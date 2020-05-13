@@ -1,0 +1,21 @@
+{
+  "name": "iterparse",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrius Mozūraitis",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.13.5"
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.0.3",
+    "JSONStream": "^1.3.5",
+    "ix": "^3.0.2",
+    "papaparse": "^5.2.0",
+    "xml-flow": "^1.0.4"
+  }
+}
