@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": false,
+      "experimentalDecorators": true,
+      "lib": [
+        "es2015",
+        "scripthost",
+        "es2015.promise",
+        "es2015.generator",
+        "es2015.iterable",
+        "ES2018.AsyncIterable"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noImplicitAny": false,
+      "noImplicitThis": true,
+      "noUnusedLocals": true,
+      "sourceMap": false,
+      "inlineSourceMap": true,
+      "outDir": "build",
+      "strict": true,
+      
+      "jsx": "react",
+      "target": "es5",
+      "jsxFactory": "React.createElement",
+      "declaration": true,
+      "declarationDir": "build/types"
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+  }
