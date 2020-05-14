@@ -122,29 +122,3 @@ export function csvWrite<T extends CSVObject>(data: AsyncIterableX<T> | Output, 
     }
     return from(_csvIterWriter(data, outputToWriteStream(out)))
 }
-
-from([
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    },
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    },
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    },
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    }
-])
-    .pipe(csvWrite('dat.csv')).forEach((c) => {
-        console.log(c)
-    })
