@@ -1,31 +1,25 @@
 {
     "compilerOptions": {
-      "allowSyntheticDefaultImports": false,
-      "experimentalDecorators": true,
-      "lib": [
-        "es2015",
-        "scripthost",
-        "es2015.promise",
-        "es2015.generator",
-        "es2015.iterable",
-        "ES2018.AsyncIterable"
-      ],
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "noImplicitAny": false,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "sourceMap": false,
-      "inlineSourceMap": true,
-      "outDir": "build",
-      "strict": true,
-      
-      "jsx": "react",
-      "target": "es5",
-      "jsxFactory": "React.createElement",
-      "declaration": true,
-      "declarationDir": "build/types"
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "noEmitHelpers": true,
+        "skipLibCheck": true,
+        "listEmittedFiles": false,
+        "declaration": true,
+        "declarationMap": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "strictFunctionTypes": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "rootDirs": ["./src"],
+        "module": "commonjs",
+        "target": "es2017",
+        "lib": ["es2017", "esnext.asynciterable"],
+        "typeRoots": ["./node_modules/@types"],
+        "outDir": "./lib"
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
-  }
+
+    "include": ["./src/**/*"]
+}

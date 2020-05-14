@@ -1,9 +1,18 @@
 {
   "name": "iterparse",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src",
+    "tests",
+    "LICENSE",
+    "tsconfig.json",
+    "README.md"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andrius Mozūraitis",
@@ -12,8 +21,10 @@
     "@types/node": "^13.13.5"
   },
   "dependencies": {
+    "@types/fs-extra": "^8.1.0",
     "@types/papaparse": "^5.0.3",
     "JSONStream": "^1.3.5",
+    "fs-extra": "^9.0.0",
     "ix": "^3.0.2",
     "papaparse": "^5.2.0",
     "xml-flow": "^1.0.4"
