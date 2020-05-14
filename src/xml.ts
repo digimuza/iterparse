@@ -15,10 +15,12 @@ const xmlStream = require('xml-flow')
 export async function* _xmlIterParser<T>({ pattern, source }: {
     pattern: string, source: NodeJS.ReadableStream
 }) {
-    const parser = xmlStream(source)
+    const parser = xmlStream(source, {
+        strict: true
+    })
     const data: T[] = []
     let done = false
-
+    parser.resume()
     parser.on(`tag:${pattern}`, (obj: T) => {
         data.push(obj)
         if (data.length > 10) {
@@ -43,7 +45,6 @@ export async function* _xmlIterParser<T>({ pattern, source }: {
     source.on('error', (err) => {
         throw err
     })
-
     while (!done || data.length > 0) {
         const d = data.shift()
         if (!d) {
@@ -56,7 +57,7 @@ export async function* _xmlIterParser<T>({ pattern, source }: {
 }
 
 
-async function* _xmlWriterParser<T>(data: AsyncIterable<T>, out: NodeJS.WritableStream) {
+async function* _xmlWriterParser<T>(data: AsyncIterable<T>, out: NodeJS.WritableStream): AsyncIterable<T> {
     let first = 0
     for await (const d of data) {
         if (first === 0) {
@@ -67,6 +68,7 @@ async function* _xmlWriterParser<T>(data: AsyncIterable<T>, out: NodeJS.Writable
         })
         out.write(`\r\n${x}`)
         first++
+        yield d
     }
     if (first !== 0) {
         out.write("\n</root>\n")
@@ -108,7 +110,7 @@ export function xmlWrite(data: AsyncIterable<XMLObject> | Output, out?: Output):
     return from(_xmlWriterParser(data, outputToWriteStream(out)))
 }
 
-export function xmlRead(source: Source, options: { pattern: string }): AsyncIterable<XMLObject> {
+export function xmlRead<T extends XMLObject>(source: Source, options: { pattern: string }): AsyncIterable<T> {
     return from(_xmlIterParser({
         pattern: options.pattern,
         source: sourceToReadStream(source)

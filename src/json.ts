@@ -53,6 +53,7 @@ async function* _jsonIterWriter<T>(output: NodeJS.WritableStream, stream: AsyncI
             output.write("[\r\n")
             output.write(JSON.stringify(data))
             x++
+            yield data
             continue
         }
         output.write(`\r\n,${JSON.stringify(data)}`)
