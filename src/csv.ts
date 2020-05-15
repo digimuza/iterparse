@@ -1,5 +1,4 @@
-import { from, AsyncIterableX } from 'ix/asynciterable'
-import { Source, Output, sourceToReadStream, outputToWriteStream } from './base'
+import { Source, Output, sourceToReadStream, outputToWriteStream, IX, AnyIterable } from './base'
 import * as Papa from 'papaparse'
 import { delay } from './_internal/helpers'
 import { EventEmitter } from 'events'
@@ -60,7 +59,7 @@ async function* _csvIterParser(source: NodeJS.ReadableStream, options?: CSVReadO
 }
 
 export function csvRead<T>(source: Source, options?: CSVReadOptions): AsyncIterable<T> {
-    return from(_csvIterParser(sourceToReadStream(source), options))
+    return IX.from(_csvIterParser(sourceToReadStream(source), options))
 }
 export type CSVObject = Record<string, string | number | boolean | undefined | null>
 export interface CSVWriteOptions {
@@ -74,11 +73,16 @@ export interface CSVWriteOptions {
     columns?: string[]; // default: null
 }
 
-async function* _csvIterWriter<T extends CSVObject>(data: AsyncIterable<T>, out: NodeJS.WritableStream, options?: CSVWriteOptions) {
+async function* _csvIterWriter<T extends CSVObject>(data: AnyIterable<T>, out: () => Promise<NodeJS.WritableStream>, options?: CSVWriteOptions) {
     let items: T[] = []
     let chunk = 0
-    console.log(out)
+    let dest: NodeJS.WritableStream | null = null
+    let loaded = false
     for await (const d of data) {
+        if (!loaded) {
+            loaded = true
+            dest = await out()
+        }
         yield d
         if (items.length < 10) {
             items.push(d)
@@ -89,28 +93,30 @@ async function* _csvIterWriter<T extends CSVObject>(data: AsyncIterable<T>, out:
         })
         items = []
         chunk++
-        out.write(`${csv}\r\n`)
+        dest?.write(`${csv}\r\n`)
     }
     if (items.length !== 0) {
         const csv = Papa.unparse(items, {
             header: chunk === 0,
             ...options
         })
-        out.write(csv)
+        dest?.write(csv)
     }
 
-    out.end()
+    dest?.end()
 }
 
+
+
 export function csvWrite<T extends CSVObject>(out: Output): OperatorAsyncFunction<T, T>
-export function csvWrite<T extends CSVObject>(data: AsyncIterableX<T>, out: Output): AsyncIterableX<T>
-export function csvWrite<T extends CSVObject>(data: AsyncIterableX<T> | Output, out?: Output): OperatorAsyncFunction<T, T> | AsyncIterableX<T> {
+export function csvWrite<T extends CSVObject>(data: AnyIterable<T>, out: Output): AsyncIterable<T>
+export function csvWrite<T extends CSVObject>(data: AnyIterable<T> | Output, out?: Output): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
     if (arguments.length === 1) {
         if (!(typeof data === 'string' || data instanceof EventEmitter)) {
             throw new Error("Impossible combination")
         }
         const fn: OperatorAsyncFunction<T, T> = (d) => {
-            return from(_csvIterWriter(d, outputToWriteStream(data)))
+            return IX.from(_csvIterWriter(d, outputToWriteStream(data)))
         }
         return fn
     }
@@ -120,31 +126,5 @@ export function csvWrite<T extends CSVObject>(data: AsyncIterableX<T> | Output, 
     if (!out) {
         throw new Error("Expected to receive output parameter but got undefined")
     }
-    return from(_csvIterWriter(data, outputToWriteStream(out)))
+    return IX.from(_csvIterWriter(data, outputToWriteStream(out)))
 }
-
-from([
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    },
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    },
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    },
-    {
-        a: 1,
-        b: 2,
-        c: 3
-    }
-])
-    .pipe(csvWrite('dat.csv')).forEach((c) => {
-        console.log(c)
-    })

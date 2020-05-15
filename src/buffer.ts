@@ -1,8 +1,9 @@
-import { from } from "ix/asynciterable"
-import { Source, Output, sourceToReadStream, outputToWriteStream } from "./base"
+import {AsyncIterable as IX } from "ix"
+import { Source, Output, sourceToReadStream, outputToWriteStream, AnyIterable } from "./base"
 import { delay } from "./_internal/helpers"
 import { EventEmitter } from "events"
 import { OperatorAsyncFunction } from "ix/interfaces"
+
 
 async function* _bufferIterParser(source: NodeJS.ReadableStream) {
     let data: Buffer[] = []
@@ -32,27 +33,33 @@ async function* _bufferIterParser(source: NodeJS.ReadableStream) {
 }
 
 export function bufferRead(source: Source): AsyncIterable<Buffer> {
-    return from(_bufferIterParser(sourceToReadStream(source)))
+    return IX.from(_bufferIterParser(sourceToReadStream(source)))
 }
 
 
-async function* _bufferIterWriter<T>(output: NodeJS.WritableStream, stream: AsyncIterable<Buffer>): AsyncIterable<Buffer> {
+async function* _bufferIterWriter(output: () => Promise<NodeJS.WritableStream>, stream: AnyIterable<Buffer>): AsyncIterable<Buffer> {
+    let dest: NodeJS.WritableStream | null = null
+    let loaded = false
     for await (const data of stream) {
-        output.write(data)
+        if (!loaded) {
+            dest = await output()
+            loaded = true
+        }
+        dest?.write(data)
         yield data
     }
-    output.end()
+    dest?.end()
 }
 
 export function bufferWrite(out: Output): OperatorAsyncFunction<Buffer, Buffer>
-export function bufferWrite(data: AsyncIterable<Buffer>, out: Output): AsyncIterable<Buffer>
-export function bufferWrite(data: AsyncIterable<Buffer> | Output, out?: Output): OperatorAsyncFunction<Buffer, Buffer> | AsyncIterable<Buffer> {
+export function bufferWrite(data: AnyIterable<Buffer>, out: Output): AsyncIterable<Buffer>
+export function bufferWrite(data: AnyIterable<Buffer> | Output, out?: Output): OperatorAsyncFunction<Buffer, Buffer> | AsyncIterable<Buffer> {
     if (arguments.length === 1) {
         if (!(typeof data === 'string' || data instanceof EventEmitter)) {
             throw new Error("Impossible combination")
         }
         return (d: AsyncIterable<Buffer>) => {
-            return from(_bufferIterWriter(outputToWriteStream(data), d))
+            return IX.from(_bufferIterWriter(outputToWriteStream(data), d))
         }
     }
     if (typeof data === 'string' || data instanceof EventEmitter) {
@@ -61,5 +68,5 @@ export function bufferWrite(data: AsyncIterable<Buffer> | Output, out?: Output):
     if (!out) {
         throw new Error("Expected to receive output parameter but got undefined")
     }
-    return from(_bufferIterWriter(outputToWriteStream(out), data))
+    return IX.from(_bufferIterWriter(outputToWriteStream(out), data))
 }
