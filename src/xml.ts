@@ -1,5 +1,4 @@
-import { Output, Source, sourceToReadStream, outputToWriteStream } from "./base";
-import { from } from "ix/asynciterable";
+import { Output, Source, sourceToReadStream, outputToWriteStream, IX, AnyIterable } from "./base";
 import { delay } from "./_internal/helpers";
 import { EventEmitter } from "events";
 import { OperatorAsyncFunction } from "ix/interfaces";
@@ -57,31 +56,40 @@ export async function* _xmlIterParser<T>({ pattern, source }: {
 }
 
 
-async function* _xmlWriterParser<T>(data: AsyncIterable<T>, out: NodeJS.WritableStream): AsyncIterable<T> {
+async function* _xmlWriterParser<T>(data: AnyIterable<T>, out: () => Promise<NodeJS.WritableStream>): AsyncIterable<T> {
     let first = 0
+    let dest: NodeJS.WritableStream | null = null
+    let loaded = false
+
     for await (const d of data) {
+        if (!loaded) {
+            loaded = true
+            dest = await out()
+        }
         if (first === 0) {
-            out.write("<root>")
+            dest?.write("<root>")
         }
         const x = xmlStream.toXml(d, {
             indent: "\t"
         })
-        out.write(`\r\n${x}`)
+        dest?.write(`\r\n${x}`)
         first++
         yield d
     }
     if (first !== 0) {
-        out.write("\n</root>\n")
+        dest?.write("\n</root>\n")
     }
-    out.end()
+    dest?.end()
 }
 
+export type XMLAttributes = Record<string, string>
+export type XMLMarkup = Object | string
 export type XMLObject = {
     $name: string,
-    $attrs?: Record<string, string | number | boolean>
-    $text?: string | number | boolean,
-    $markup?: ReadonlyArray<XMLObject | string | number | boolean>
-
+    $attrs?: XMLAttributes
+    $text?: string,
+    $markup?: ReadonlyArray<XMLMarkup>
+    [d: string]: string | XMLMarkup | XMLAttributes | ReadonlyArray<XMLMarkup> | undefined | Object
 }
 
 export function toXmlNode<T>(nodeFn: (data: T) => XMLObject): (data: T) => XMLObject {
@@ -91,14 +99,14 @@ export function toXmlNode<T>(nodeFn: (data: T) => XMLObject): (data: T) => XMLOb
 }
 
 export function xmlWrite(out: Output): OperatorAsyncFunction<XMLObject, XMLObject>
-export function xmlWrite(data: AsyncIterable<XMLObject>, out: Output): AsyncIterable<XMLObject>
-export function xmlWrite(data: AsyncIterable<XMLObject> | Output, out?: Output): OperatorAsyncFunction<XMLObject, XMLObject> | AsyncIterable<XMLObject> {
+export function xmlWrite(data: AnyIterable<XMLObject>, out: Output): AsyncIterable<XMLObject>
+export function xmlWrite(data: AnyIterable<XMLObject> | Output, out?: Output): OperatorAsyncFunction<XMLObject, XMLObject> | AsyncIterable<XMLObject> {
     if (arguments.length === 1) {
         if (!(typeof data === 'string' || data instanceof EventEmitter)) {
             throw new Error("Impossible combination")
         }
         return (d: AsyncIterable<XMLObject>) => {
-            return from(_xmlWriterParser(d, outputToWriteStream(data)))
+            return IX.from(_xmlWriterParser(d, outputToWriteStream(data)))
         }
     }
     if (typeof data === 'string' || data instanceof EventEmitter) {
@@ -107,11 +115,15 @@ export function xmlWrite(data: AsyncIterable<XMLObject> | Output, out?: Output):
     if (!out) {
         throw new Error("Expected to receive output parameter but got undefined")
     }
-    return from(_xmlWriterParser(data, outputToWriteStream(out)))
+    return IX.from(_xmlWriterParser(data, outputToWriteStream(out)))
 }
 
-export function xmlRead<T extends XMLObject>(source: Source, options: { pattern: string }): AsyncIterable<T> {
-    return from(_xmlIterParser({
+export interface XMLReadOptions {
+    pattern: string
+}
+
+export function xmlRead<T extends XMLObject>(source: Source, options: XMLReadOptions): AsyncIterable<T> {
+    return IX.from(_xmlIterParser({
         pattern: options.pattern,
         source: sourceToReadStream(source)
     }))

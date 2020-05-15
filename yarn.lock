@@ -14,15 +14,15 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.1.tgz#5d93e0a099cd0acd5ef3d5bde3c086e1f49ff68c"
   integrity sha512-FAYBGwC+W6F9+huFIDtn43cpy7+SzG+atzRiTfdp3inUKL2hXnd4rG8hylJLIh4+hqrQy1P17kvJByE/z825hA==
 
+"@types/node@^11.11.6":
+  version "11.15.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.15.12.tgz#bf5d348c4d37c026029ad81e874946fa6ad100ba"
+  integrity sha512-iefeBfpmhoYaZfj+gJM5z9H9eiTwhuzhPsJgH/flx4HP2SBI2FNDra1D3vKljqPLGDr9Cazvh9gP9Xszc30ncA==
+
 "@types/node@^13.13.5":
   version "13.13.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.5.tgz#96ec3b0afafd64a4ccea9107b75bf8489f0e5765"
   integrity sha512-3ySmiBYJPqgjiHA7oEaIo2Rzz0HrOZ7yrNO5HWyaE5q0lQ3BppDZ3N53Miz8bw2I7gh1/zir2MGVZBvpb1zq9g==
-
-"@types/node@^13.7.4":
-  version "13.13.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.6.tgz#caa6756b64d30547a2082235531fa0dd8cba1b6e"
-  integrity sha512-zqRj8ugfROCjXCNbmPBe2mmQ0fJWP9lQaN519hwunOgpHgVykme4G6FW95++dyNFDvJUk4rtExkVkL0eciu5NA==
 
 "@types/papaparse@^5.0.3":
   version "5.0.3"
@@ -59,12 +59,12 @@ graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
 
-ix@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/ix/-/ix-3.0.2.tgz#4a77bd78da6052233a6dc57b2aa91ef17bff7081"
-  integrity sha512-Vt2zmkRcxo5Rddpqz8IvhRUqojEzmCayHYLIBve5Ddkw7+FqHfWf6zjnE2CEOVb19gGx2hG8R76uVgJhqGdYUw==
+ix@^2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/ix/-/ix-2.5.5.tgz#2aef77fbdee79dd0e7f62280c1810d5a39ff1cd4"
+  integrity sha512-WCeaFy6lddyLxqRlY1RpgpSfNxLucn/kht9AaZfOl3yTVKNRP1iiJo7Ib1uedIGNHy9U225dvVXQrU6h2jNE2w==
   dependencies:
-    "@types/node" "^13.7.4"
+    "@types/node" "^11.11.6"
     tslib "^1.9.3"
 
 jsonfile@^6.0.1:

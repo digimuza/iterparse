@@ -1,6 +1,5 @@
 import { delay } from './_internal/helpers';
-import { sourceToReadStream, Source, Output, outputToWriteStream } from './base';
-import { from } from 'ix/asynciterable';
+import { sourceToReadStream, Source, Output, outputToWriteStream, IX, AnyIterable } from './base';
 import { EventEmitter } from 'events';
 import { OperatorAsyncFunction } from 'ix/interfaces';
 const JSONStream = require('JSONStream')
@@ -42,41 +41,47 @@ async function* _jsonIterParser(stream: NodeJS.ReadableStream, pattern: string):
 
 
 export function jsonRead<T>(source: Source, options: JSONReadOptions): AsyncIterable<T> {
-    return from(_jsonIterParser(sourceToReadStream(source), options.pattern))
+    return IX.from(_jsonIterParser(sourceToReadStream(source), options.pattern))
 }
 
 
-async function* _jsonIterWriter<T>(output: NodeJS.WritableStream, stream: AsyncIterable<T>): AsyncIterable<T> {
+async function* _jsonIterWriter<T>(output: () => Promise<NodeJS.WritableStream>, stream: AnyIterable<T>): AsyncIterable<T> {
     let x = 0
+    let dest: NodeJS.WritableStream | null = null
+    let loaded = false
     for await (const data of stream) {
+        if (!loaded) {
+            loaded = true
+            dest = await output()
+        }
         if (x === 0) {
-            output.write("[\r\n")
-            output.write(JSON.stringify(data))
+            dest?.write("[\r\n")
+            dest?.write(JSON.stringify(data))
             x++
             yield data
             continue
         }
-        output.write(`\r\n,${JSON.stringify(data)}`)
+        dest?.write(`\r\n,${JSON.stringify(data)}`)
         yield data
     }
     if (x === 0) {
-        output.end()
+        dest?.end()
         return
     }
-    output.write("\r\n]")
-    output.end()
+    dest?.write("\r\n]")
+    dest?.end()
 }
 
 
 export function jsonWrite<T>(out: Output): OperatorAsyncFunction<T, T>
-export function jsonWrite<T>(data: AsyncIterable<T>, out: Output): AsyncIterable<T>
-export function jsonWrite<T>(data: AsyncIterable<T> | Output, out?: Output): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
+export function jsonWrite<T>(data: AnyIterable<T>, out: Output): AsyncIterable<T>
+export function jsonWrite<T>(data: AnyIterable<T> | Output, out?: Output): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
     if (arguments.length === 1) {
         if (!(typeof data === 'string' || data instanceof EventEmitter)) {
             throw new Error("Impossible combination")
         }
         return (d: AsyncIterable<T>) => {
-            return from(_jsonIterWriter(outputToWriteStream(data), d))
+            return IX.from(_jsonIterWriter(outputToWriteStream(data), d))
         }
     }
     if (typeof data === 'string' || data instanceof EventEmitter) {
@@ -85,5 +90,5 @@ export function jsonWrite<T>(data: AsyncIterable<T> | Output, out?: Output): Ope
     if (!out) {
         throw new Error("Expected to receive output parameter but got undefined")
     }
-    return from(_jsonIterWriter(outputToWriteStream(out), data))
+    return IX.from(_jsonIterWriter(outputToWriteStream(out), data))
 }
