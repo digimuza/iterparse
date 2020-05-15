@@ -8,12 +8,12 @@ Processing huge files in `Node.js` can be hard. Especially when you need execute
 
 This package
 
-1. Parse big CSV | XML | JSON files in memory efficient way.
-2. Write data to CSV | JSON | XML file in memory efficient way.
+1. Parse big *CSV* | *XML* | *JSON* files in memory efficient way.
+2. Write data to *CSV* | *JSON* | *XML* file in memory efficient way.
 
 # Installation
 
-Async iterators are natively supported in Node.js **10.x.** If you're using Node.js **8.x** or **9.x**, you need to use Node.js' `--harmony_async_iteration` flag. 
+Async iterators are natively supported in Node.js **10.x.** If you're using Node.js **8.x** or **9.x**, you need to use Node.js' `--harmony_async_iteration` flag.
 
 Async iterators are **not supported** in Node.js **6.x** or **7.x**, so if you're on an older version you need to upgrade Node.js to use async iterators.
 
@@ -95,7 +95,7 @@ interface Video {
 async function getListOfYoutubeVideos(query: string): Promise<Video[]> {
     // I will not implement real logic here
     // Just have in mind that this function will do some http requests
-    ... 
+    ...
 }
 
 function getProductBaseInfo(data: XMLObject): { id: string, url: string, title: string  } {...}
@@ -112,7 +112,10 @@ AsyncIterable
             }
     }).
     .pipe(jsonWrite( `./small_feed_with_videos.json` )) // Write all extracted data to JSON file
-    .count() // All iterators must be consumed in any way. I just pick count(). Other alternatives are toArray(), forEach(), reduce() ...
+    .count() 
+    // All iterators must be consumed in any way. 
+    // I just pick count(). 
+    // Other alternatives are toArray(), forEach(), reduce() ect.
 ```
 
 Keep in mind this is trivial example but it illustrates how to process huge amounts of data.
@@ -195,6 +198,11 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
   ): AsyncIterable<T>;
   ```
 - **jsonWrite** - Writes iterator to JSON file in memory efficient matter.
+  Some considerations
+
+  - If file exists function will overwrite file
+  - If path does not exists function will path to file
+
   ```typescript
   export function jsonWrite<T>(out: Output): OperatorAsyncFunction<T, T>;
   export function jsonWrite<T>(
@@ -234,6 +242,7 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
   ```
 
   **Usage**
+  _path_to_xml.xml_ file
 
   ```xml
   <root>
@@ -255,6 +264,8 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
   </root>
   ```
 
+  And in code
+
   ```typescript
   const xmlIter = xmlRead("./path_to_xml.xml", { patter: "person" });
   for await (const data of xmlIter) {
@@ -265,7 +276,7 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
     // Do what ever you want here
     await sendDataToServer(data);
   }
-
+  // Or my prefer way
   import { AsyncIterable } from "ix";
   AsyncIterable.from(xmlRead("./path_to_xml.xml", { patter: "person" })).map(
     async (data) => {
@@ -276,7 +287,7 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
 
 - **xmlWrite** - Writes iterator to XML file in memory efficient matter.
 
-  Considerations
+  Some considerations
 
   - If file exists function will overwrite file
   - If path does not exists function will create all folder structure
