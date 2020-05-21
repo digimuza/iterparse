@@ -1,6 +1,6 @@
 {
   "name": "iterparse",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "lib/index.js",
   "files": [
@@ -18,7 +18,8 @@
   "author": "Andrius Mozūraitis",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^13.13.5"
+    "@types/node": "^13.13.5",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
     "@types/fs-extra": "^8.1.0",
