@@ -3,6 +3,7 @@ import * as Papa from 'papaparse'
 import { delay } from './_internal/helpers'
 import { EventEmitter } from 'events'
 import { OperatorAsyncFunction } from 'ix/interfaces'
+
 export interface CSVReadOptions {
     delimiter?: string; // default: ","
     newline?: string; // default: "\r\n"
@@ -10,10 +11,6 @@ export interface CSVReadOptions {
     escapeChar?: string; // default: '"'
     header?: boolean; // default: false
     trimHeaders?: boolean; // default: false
-    dynamicTyping?:
-    | boolean
-    | { [headerName: string]: boolean;[columnNumber: number]: boolean }
-    | ((field: string | number) => boolean); // default: false
     encoding?: string; // default: ""
     comments?: boolean | string; // default: false
     skipEmptyLines?: boolean | 'greedy'; // default: false
@@ -27,6 +24,7 @@ async function* _csvIterParser(source: NodeJS.ReadableStream, options?: CSVReadO
     Papa.parse(sourceToReadStream(source), {
         header: true,
         step: (result) => {
+            // Collecting 10 items and pausing stream until items are 
             if (items.length === 10) {
                 source.pause()
             }
@@ -45,10 +43,8 @@ async function* _csvIterParser(source: NodeJS.ReadableStream, options?: CSVReadO
     while (!done || items.length >= 0) {
         const d = items.shift()
         if (!d) {
-            await delay(0)
-            if (done && items.length === 0) {
-                return
-            }
+            await delay(1) // Delay until we have new items or proccesing is finished
+            if (done && items.length === 0) return;
             if (!done) {
                 source.resume()
             }
@@ -58,9 +54,7 @@ async function* _csvIterParser(source: NodeJS.ReadableStream, options?: CSVReadO
     }
 }
 
-export function csvRead<T>(source: Source, options?: CSVReadOptions): AsyncIterable<T> {
-    return IX.from(_csvIterParser(sourceToReadStream(source), options))
-}
+
 export type CSVObject = Record<string, string | number | boolean | undefined | null>
 export interface CSVWriteOptions {
     quotes?: boolean | boolean[]; // default: false
@@ -81,6 +75,8 @@ async function* _csvIterWriter<T extends CSVObject>(data: AnyIterable<T>, out: (
     for await (const d of data) {
         if (!loaded) {
             loaded = true
+            // Accessing stream only when receiving first item.
+            // This is convienent becouse. If stream have 0 items I will not create any file
             dest = await out()
         }
         yield d
@@ -107,24 +103,23 @@ async function* _csvIterWriter<T extends CSVObject>(data: AnyIterable<T>, out: (
 }
 
 
+export function csvRead<T>(source: Source, options?: CSVReadOptions): AsyncIterable<T> {
+    return IX.from(_csvIterParser(sourceToReadStream(source), options))
+}
 
+/**
+ * @param out - path to file or ReadableStream
+ * @param data - any iteratable.
+ * @example
+ * ```typescript
+ * AsyncIterableX.from([1,2,3,4,5]).pipe(csvWrite("path/to/file"))
+ * ```
+ * @example
+ * csvWrite("/path/to/file", [{ a: 1, b: 2 },{ a: 1, b: 2 }])
+ */
 export function csvWrite<T extends CSVObject>(out: Output): OperatorAsyncFunction<T, T>
-export function csvWrite<T extends CSVObject>(data: AnyIterable<T>, out: Output): AsyncIterable<T>
-export function csvWrite<T extends CSVObject>(data: AnyIterable<T> | Output, out?: Output): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
-    if (arguments.length === 1) {
-        if (!(typeof data === 'string' || data instanceof EventEmitter)) {
-            throw new Error("Impossible combination")
-        }
-        const fn: OperatorAsyncFunction<T, T> = (d) => {
-            return IX.from(_csvIterWriter(d, outputToWriteStream(data)))
-        }
-        return fn
-    }
-    if (typeof data === 'string' || data instanceof EventEmitter) {
-        throw new Error("Impossible combination")
-    }
-    if (!out) {
-        throw new Error("Expected to receive output parameter but got undefined")
-    }
+export function csvWrite<T extends CSVObject>(out: Output, data: AnyIterable<T>): AsyncIterable<T>
+export function csvWrite<T extends CSVObject>(out: Output, data?: AnyIterable<T>): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
+    if (!data) return (d) => csvWrite(out, d);
     return IX.from(_csvIterWriter(data, outputToWriteStream(out)))
 }

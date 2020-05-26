@@ -206,8 +206,8 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
   ```typescript
   export function jsonWrite<T>(out: Output): OperatorAsyncFunction<T, T>;
   export function jsonWrite<T>(
+    out: Output,
     data: AnyIterable<T>,
-    out: Output
   ): AsyncIterable<T>;
   ```
 
@@ -301,8 +301,8 @@ Keep in mind this is trivial example but it illustrates how to process huge amou
     out: Output
   ): OperatorAsyncFunction<XMLObject, XMLObject>;
   export function xmlWrite(
+    out: Output,
     data: AnyIterable<XMLObject>,
-    out: Output
   ): AsyncIterable<XMLObject>;
   ```
 
