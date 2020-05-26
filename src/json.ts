@@ -1,11 +1,7 @@
 import { delay } from './_internal/helpers';
 import { sourceToReadStream, Source, Output, outputToWriteStream, IX, AnyIterable } from './base';
-import { EventEmitter } from 'events';
 import { OperatorAsyncFunction } from 'ix/interfaces';
 const JSONStream = require('JSONStream')
-export interface JSONReadOptions {
-    pattern: string
-}
 
 async function* _jsonIterParser(stream: NodeJS.ReadableStream, pattern: string): AsyncIterable<unknown> {
     const parser = JSONStream.parse(pattern)
@@ -38,13 +34,6 @@ async function* _jsonIterParser(stream: NodeJS.ReadableStream, pattern: string):
     }
 }
 
-
-
-export function jsonRead<T>(source: Source, options: JSONReadOptions): AsyncIterable<T> {
-    return IX.from(_jsonIterParser(sourceToReadStream(source), options.pattern))
-}
-
-
 async function* _jsonIterWriter<T>(output: () => Promise<NodeJS.WritableStream>, stream: AnyIterable<T>): AsyncIterable<T> {
     let x = 0
     let dest: NodeJS.WritableStream | null = null
@@ -72,23 +61,47 @@ async function* _jsonIterWriter<T>(output: () => Promise<NodeJS.WritableStream>,
     dest?.end()
 }
 
+export interface JSONReadOptions {
+    /**
+     * JSON parsing pattern
+     * @example
+     * [{...}, {...}] => *
+     * { a: [{...}, {...}] } => a.*
+     * { a: { b: [{...}, {...}] } } => a.b.*
+     */
+    pattern: string
+}
 
+/**
+ * Function will read big JSON files in memory efficent way.
+ * @param source - path to file or ReadableStream
+ * @param options - parsing pattern {@link JSONReadOptions}
+ */
+export function jsonRead<T>(source: Source, options: JSONReadOptions): AsyncIterable<T> {
+    return IX.from(_jsonIterParser(sourceToReadStream(source), options.pattern))
+}
+
+/**
+ * Function will write iteratble in memory efficient way. Tested iteratebles that produce 10gb json files 
+ * @param out - path to file or WritableStream
+ * @param data - any iteratable.
+ * @example
+ * ```typescript
+ * import { AsyncIterable } from 'ix'
+ * AsyncIterable.from([1, 2, 3, 4, 5]).pipe(jsonWrite("path/to/file"))
+ * ```
+ * @example
+ * ```typescript
+ * jsonWrite("/path/to/file", [{ a: 1, b: 2 }, { a: 1, b: 2 }])
+ * ```
+ * @example
+ * ```typescript
+ * jsonWrite(process.stdout, [1, 2, 3, 4, 5, 6, 7, 8])
+ * ```
+ */
 export function jsonWrite<T>(out: Output): OperatorAsyncFunction<T, T>
-export function jsonWrite<T>(data: AnyIterable<T>, out: Output): AsyncIterable<T>
-export function jsonWrite<T>(data: AnyIterable<T> | Output, out?: Output): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
-    if (arguments.length === 1) {
-        if (!(typeof data === 'string' || data instanceof EventEmitter)) {
-            throw new Error("Impossible combination")
-        }
-        return (d: AsyncIterable<T>) => {
-            return IX.from(_jsonIterWriter(outputToWriteStream(data), d))
-        }
-    }
-    if (typeof data === 'string' || data instanceof EventEmitter) {
-        throw new Error("Impossible combination")
-    }
-    if (!out) {
-        throw new Error("Expected to receive output parameter but got undefined")
-    }
+export function jsonWrite<T>(out: Output, data: AnyIterable<T>): AsyncIterable<T>
+export function jsonWrite<T>(out: Output, data?: AnyIterable<T>): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
+    if (!data) return (d) => jsonWrite(out, d)
     return IX.from(_jsonIterWriter(outputToWriteStream(out), data))
 }

@@ -1,5 +1,5 @@
-export { Output, Source, outputToWriteStream, sourceToReadStream } from './base'
+export { Output, Source } from './base'
 export { bufferRead, bufferWrite } from './buffer'
 export { CSVObject, CSVReadOptions, CSVWriteOptions, csvRead, csvWrite } from './csv'
 export { JSONReadOptions, jsonRead, jsonWrite } from './json'
-export { XMLObject, _xmlIterParser, toXmlNode, xmlRead, xmlWrite } from './xml'
+export { XMLObject, toXmlNode, xmlRead, xmlWrite } from './xml'

@@ -1,17 +1,10 @@
 import { Output, Source, sourceToReadStream, outputToWriteStream, IX, AnyIterable } from "./base";
 import { delay } from "./_internal/helpers";
-import { EventEmitter } from "events";
 import { OperatorAsyncFunction } from "ix/interfaces";
 
-
-// tslint:disable
 const xmlStream = require('xml-flow')
 
-/**
- * Parse XML source to iterator
- * @param param0 
- */
-export async function* _xmlIterParser<T>({ pattern, source }: {
+async function* _xmlIterParser<T>({ pattern, source }: {
     pattern: string, source: NodeJS.ReadableStream
 }) {
     const parser = xmlStream(source, {
@@ -84,6 +77,10 @@ async function* _xmlWriterParser<T>(data: AnyIterable<T>, out: () => Promise<Nod
 
 export type XMLAttributes = Record<string, string>
 export type XMLMarkup = Object | string
+
+/**
+ * xmlRead function return object type
+ */
 export type XMLObject = {
     $name: string,
     $attrs?: XMLAttributes
@@ -92,39 +89,67 @@ export type XMLObject = {
     [d: string]: string | XMLMarkup | XMLAttributes | ReadonlyArray<XMLMarkup> | undefined | Object
 }
 
-export function toXmlNode<T>(nodeFn: (data: T) => XMLObject): (data: T) => XMLObject {
-    return (data: T) => {
-        return nodeFn(data)
-    }
-}
-
-export function xmlWrite(out: Output): OperatorAsyncFunction<XMLObject, XMLObject>
-export function xmlWrite(data: AnyIterable<XMLObject>, out: Output): AsyncIterable<XMLObject>
-export function xmlWrite(data: AnyIterable<XMLObject> | Output, out?: Output): OperatorAsyncFunction<XMLObject, XMLObject> | AsyncIterable<XMLObject> {
-    if (arguments.length === 1) {
-        if (!(typeof data === 'string' || data instanceof EventEmitter)) {
-            throw new Error("Impossible combination")
-        }
-        return (d: AsyncIterable<XMLObject>) => {
-            return IX.from(_xmlWriterParser(d, outputToWriteStream(data)))
-        }
-    }
-    if (typeof data === 'string' || data instanceof EventEmitter) {
-        throw new Error("Impossible combination")
-    }
-    if (!out) {
-        throw new Error("Expected to receive output parameter but got undefined")
-    }
-    return IX.from(_xmlWriterParser(data, outputToWriteStream(out)))
-}
-
 export interface XMLReadOptions {
+    /**
+     * XML parsing pattern
+     * @example
+     * <root>
+     *   <item>...</item>
+     *   <item>...</item>
+     *   <item>...</item>
+     *   <item>...</item>
+     * </root>
+     * Results to `item`
+     */
     pattern: string
 }
 
+/**
+ * Function will read big JSON files in memory efficent way.
+ * @param source - path to file or ReadableStream
+ * @param options - parsing pattern {@link XMLReadOptions}
+ */
 export function xmlRead<T extends XMLObject>(source: Source, options: XMLReadOptions): AsyncIterable<T> {
     return IX.from(_xmlIterParser({
         pattern: options.pattern,
         source: sourceToReadStream(source)
     }))
+}
+
+/**
+ * @param out - path to file or WritableStream
+ * @param data - any iteratable that extends XMLObject type.
+ * @example
+ * ```typescript
+ * import { AsyncIterable } from 'ix'
+ * AsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }]).map(toXmlNode((item)=>({ $name: "person", ...item }))).pipe(xmlWrite("path/to/file"))
+ * ```
+ * @example
+ * ```typescript
+ * xmlWrite("/path/to/file", [{ a: 1, b: 2 }, { a: 1, b: 2 }].map(toXmlNode((item)=>({ $name: "person", ...item })))
+ * ```
+ * @example
+ * ```typescript
+ * xmlWrite(process.stdout, [{ a: 1, b: 2 }, { a: 1, b: 2 }].map(toXmlNode((item)=>({ $name: "person", ...item })))
+ * ```
+ */
+export function xmlWrite(out: Output): OperatorAsyncFunction<XMLObject, XMLObject>
+export function xmlWrite(out: Output, data: AnyIterable<XMLObject>): AsyncIterable<XMLObject>
+export function xmlWrite(out: Output, data?: AnyIterable<XMLObject>): OperatorAsyncFunction<XMLObject, XMLObject> | AsyncIterable<XMLObject> {
+    if (!data) return (d) => xmlWrite(out, d);
+    return IX.from(_xmlWriterParser(data, outputToWriteStream(out)))
+}
+
+/**
+ * Sample helper to conver data to XMLObject
+ * @param nodeFn - transformation function
+ * @example
+ * ```typescript
+ * const xmlObjects = [{ a: 1, b: 2 }, { a: 1, b: 2 }].map(toXmlNode((item)=>({ $name: "person", ...item })
+ * ```
+ */
+export function toXmlNode<T>(nodeFn: (data: T) => XMLObject): (data: T) => XMLObject {
+    return (data: T) => {
+        return nodeFn(data)
+    }
 }
