@@ -4,12 +4,38 @@ import { OperatorAsyncFunction } from "ix/interfaces";
 
 const xmlStream = require('xml-flow')
 
-async function* _xmlIterParser<T>({ pattern, source }: {
-    pattern: string, source: NodeJS.ReadableStream
+
+export enum XMLParserBehavior {
+    ALWAYS = 1,
+    SOMETIMES = 0,
+    NEVER = -1
+}
+export interface XMLParserConfig {
+    strict?: boolean,
+    lowercase?: boolean,
+    trim?: boolean,
+    preserveMarkup?: XMLParserBehavior,
+    useArrays?: XMLParserBehavior,
+    cdataAsText?: boolean
+}
+export const defaultXmlParserConfig = {
+    strict: false,
+    lowercase: true,
+    trim: true,
+    preserveMarkup: XMLParserBehavior.SOMETIMES,
+    useArrays: XMLParserBehavior.SOMETIMES,
+    cdataAsText: false
+} as const
+
+async function* _xmlIterParser<T>(args: {
+    pattern: string, source: NodeJS.ReadableStream, options?: XMLParserConfig
 }) {
-    const parser = xmlStream(source, {
-        strict: true
-    })
+    const { pattern, source, options = {} } = args
+    const defaultConfig = {
+        ...options,
+        ...defaultXmlParserConfig
+    }
+    const parser = xmlStream(source, defaultConfig)
     const data: T[] = []
     let done = false
     parser.resume()
@@ -89,6 +115,8 @@ export type XMLObject = {
     [d: string]: string | XMLMarkup | XMLAttributes | ReadonlyArray<XMLMarkup> | undefined | Object
 }
 
+
+
 export interface XMLReadOptions {
     /**
      * XML parsing pattern
@@ -102,6 +130,7 @@ export interface XMLReadOptions {
      * Results to `item`
      */
     pattern: string
+    options?: XMLParserConfig
 }
 
 /**
