@@ -6,7 +6,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will read big files in memory efficient way.",
-						"example": "import { bufferRead } from 'iterparse'\nbufferRead({ filePath: \"path/to/file\" })\n.map((buffer)=> console.log(buffer.byteLength))\n.count()",
+						"examples": [
+							"import { bufferRead } from 'iterparse'\nbufferRead({ filePath: \"path/to/file\" })\n.map((buffer)=> console.log(buffer.byteLength))\n.count()",
+							"import { bufferRead } from 'iterparse'\nfor await (const buffer of bufferRead({ filePath: \"path/to/file\" })) {\nconsole.log(q.byteLength)\n}"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -82,6 +85,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -125,7 +129,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will write buffer to file",
-						"example": "import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nAsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))",
+						"examples": [
+							"import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nAsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))",
+							"import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nbufferWrite(getBufferIter() ,{ filePath: \"path/to/file\" }).count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -208,7 +215,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will write buffer to file",
-						"example": "import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nAsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))",
+						"examples": [
+							"import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nAsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))",
+							"import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nbufferWrite(getBufferIter() ,{ filePath: \"path/to/file\" }).count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -306,6 +316,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -340,7 +351,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Cache iterator output to file.\r\n  Useful when we need develop complex iterator pipelines.",
-						"example": "import { cacheIter } from 'iterparse'\ngetFeed() // If cache exists get feed function will not be called\n.pipe(cacheIter({ cacheFolder: \"./_cache\" }))\n.count()",
+						"examples": [
+							"import { cacheIter } from 'iterparse'\ngetFeed() // If cache exists get feed function will not be called\n.pipe(cacheIter({ cacheFolder: \"./_cache\" }))\n.count()",
+							"import { cacheIter } from 'iterparse'\nconst cachedIter = cacheIter(getFeed(), { cacheFolder: \"./_cache\" })\nfor await (const item of cachedIter) {\nconsole.log(item)\n}"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -417,7 +431,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Cache iterator output to file.\r\n  Useful when we need develop complex iterator pipelines.",
-						"example": "import { cacheIter } from 'iterparse'\ngetFeed() // If cache exists get feed function will not be called\n.pipe(cacheIter({ cacheFolder: \"./_cache\" }))\n.count()",
+						"examples": [
+							"import { cacheIter } from 'iterparse'\ngetFeed() // If cache exists get feed function will not be called\n.pipe(cacheIter({ cacheFolder: \"./_cache\" }))\n.count()",
+							"import { cacheIter } from 'iterparse'\nconst cachedIter = cacheIter(getFeed(), { cacheFolder: \"./_cache\" })\nfor await (const item of cachedIter) {\nconsole.log(item)\n}"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -509,6 +526,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -543,7 +561,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Read CSV file. In memory efficient way.",
-						"example": "import { csvRead } from 'iterparse'\ncsvRead({ filePath: 'path/to/file' })\n.map((q)=> console.log(q))\n.count()",
+						"examples": [
+							"import { csvRead } from 'iterparse'\ncsvRead({ filePath: 'path/to/file' })\n.map((q)=> console.log(q))\n.count()",
+							"import { csvRead } from 'iterparse'\nfor await (const item of csvRead({ filePath: 'path/to/file' })) {\nconsole.log(item)\n}"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -625,6 +646,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -668,7 +690,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Writes json objects to file in \".csv\" format",
-						"example": "import { csvWrite } from 'iterparse'\nAsyncIterable.from([{...},{...},{...}])\n.pipe(csvWrite({ filePath: \"path/to/file\" }))\n.count()",
+						"examples": [
+							"import { csvWrite } from 'iterparse'\nAsyncIterable.from([{...},{...},{...}])\n.pipe(csvWrite({ filePath: \"path/to/file\" }))\n.count()",
+							"import { csvWrite } from 'iterparse'\ncsvWrite([{ a: 1, b: 2 },{ a: 1, b: 2 }], { filePath: \"/path/to/file\" })\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -767,7 +792,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Writes json objects to file in \".csv\" format",
-						"example": "import { csvWrite } from 'iterparse'\nAsyncIterable.from([{...},{...},{...}])\n.pipe(csvWrite({ filePath: \"path/to/file\" }))\n.count()",
+						"examples": [
+							"import { csvWrite } from 'iterparse'\nAsyncIterable.from([{...},{...},{...}])\n.pipe(csvWrite({ filePath: \"path/to/file\" }))\n.count()",
+							"import { csvWrite } from 'iterparse'\ncsvWrite([{ a: 1, b: 2 },{ a: 1, b: 2 }], { filePath: \"/path/to/file\" })\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -881,6 +909,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -906,7 +935,9 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will download any resource from interned and cache it in local file system.",
-						"example": "import { download } from 'iterparse'\ndownload({ url: \"url/to/resource.csv\", downloadFolder: \"/tmp\"  })\n.flatMap((filePath)=> csvRead({ filePath }))\n.map((q)=> console.log(q))\n.count()",
+						"examples": [
+							"import { download } from 'iterparse'\ndownload({ url: \"url/to/resource.csv\", downloadFolder: \"/tmp\"  })\n.flatMap((filePath)=> csvRead({ filePath }))\n.map((q)=> console.log(q))\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -992,6 +1023,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -1026,7 +1058,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will read big JSON files in memory efficient way.",
-						"example": "import { jsonRead } from 'iterparse'\njsonRead({ filePath: \"path/to/file.json\" })\n.map((q)=> console.log(q))\n.count()",
+						"examples": [
+							"import { jsonRead } from 'iterparse'\njsonRead({ filePath: \"path/to/file.json\" })\n.map((q)=> console.log(q))\n.count()",
+							"import { jsonRead } from 'iterparse'\nfor await (const item of jsonRead({ filePath: \"path/to/file.json\" })) {\nconsole.log(item)\n}"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -1099,6 +1134,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -1142,7 +1178,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files",
-						"example": "import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
+						"examples": [
+							"import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
+							"import { jsonWrite } from 'iterparse'\njsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: \"/path/to/file\" })\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -1220,7 +1259,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files",
-						"example": "import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
+						"examples": [
+							"import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
+							"import { jsonWrite } from 'iterparse'\njsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: \"/path/to/file\" })\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -1313,6 +1355,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -1356,7 +1399,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Function read xml from file in memory efficient way",
-						"example": "import { xmlRead } from 'iterparse'\nxmlRead({ filePath: \"./path/to/file.xml\" })\n.map((q)=> console.log(q))\n.count()",
+						"examples": [
+							"import { xmlRead } from 'iterparse'\nxmlRead({ filePath: \"./path/to/file.xml\" })\n.map((q)=> console.log(q))\n.count()",
+							"import { xmlRead } from 'iterparse'\nfor await (const item of xmlRead({ filePath: \"./path/to/file.xml\" })) {\nconsole.log(item)\n}"
+						],
 						"parsed": [
 							{
 								"tag": "@includes",
@@ -1422,6 +1468,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
@@ -1474,7 +1521,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Writes JSON object iteratable to file in .xml format",
-						"example": "import { AsyncIterable } from 'ix'\nimport { xmlWrite } from 'iterparse'\nAsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])\n.pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' }))\n.count()",
+						"examples": [
+							"import { AsyncIterable } from 'ix'\nimport { xmlWrite } from 'iterparse'\nAsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])\n.pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' }))\n.count()",
+							"import { xmlWrite } from 'iterparse'\nxmlWrite([{...}, {...}], { filePath: 'filePath', nodeName: \"Person\" })\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -1560,7 +1610,10 @@
 					"kind": "Function",
 					"comment": {
 						"description": "Writes JSON object iteratable to file in .xml format",
-						"example": "import { AsyncIterable } from 'ix'\nimport { xmlWrite } from 'iterparse'\nAsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])\n.pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' }))\n.count()",
+						"examples": [
+							"import { AsyncIterable } from 'ix'\nimport { xmlWrite } from 'iterparse'\nAsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])\n.pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' }))\n.count()",
+							"import { xmlWrite } from 'iterparse'\nxmlWrite([{...}, {...}], { filePath: 'filePath', nodeName: \"Person\" })\n.count()"
+						],
 						"parsed": [
 							{
 								"tag": "@param",
@@ -1661,6 +1714,7 @@
 					"kind": "Interface",
 					"comment": {
 						"description": "",
+						"examples": [],
 						"parsed": []
 					},
 					"excerptTokens": [
