@@ -107,7 +107,7 @@ export interface JSONReadOptions extends ProgressReportOptions, FileReference {
  *  for await (const item of jsonRead({ filePath: "path/to/file.json" })) {
  *      console.log(item)
  *  }
- * @category Read, JSON
+ * @category JSON
  */
 export function jsonRead<T>(options: JSONReadOptions): IX<T> {
     return IX.from(_jsonIterParser(options))
@@ -127,7 +127,7 @@ export function jsonRead<T>(options: JSONReadOptions): IX<T> {
  *  import { jsonWrite } from 'iterparse'
  *  jsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: "/path/to/file" })
  *      .count()
- * @category Write, JSON
+ * @category JSON
  */
 export function jsonWrite<T>(options: JSONWriteOptions): (data: AsyncIterable<T>) => AsyncIterable<T>
 export function jsonWrite<T>(data: AnyIterable<T>, options: JSONWriteOptions): IX<T>

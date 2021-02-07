@@ -12,7 +12,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./lib && tsc && yarn ts-docflux",
     "prepare": "yarn build",
     "watch": "yarn link && tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,9 @@
   "devDependencies": {
     "@types/node": "^13.13.5",
     "typescript": "^3.9.3"
+  },
+  "tsDocFluxConfig": {
+    "mainEntryPointFilePath": "./lib/index.d.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^8.1.0",
@@ -34,9 +37,12 @@
     "fs-extra": "^9.0.0",
     "he": "^1.2.0",
     "ix": "^2.5.5",
+    "jsonc": "^2.0.0",
+    "jsonc-parser": "^3.0.0",
     "node-fetch": "^2.6.1",
     "papaparse": "^5.2.0",
     "pretty-ms": "^7.0.1",
+    "ts-docflux": "^0.0.10",
     "ts-prime": "^0.3.11",
     "xml2js": "^0.4.23"
   }

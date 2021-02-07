@@ -184,10 +184,18 @@ function _xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, opt
  * @param options - More information in { @link XMLWriteOptions }
  * @param data - any iteratable that extends XMLObject type.
  * @example
- *      import { AsyncIterable } from 'ix'
- *      AsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }]).pipe(xmlWrite({ filePath: "path/to/file", nodeName: 'Person' }))
+ *  import { AsyncIterable } from 'ix'
+ *  import { xmlWrite } from 'iterparse'
+ * 
+ *  AsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])
+ *      .pipe(xmlWrite({ filePath: "path/to/file", nodeName: 'Person' }))
+ *      .count()
  * @example
- *      xmlWrite([{...}, {...}], { filePath: 'filePath', nodeName: "Person" }).count()
+ *  import { xmlWrite } from 'iterparse'
+ *  
+ *  xmlWrite([{...}, {...}], { filePath: 'filePath', nodeName: "Person" })
+ *      .count()
+ * @category XML
  */
 export function xmlWrite<T extends { [k: string]: unknown }>(options: XMLWriteOptions): (data: AnyIterable<T>) => IX<T>
 export function xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, options: XMLWriteOptions): IX<T>
@@ -199,7 +207,15 @@ export function xmlWrite() {
  * Function read xml from file in memory efficient way
  * @includes ./xml-read.md
  * @example
- *      xmlRead({ filePath: "./pathToXmlFile.xml" }).map((q)=> console.log(q)).count()
+ *  import { xmlRead } from 'iterparse'    
+ *  xmlRead({ filePath: "./path/to/file.xml" })
+ *      .map((q)=> console.log(q))
+ *      .count()
+ * @example
+ *  import { xmlRead } from 'iterparse'    
+ *  for await (const item of xmlRead({ filePath: "./path/to/file.xml" })) {
+ *      console.log(item)
+ *  }
  * @category XML
  */
 export function xmlRead<T>(options: XMLReadOptions): IX<T> {

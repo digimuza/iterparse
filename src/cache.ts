@@ -136,10 +136,22 @@ export function _cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): 
  * Useful when we need develop complex iterator pipelines.
  * @param options - Check more information in {@link CacheIterOptions}
  * @include ./cache-iter.md
- * @example 
+ * @example
+ *  import { cacheIter } from 'iterparse'
+ * 
  *  getFeed() // If cache exists get feed function will not be called
  *      .pipe(cacheIter({ cacheFolder: "./_cache" }))
  *      .count()
+ * 
+ * @example
+ *  import { cacheIter } from 'iterparse'
+ *  
+ *  const cachedIter = cacheIter(getFeed(), { cacheFolder: "./_cache" })
+ * 
+ *  for await (const item of cachedIter) {
+ *      console.log(item)
+ *  }
+ * @category Utility
  */
 export function cacheIter<T>(options: CacheIterOptions): (data: AnyIterable<T>) => IX<T>
 export function cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): IX<T>

@@ -121,6 +121,22 @@ export interface CSVReadOptions extends ProgressReportOptions, FileReference {
     delimitersToGuess?: GuessableDelimiters[];
 }
 
+/**
+ * Read CSV file. In memory efficient way.
+ * @example
+ *  import { csvRead } from 'iterparse'
+ *  csvRead({ filePath: 'path/to/file' })
+ *      .map((q)=> console.log(q))
+ *      .count()
+ * 
+ * @example
+ *  import { csvRead } from 'iterparse'
+ *  for await (const item of csvRead({ filePath: 'path/to/file' })) {
+ *      console.log(item)
+ *  }
+ * @param options - {@link CSVReadOptions} 
+ * @category CSV
+ */
 export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult<T>> {
     const { progressFrequency = 3000 } = options || {}
     async function* iter() {
@@ -177,9 +193,7 @@ export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult
 
 
 
-export interface CSVWriteOptions {
-
-}
+export interface CSVWriteOptions { }
 
 async function* _csvIterWriter<T extends { [k: string]: unknown }>(data: AnyIterable<T>, out: () => Promise<NodeJS.WritableStream>, options?: CSVWriteOptions) {
     let items: T[] = []
@@ -270,13 +284,18 @@ export interface CSVWriteOptions extends FileReference, FileWriteMode {
  * @param options - Write options
  * @include ./CSVOptions.md
  * @signature
- *      cswWrite(option)(iteratable)
+ *  cswWrite(option)(iteratable)
  * @signature
- *      cswWrite(iteratable,option)
+ *  cswWrite(iteratable,option)
  * @example
- *      AsyncIterable.from([{...},{...},{...}]).pipe(csvWrite({ filePath: "path/to/file" })).count()
+ *  import { csvWrite } from 'iterparse'
+ *  AsyncIterable.from([{...},{...},{...}])
+ *      .pipe(csvWrite({ filePath: "path/to/file" }))
+ *      .count()
  * @example
- *      csvWrite([{ a: 1, b: 2 },{ a: 1, b: 2 }], { filePath: "/path/to/file" }).count()
+ *  import { csvWrite } from 'iterparse'
+ *  csvWrite([{ a: 1, b: 2 },{ a: 1, b: 2 }], { filePath: "/path/to/file" })
+ *      .count()
  * @category CSV
  */
 export function csvWrite<T extends { [k: string]: unknown }>(options: CSVWriteOptions): (data: AnyIterable<T>) => IX<T>

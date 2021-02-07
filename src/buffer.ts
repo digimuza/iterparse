@@ -61,7 +61,7 @@ function _bufferWrite(data: AnyIterable<Buffer | string>, options: BufferWriteOp
  *  for await (const buffer of bufferRead({ filePath: "path/to/file" })) {
  *      console.log(q.byteLength)
  *  }
- * @category Read, Buffer
+ * @category Buffer
  */
 export function bufferRead(options: BufferReadOptions): IX<Buffer> {
     return IX.from(_bufferIterParser(options))
@@ -83,6 +83,7 @@ export interface BufferWriteOptions extends FileReference {
  *  import { AsyncIterable } from 'ix'
  *  import { bufferWrite } from 'iterparse'
  *  bufferWrite(getBufferIter() ,{ filePath: "path/to/file" }).count()
+ * @category Buffer
  */
 export function bufferWrite(options: BufferWriteOptions): (data: AnyIterable<Buffer | string>) => IX<Buffer>
 export function bufferWrite(data: AnyIterable<Buffer | string>, options: BufferWriteOptions): IX<Buffer>

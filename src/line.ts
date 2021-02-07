@@ -44,7 +44,7 @@ export async function* _lineIterParser(options: LineReadOptions) {
  *  for await (const line of lineRead({ filePath: "path/to/file" })) {
  * 
  *  }
- * @category Read, Line
+ * @category Line
  */
 export function lineRead(options: LineReadOptions): IX<string> {
     return IX.from(_lineIterParser(options))
@@ -80,7 +80,7 @@ async function* _lineIterWriter(data: AnyIterable<string>, args: LineWriteOption
  *      .count()
  * @example
  *  lineWrite(["1", "2", "3", "4", "5"], { filePath: "path/to/file" }).count()
- * @category Write, Line
+ * @category Line
  */
 export function lineWrite(args: LineWriteOptions): (data: AnyIterable<string>) => IX<string>
 export function lineWrite(data: AnyIterable<string>, args: LineWriteOptions,): IX<string>
