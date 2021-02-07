@@ -14,6 +14,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "yarn build",
+    "watch": "yarn link && tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andrius Mozūraitis",
@@ -24,11 +25,19 @@
   },
   "dependencies": {
     "@types/fs-extra": "^8.1.0",
+    "@types/he": "^1.1.1",
+    "@types/node-fetch": "^2.5.8",
     "@types/papaparse": "^5.0.3",
+    "@types/xml2js": "^0.4.8",
     "JSONStream": "^1.3.5",
+    "fast-xml-parser": "^3.18.0",
     "fs-extra": "^9.0.0",
+    "he": "^1.2.0",
     "ix": "^2.5.5",
+    "node-fetch": "^2.6.1",
     "papaparse": "^5.2.0",
-    "xml-flow": "^1.0.4"
+    "pretty-ms": "^7.0.1",
+    "ts-prime": "^0.3.11",
+    "xml2js": "^0.4.23"
   }
 }

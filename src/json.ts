@@ -1,107 +1,137 @@
-import { delay } from './_internal/helpers';
-import { sourceToReadStream, Source, Output, outputToWriteStream, IX, AnyIterable } from './base';
-import { OperatorAsyncFunction } from 'ix/interfaces';
+import { createReadStream, createWriteStream, ensureFile, statSync } from 'fs-extra';
+import { Progress, ProgressReportOptions } from './helpers';
+import * as P from 'ts-prime';
+import { purry } from 'ts-prime';
+import { AnyIterable, FileReference, FileWriteMode, IX } from './types';
 const JSONStream = require('JSONStream')
 
-async function* _jsonIterParser(stream: NodeJS.ReadableStream, pattern: string): AsyncIterable<unknown> {
-    const parser = JSONStream.parse(pattern)
-    stream.pipe(parser)
+async function* _jsonIterParser(options: JSONReadOptions) {
+    const pStream = createReadStream(options.filePath)
+    const size = statSync(options.filePath)
+    const progress = new Progress(options.filePath, size.size, Date.now())
+    const log = () => {
+        options.progress?.(progress)
+    }
+    const logTh = P.throttle(log, options.progressFrequency || 3000)
+    pStream.on('data', (q) => {
+        if (q instanceof Buffer) {
+            progress.add(q.byteLength)
+            return
+        }
+        progress.add(Buffer.from(q).byteLength)
+
+    })
+
+    const parser = JSONStream.parse(options.pattern)
+    pStream.pipe(parser)
     let data: unknown[] = []
     let done = false
     parser.on(`data`, (obj: unknown) => {
         data.push(obj)
         if (data.length > 10) {
-            stream.pause()
+            pStream.pause()
         }
     })
-    stream.on('close', () => {
+    pStream.on('close', () => {
         done = true
     })
-    stream.on('end', () => {
+    pStream.on('end', () => {
         done = true
     })
-    stream.on('error', (err) => {
+    pStream.on('error', (err) => {
         throw err
     })
     while (!done || data.length > 0) {
+        logTh()
         const d = data.shift()
         if (!d) {
-            await delay(0)
-            stream.resume()
+            await P.delay(0)
+            pStream.resume()
             continue
         }
         yield d
+        progress.addItem(1)
     }
+
+    log()
 }
 
-async function* _jsonIterWriter<T>(output: () => Promise<NodeJS.WritableStream>, stream: AnyIterable<T>): AsyncIterable<T> {
-    let x = 0
+
+export interface JSONWriteOptions extends FileReference, FileWriteMode { }
+
+function _jsonWrite<T>(data: AnyIterable<T>, args: JSONWriteOptions): AsyncIterable<T> {
     let dest: NodeJS.WritableStream | null = null
-    let loaded = false
-    for await (const data of stream) {
-        if (!loaded) {
-            loaded = true
-            dest = await output()
+    async function* iter() {
+        const { mode = 'overwrite' } = args
+        let x = 0
+        let loaded = false
+        for await (const item of data) {
+            if (!loaded) {
+                loaded = true
+                await ensureFile(args.filePath)
+                dest = createWriteStream(args.filePath, { flags: mode === 'append' ? 'a' : 'w' })
+                dest?.write(`[\r\n`)
+            }
+            dest?.write(`${JSON.stringify(item)},\r\n`)
+            yield item
         }
-        if (x === 0) {
-            dest?.write("[\r\n")
-            dest?.write(JSON.stringify(data))
-            x++
-            yield data
-            continue
-        }
-        dest?.write(`\r\n,${JSON.stringify(data)}`)
-        yield data
+
     }
-    if (x === 0) {
+    return IX.from(iter()).finally(() => {
+        dest?.write("\r\n]")
         dest?.end()
-        return
-    }
-    dest?.write("\r\n]")
-    dest?.end()
+    })
 }
 
-export interface JSONReadOptions {
+export interface JSONReadOptions extends ProgressReportOptions, FileReference {
     /**
      * JSON parsing pattern
      * @example
-     * [{...}, {...}] => *
-     * { a: [{...}, {...}] } => a.*
-     * { a: { b: [{...}, {...}] } } => a.b.*
+     *      [{...}, {...}] => *
+     *      { a: [{...}, {...}] } => a.*
+     *      { a: { b: [{...}, {...}] } } => a.b.*
      */
     pattern: string
 }
 
 /**
- * Function will read big JSON files in memory efficent way.
- * @param source - path to file or ReadableStream
- * @param options - parsing pattern {@link JSONReadOptions}
+ * Function will read big JSON files in memory efficient way.
+ * @param options - More information {@link JSONReadOptions}
+ * @example 
+ *  import { jsonRead } from 'iterparse'
+ *  jsonRead({ filePath: "path/to/file.json" })
+ *      .map((q)=> console.log(q))
+ *      .count()
+ * @example 
+ *  import { jsonRead } from 'iterparse'
+ *  for await (const item of jsonRead({ filePath: "path/to/file.json" })) {
+ *      console.log(item)
+ *  }
+ * @category Read, JSON
  */
-export function jsonRead<T>(source: Source, options: JSONReadOptions): AsyncIterable<T> {
-    return IX.from(_jsonIterParser(sourceToReadStream(source), options.pattern))
+export function jsonRead<T>(options: JSONReadOptions): IX<T> {
+    return IX.from(_jsonIterParser(options))
 }
 
 /**
- * Function will write iteratble in memory efficient way. Tested iteratebles that produce 10gb json files 
- * @param out - path to file or WritableStream
+ * Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files 
  * @param data - any iteratable.
+ * @param options - {@link JSONWriteOptions}
  * @example
- * ```typescript
- * import { AsyncIterable } from 'ix'
- * AsyncIterable.from([1, 2, 3, 4, 5]).pipe(jsonWrite("path/to/file"))
- * ```
+ *  import { AsyncIterable } from 'ix'
+ *  import { jsonWrite } from 'iterparse'
+ *  AsyncIterable.from([1, 2, 3, 4, 5])
+ *      .pipe(jsonWrite({ filePath: "path/to/file.json" }))
+ *      .count()
  * @example
- * ```typescript
- * jsonWrite("/path/to/file", [{ a: 1, b: 2 }, { a: 1, b: 2 }])
- * ```
- * @example
- * ```typescript
- * jsonWrite(process.stdout, [1, 2, 3, 4, 5, 6, 7, 8])
- * ```
+ *  import { jsonWrite } from 'iterparse'
+ *  jsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: "/path/to/file" })
+ *      .count()
+ * @category Write, JSON
  */
-export function jsonWrite<T>(out: Output): OperatorAsyncFunction<T, T>
-export function jsonWrite<T>(out: Output, data: AnyIterable<T>): AsyncIterable<T>
-export function jsonWrite<T>(out: Output, data?: AnyIterable<T>): OperatorAsyncFunction<T, T> | AsyncIterable<T> {
-    if (!data) return (d) => jsonWrite(out, d)
-    return IX.from(_jsonIterWriter(outputToWriteStream(out), data))
+export function jsonWrite<T>(options: JSONWriteOptions): (data: AsyncIterable<T>) => AsyncIterable<T>
+export function jsonWrite<T>(data: AnyIterable<T>, options: JSONWriteOptions): IX<T>
+export function jsonWrite() {
+    return purry(_jsonWrite, arguments)
 }
+

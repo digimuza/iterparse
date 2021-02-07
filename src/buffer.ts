@@ -1,70 +1,91 @@
-import { AsyncIterable as IX } from "ix"
-import { Source, Output, sourceToReadStream, outputToWriteStream, AnyIterable } from "./base"
-import { delay } from "./_internal/helpers"
-import { OperatorAsyncFunction } from "ix/interfaces"
+import { createReadStream, createWriteStream, ensureFile, statSync } from "fs-extra"
+import { Progress, ProgressReportOptions } from "./helpers"
+import * as P from 'ts-prime'
+import { AnyIterable, FileReference, IX } from "./types"
+import { purry } from "ts-prime"
 
-async function* _bufferIterParser(source: NodeJS.ReadableStream) {
-    let data: Buffer[] = []
-    let done = false
 
-    source.on('close', () => {
-        done = true
-    })
-    source.on('data', (value) => {
-        data.push(value)
-    })
-    source.on('end', () => {
-        done = true
-    })
-    source.on('error', (err) => {
-        throw err
-    })
-    while (!done || data.length > 0) {
-        const d = data.shift()
-        if (!d) {
-            await delay(0)
-            source.resume()
-            continue
-        }
-        yield d
+export interface BufferReadOptions extends FileReference, ProgressReportOptions {}
+
+async function* _bufferIterParser(options: BufferReadOptions): AsyncGenerator<Buffer, void, unknown> {
+    const { progressFrequency = 3000 } = options || {}
+
+    const size = statSync(options.filePath)
+    const progress = new Progress(options.filePath, size.size, Date.now())
+    const log = () => {
+        options?.progress?.(progress)
     }
+    const logTh = P.throttle(log, progressFrequency)
+    for await (const buffer of createReadStream(options.filePath)) {
+        const b = buffer as Buffer
+        yield b
+        progress.addItem(1)
+        progress.add(b.byteLength)
+        logTh()
+    }
+    log()
 }
 
-async function* _bufferIterWriter(output: () => Promise<NodeJS.WritableStream>, stream: AnyIterable<Buffer | string>): AsyncIterable<Buffer> {
-    let dest: NodeJS.WritableStream | null = null
-    let loaded = false
-    for await (const data of stream) {
-        if (!loaded) {
-            dest = await output()
-            loaded = true
+function _bufferWrite(data: AnyIterable<Buffer | string>, options: BufferWriteOptions) {
+    async function* iter() {
+        let dest: NodeJS.WritableStream | null = null
+        const mode = options.mode || 'overwrite'
+        let loaded = false
+        for await (const item of data) {
+            if (!loaded) {
+                await ensureFile(options.filePath)
+                dest = createWriteStream(options.filePath, { flags: mode === 'append' ? 'a' : "w" })
+                loaded = true
+            }
+            dest?.write(item)
+            yield Buffer.from(item)
         }
-        dest?.write(data)
-        yield Buffer.from(data)
+        dest?.end()
     }
-    dest?.end()
+
+    return IX.from(iter())
 }
 
 /**
  * Function will read big files in memory efficient way. 
- * @param source - path to file or ReadbaleStream
+ * @param options.filePath - Path to file
+ * @example
+ *  import { bufferRead } from 'iterparse'
+ * 
+ *  bufferRead({ filePath: "path/to/file" })
+ *      .map((buffer)=> console.log(buffer.byteLength))
+ *      .count()
+ * @example 
+ *  import { bufferRead } from 'iterparse'
+ * 
+ *  for await (const buffer of bufferRead({ filePath: "path/to/file" })) {
+ *      console.log(q.byteLength)
+ *  }
+ * @category Read, Buffer
  */
-export function bufferRead(source: Source): AsyncIterable<Buffer> {
-    return IX.from(_bufferIterParser(sourceToReadStream(source)))
+export function bufferRead(options: BufferReadOptions): IX<Buffer> {
+    return IX.from(_bufferIterParser(options))
+}
+
+
+export interface BufferWriteOptions extends FileReference {
+    mode?: 'overwrite' | 'append'
 }
 
 /**
  * Function will write buffer to file
- * @param out - path to file or WritableStream
- * @param data - any iteratable that extends string | Buffer types.
+ * @param data - Any iteratable that extends `AnyIteratable<string | Buffer>` type.
  * @example
- * ```typescript
- * import { AsyncIterable } from 'ix'
- * AsyncIterable.from(["one", "two", "three"]).pipe(bufferWrite("path/to/file"))
- * ```
+ *  import { AsyncIterable } from 'ix'
+ *  import { bufferWrite } from 'iterparse'
+ *  AsyncIterable.from(["one", "two", "three"]).pipe(bufferWrite({ filePath: "path/to/file" }))
+ * @example
+ *  import { AsyncIterable } from 'ix'
+ *  import { bufferWrite } from 'iterparse'
+ *  bufferWrite(getBufferIter() ,{ filePath: "path/to/file" }).count()
  */
-export function bufferWrite(out: Output): OperatorAsyncFunction<Buffer | string, Buffer>
-export function bufferWrite(out: Output, data: AnyIterable<Buffer | string>): AsyncIterable<Buffer>
-export function bufferWrite(out: Output, data?: AnyIterable<Buffer | string>): OperatorAsyncFunction<Buffer, Buffer> | AsyncIterable<Buffer> {
-    if (!data) return (d) => bufferWrite(out, d);
-    return IX.from(_bufferIterWriter(outputToWriteStream(out), data))
+export function bufferWrite(options: BufferWriteOptions): (data: AnyIterable<Buffer | string>) => IX<Buffer>
+export function bufferWrite(data: AnyIterable<Buffer | string>, options: BufferWriteOptions): IX<Buffer>
+export function bufferWrite() {
+    return purry(_bufferWrite, arguments)
 }

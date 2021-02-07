@@ -1,184 +1,251 @@
-import { Output, Source, sourceToReadStream, outputToWriteStream, IX, AnyIterable } from "./base";
-import { delay } from "./_internal/helpers";
-import { OperatorAsyncFunction } from "ix/interfaces";
+import { createWriteStream } from 'fs'
+import { ProgressReportOptions } from "./helpers";
+import { AsyncIterable } from "ix";
+import { bufferRead } from "./buffer";
+import * as Parser from 'fast-xml-parser'
+import { isString, purry } from "ts-prime";
+import * as he from 'he'
+import { ensureFile } from 'fs-extra'
+import { AnyIterable, FileReference, FileWriteMode, IX } from "./types";
 
-const xmlStream = require('xml-flow')
-
-
-export enum XMLParserBehavior {
-    ALWAYS = 1,
-    SOMETIMES = 0,
-    NEVER = -1
-}
-export interface XMLParserConfig {
-    strict?: boolean,
-    lowercase?: boolean,
-    trim?: boolean,
-    preserveMarkup?: XMLParserBehavior,
-    useArrays?: XMLParserBehavior,
-    cdataAsText?: boolean
-}
-export const defaultXmlParserConfig = {
-    strict: false,
-    lowercase: true,
-    trim: true,
-    preserveMarkup: XMLParserBehavior.SOMETIMES,
-    useArrays: XMLParserBehavior.SOMETIMES,
-    cdataAsText: false
-} as const
-
-async function* _xmlIterParser<T>(args: {
-    pattern: string, source: NodeJS.ReadableStream, options?: XMLParserConfig
-}) {
-    const { pattern, source, options = {} } = args
-    const defaultConfig = {
-        ...options,
-        ...defaultXmlParserConfig
-    }
-    const parser = xmlStream(source, defaultConfig)
-    const data: T[] = []
-    let done = false
-    parser.resume()
-    parser.on(`tag:${pattern}`, (obj: T) => {
-        data.push(obj)
-        if (data.length > 10) {
-            source.pause()
-        }
-    })
-    parser.on('end', () => {
-        done = true
-    })
-    parser.on('close', () => {
-        done = true
-    })
-
-    source.on('close', () => {
-        done = true
-    })
-
-    source.on('end', () => {
-        done = true
-    })
-
-    source.on('error', (err) => {
-        throw err
-    })
-    while (!done || data.length > 0) {
-        const d = data.shift()
-        if (!d) {
-            await delay(0)
-            source.resume()
-            continue
-        }
-        yield d
-    }
-}
-
-
-async function* _xmlWriterParser<T>(data: AnyIterable<T>, out: () => Promise<NodeJS.WritableStream>): AsyncIterable<T> {
-    let first = 0
-    let dest: NodeJS.WritableStream | null = null
-    let loaded = false
-
-    for await (const d of data) {
-        if (!loaded) {
-            loaded = true
-            dest = await out()
-        }
-        if (first === 0) {
-            dest?.write("<root>")
-        }
-        const x = xmlStream.toXml(d, {
-            indent: "\t"
-        })
-        dest?.write(`\r\n${x}`)
-        first++
-        yield d
-    }
-    if (first !== 0) {
-        dest?.write("\n</root>\n")
-    }
-    dest?.end()
-}
-
-export type XMLAttributes = Record<string, string>
-export type XMLMarkup = Object | string
-
-/**
- * xmlRead function return object type
- */
-export type XMLObject = {
-    $name: string,
-    $attrs?: XMLAttributes
-    $text?: string,
-    $markup?: ReadonlyArray<XMLMarkup>
-    [d: string]: string | XMLMarkup | XMLAttributes | ReadonlyArray<XMLMarkup> | undefined | Object
-}
-
-
-
-export interface XMLReadOptions {
+export interface FastXMLParser {
     /**
-     * XML parsing pattern
+    * Node attribute prefix
+    * @defaultValue `""`
+    * @example
+    *      const cfg: FastXMLWriteOptions =  { attributeNamePrefix: "#", attrNodeName: "_" }
+    *      const obj = { "_":{ "#id": "1" }, "Person": { ... } } //-> <Person id="1">...</Person>
+    */
+    attributeNamePrefix?: string;
+    /**
+    * Node attribute prefix
+    * @defaultValue `"_"`
+    * @example
+    *      const cfg: FastXMLWriteOptions =  { attributeNamePrefix: "#", attrNodeName: "_" }
+    *      const obj = { "_":{ "#id": "1" }, "Person": { ... } } //-> <Person id="1">...</Person>
+    */
+    attrNodeName?: false | string;
+    /**
+     * Text node key
+     * @defaultValue `"#text"`
      * @example
-     * <root>
-     *   <item>...</item>
-     *   <item>...</item>
-     *   <item>...</item>
-     *   <item>...</item>
-     * </root>
-     * Results to `item`
+     *      <Node>
+     *          Text attribute value
+     *          <NodeChild></NodeChild>
+     *      </Node>
      */
-    pattern: string
-    options?: XMLParserConfig
+    textNodeName?: string;
+    /**
+    * Should we parse node attributes?
+    * @defaultValue `false`
+    */
+    ignoreAttributes?: boolean;
+    ignoreNameSpace?: boolean;
+    allowBooleanAttributes?: boolean;
+    parseNodeValue?: boolean;
+    /**
+     * Should we parse attributes?
+     * * Recommended value is false. Improves parsing performance. 
+     * @defaultValue `false`
+     */
+    parseAttributeValue?: boolean;
+    arrayMode?: boolean | 'strict' | RegExp | ((tagName: string, parentTagName: string) => boolean);
+    trimValues?: boolean;
+    /**
+     * @defaultValue `"__cdata"`
+     */
+    cdataTagName?: false | string;
+    /**
+     * @defaultValue `"\\c"`
+     */
+    cdataPositionChar?: string;
+    /**
+     * Should we parse number values?
+     * Recommended value is false. Improves parsing speed
+     * @defaultValue false
+     */
+    parseTrueNumberOnly?: boolean;
+    /**
+     * How tag value is processed?
+     */
+    tagValueProcessor?: (tagValue: string, tagName: string) => string;
+    /**
+     * How attribute value is processed?
+     */
+    attrValueProcessor?: (attrValue: string, attrName: string) => string;
+    /**
+     * Nodes that are included in this list will not be processed
+     */
+    stopNodes?: string[];
+}
+export interface XMLReadOptions extends ProgressReportOptions, FastXMLParser, FileReference {
+    /**
+     * Object node name
+     * @example
+     * nodeName === "Person"
+     * <Person>...</Person>
+     */
+    nodeName: string
+}
+export interface FastXMLWriteOptions {
+    /**
+     * Node attribute prefix
+     * @example
+     *      const cfg: FastXMLWriteOptions =  { attributeNamePrefix: "#", attrNodeName: "_" }
+     *      const obj = { "_":{ "#id": "1" }, "Person": { ... } } //-> <Person id="1">...</Person>
+     */
+    attributeNamePrefix?: string;
+    /**
+     * Node attribute prefix
+     * @example
+     *      const cfg: FastXMLWriteOptions =  { attributeNamePrefix: "#", attrNodeName: "_" }
+     *      const obj = { "_":{ "#id": "1" }, "Person": { ... } } //-> <Person id="1">...</Person>
+     */
+    attrNodeName?: false | string;
+    /**
+     * How text node is formatted?
+     */
+    textNodeName?: string;
+    ignoreAttributes?: boolean;
+    cdataTagName?: false | string;
+    cdataPositionChar?: string;
+    format?: boolean;
+    indentBy?: string;
+    supressEmptyNode?: boolean;
+    tagValueProcessor?: (tagValue: string) => string;
+    attrValueProcessor?: (attrValue: string) => string;
 }
 
-/**
- * Function will read big JSON files in memory efficent way.
- * @param source - path to file or ReadableStream
- * @param options - parsing pattern {@link XMLReadOptions}
- */
-export function xmlRead<T extends XMLObject>(source: Source, options: XMLReadOptions): AsyncIterable<T> {
-    return IX.from(_xmlIterParser({
-        pattern: options.pattern,
-        source: sourceToReadStream(source)
-    }))
+export interface XMLWriteOptions extends FastXMLWriteOptions, FileReference, FileWriteMode {
+    /**
+     * Object node name
+     * @example
+     * nodeName === "Person"
+     * <Person>...</Person>
+     */
+    nodeName: string
 }
 
+function _xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, options: XMLWriteOptions): AsyncIterable<T> {
+    return IX.defer(async () => {
+        const mode = options.mode || 'overwrite'
+        let loaded = false
+        let dest: NodeJS.WritableStream = undefined as unknown as NodeJS.WritableStream
+        async function* iter() {
+            const defaultOptions: FastXMLWriteOptions = {
+                attributeNamePrefix: "",
+                attrNodeName: "_", //default is false
+                textNodeName: "#text",
+                ignoreAttributes: false,
+                cdataTagName: "__cdata", //default is false
+                cdataPositionChar: "\\c",
+                format: false,
+                indentBy: "  ",
+                supressEmptyNode: false,
+                tagValueProcessor: a => {
+                    if (isString(a)) return he.encode(a, { useNamedReferences: true })
+                    return a
+                },// default is a=>a
+                attrValueProcessor: a => {
+                    if (!isString(a)) return a
+                    return he.encode(a, { useNamedReferences: true })// default is a=>a
+                }
+            }
+            const parser = new Parser.j2xParser({
+                ...defaultOptions,
+                ...options
+            })
+            const i = IX.from(data)
+            if (mode === 'overwrite') {
+                dest.write("<root>\r\n")
+            }
+            for await (const s of i) {
+                if (!loaded) {
+                    await ensureFile(options.filePath)
+                    dest = createWriteStream(options.filePath, { flags: mode === 'append' ? 'a' : 'w' })
+                }
+                const result = parser.parse({ [options.nodeName]: s })
+                dest.write(`${result}\r\n`)
+                yield s
+            }
+        }
+
+        return IX.from(iter()).finally(() => {
+            if (mode === 'overwrite') {
+                dest.write("</root>")
+            }
+        })
+    })
+}
+
+
 /**
- * @param out - path to file or WritableStream
+ * Writes JSON object iteratable to file in .xml format
+ * @param options - More information in { @link XMLWriteOptions }
  * @param data - any iteratable that extends XMLObject type.
  * @example
- * ```typescript
- * import { AsyncIterable } from 'ix'
- * AsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }]).map(toXmlNode((item)=>({ $name: "person", ...item }))).pipe(xmlWrite("path/to/file"))
- * ```
+ *      import { AsyncIterable } from 'ix'
+ *      AsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }]).pipe(xmlWrite({ filePath: "path/to/file", nodeName: 'Person' }))
  * @example
- * ```typescript
- * xmlWrite("/path/to/file", [{ a: 1, b: 2 }, { a: 1, b: 2 }].map(toXmlNode((item)=>({ $name: "person", ...item })))
- * ```
- * @example
- * ```typescript
- * xmlWrite(process.stdout, [{ a: 1, b: 2 }, { a: 1, b: 2 }].map(toXmlNode((item)=>({ $name: "person", ...item })))
- * ```
+ *      xmlWrite([{...}, {...}], { filePath: 'filePath', nodeName: "Person" }).count()
  */
-export function xmlWrite(out: Output): OperatorAsyncFunction<XMLObject, XMLObject>
-export function xmlWrite(out: Output, data: AnyIterable<XMLObject>): AsyncIterable<XMLObject>
-export function xmlWrite(out: Output, data?: AnyIterable<XMLObject>): OperatorAsyncFunction<XMLObject, XMLObject> | AsyncIterable<XMLObject> {
-    if (!data) return (d) => xmlWrite(out, d);
-    return IX.from(_xmlWriterParser(data, outputToWriteStream(out)))
+export function xmlWrite<T extends { [k: string]: unknown }>(options: XMLWriteOptions): (data: AnyIterable<T>) => IX<T>
+export function xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, options: XMLWriteOptions): IX<T>
+export function xmlWrite() {
+    return purry(_xmlWrite, arguments)
 }
 
 /**
- * Sample helper to conver data to XMLObject
- * @param nodeFn - transformation function
+ * Function read xml from file in memory efficient way
+ * @includes ./xml-read.md
  * @example
- * ```typescript
- * const xmlObjects = [{ a: 1, b: 2 }, { a: 1, b: 2 }].map(toXmlNode((item)=>({ $name: "person", ...item })
- * ```
+ *      xmlRead({ filePath: "./pathToXmlFile.xml" }).map((q)=> console.log(q)).count()
+ * @category XML
  */
-export function toXmlNode<T>(nodeFn: (data: T) => XMLObject): (data: T) => XMLObject {
-    return (data: T) => {
-        return nodeFn(data)
+export function xmlRead<T>(options: XMLReadOptions): IX<T> {
+    let last = ''
+    const defaultOptions: FastXMLParser = {
+        attributeNamePrefix: "",
+        attrNodeName: "_", //default is 'false'
+        textNodeName: "#text",
+        ignoreAttributes: false,
+        ignoreNameSpace: false,
+        allowBooleanAttributes: false,
+        parseNodeValue: true,
+        parseAttributeValue: false,
+        trimValues: true,
+        cdataTagName: "__cdata", //default is 'false'
+        cdataPositionChar: "\\c",
+        parseTrueNumberOnly: false,
+        arrayMode: false, //"strict"
     }
+    let count = 0
+    async function* iter() {
+        for await (const buffer of bufferRead({
+            ...options,
+            progress: (q) => {
+                q.set({
+                    items: count
+                })
+                options.progress?.(q)
+            }
+        })) {
+            const full = `${last}${buffer.toString()}`
+            const beef = full.replace(new RegExp(`<${options.nodeName}`, 'gm'), `!@###@!<${options.nodeName}`).split(`!@###@!`)
+            last = beef.pop() || ''
+            for (const qwe of beef) {
+                if (!qwe.includes(`<${options.nodeName}`)) {
+                    continue
+                }
+                yield Parser.parse(qwe, {
+                    ...defaultOptions,
+                    ...options
+
+                })[options.nodeName]
+                count++
+            }
+        }
+    }
+
+    return AsyncIterable.from(iter())
 }
