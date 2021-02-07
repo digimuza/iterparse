@@ -1,0 +1,1714 @@
+{
+	"docs": [
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will read big files in memory efficient way.",
+						"example": "import { bufferRead } from 'iterparse'\nbufferRead({ filePath: \"path/to/file\" })\n.map((buffer)=> console.log(buffer.byteLength))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": ".filePath - Path to file",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"Buffer"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function bufferRead(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "BufferReadOptions",
+							"canonicalReference": "iterparse!BufferReadOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<"
+						},
+						{
+							"kind": "Reference",
+							"text": "Buffer",
+							"canonicalReference": "!Buffer:class"
+						},
+						{
+							"kind": "Content",
+							"text": ">"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!bufferRead:function(1)",
+					"canonicalReferenceGroup": "iterparse!bufferRead"
+				}
+			],
+			"kind": "Function",
+			"name": "bufferRead",
+			"canonicalReference": "iterparse!bufferRead:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!bufferRead",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "Buffer"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface BufferReadOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "ProgressReportOptions",
+							"canonicalReference": "iterparse!ProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!BufferReadOptions:interface",
+					"canonicalReferenceGroup": "iterparse!BufferReadOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "BufferReadOptions",
+			"canonicalReference": "iterparse!BufferReadOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!BufferReadOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will write buffer to file",
+						"example": "import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nAsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Any iteratable that extends `AnyIteratable<string | Buffer>` type.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"Buffer"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function bufferWrite(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "BufferWriteOptions",
+							"canonicalReference": "iterparse!BufferWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Content",
+							"text": "(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<"
+						},
+						{
+							"kind": "Reference",
+							"text": "Buffer",
+							"canonicalReference": "!Buffer:class"
+						},
+						{
+							"kind": "Content",
+							"text": " | string>) => "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<"
+						},
+						{
+							"kind": "Reference",
+							"text": "Buffer",
+							"canonicalReference": "!Buffer:class"
+						},
+						{
+							"kind": "Content",
+							"text": ">"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!bufferWrite:function(1)",
+					"canonicalReferenceGroup": "iterparse!bufferWrite"
+				},
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will write buffer to file",
+						"example": "import { AsyncIterable } from 'ix'\nimport { bufferWrite } from 'iterparse'\nAsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Any iteratable that extends `AnyIteratable<string | Buffer>` type.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"Buffer"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function bufferWrite(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<"
+						},
+						{
+							"kind": "Reference",
+							"text": "Buffer",
+							"canonicalReference": "!Buffer:class"
+						},
+						{
+							"kind": "Content",
+							"text": " | string>"
+						},
+						{
+							"kind": "Content",
+							"text": ", options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "BufferWriteOptions",
+							"canonicalReference": "iterparse!BufferWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<"
+						},
+						{
+							"kind": "Reference",
+							"text": "Buffer",
+							"canonicalReference": "!Buffer:class"
+						},
+						{
+							"kind": "Content",
+							"text": ">"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!bufferWrite:function(2)",
+					"canonicalReferenceGroup": "iterparse!bufferWrite"
+				}
+			],
+			"kind": "Function",
+			"name": "bufferWrite",
+			"canonicalReference": "iterparse!bufferWrite:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!bufferWrite",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "Buffer"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface BufferWriteOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!BufferWriteOptions:interface",
+					"canonicalReferenceGroup": "iterparse!BufferWriteOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "BufferWriteOptions",
+			"canonicalReference": "iterparse!BufferWriteOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!BufferWriteOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Cache iterator output to file.\r\n  Useful when we need develop complex iterator pipelines.",
+						"example": "import { cacheIter } from 'iterparse'\ngetFeed() // If cache exists get feed function will not be called\n.pipe(cacheIter({ cacheFolder: \"./_cache\" }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Check more information in {",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"CacheIterOptions}"
+								]
+							},
+							{
+								"tag": "@include",
+								"content": [
+									"./cache-iter.md"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"Utility"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function cacheIter<T>(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "CacheIterOptions",
+							"canonicalReference": "iterparse!CacheIterOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Content",
+							"text": "(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>) => "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!cacheIter:function(1)",
+					"canonicalReferenceGroup": "iterparse!cacheIter"
+				},
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Cache iterator output to file.\r\n  Useful when we need develop complex iterator pipelines.",
+						"example": "import { cacheIter } from 'iterparse'\ngetFeed() // If cache exists get feed function will not be called\n.pipe(cacheIter({ cacheFolder: \"./_cache\" }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Check more information in {",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"CacheIterOptions}"
+								]
+							},
+							{
+								"tag": "@include",
+								"content": [
+									"./cache-iter.md"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"Utility"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function cacheIter<T>(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ", options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "CacheIterOptions",
+							"canonicalReference": "iterparse!CacheIterOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!cacheIter:function(2)",
+					"canonicalReferenceGroup": "iterparse!cacheIter"
+				}
+			],
+			"kind": "Function",
+			"name": "cacheIter",
+			"canonicalReference": "iterparse!cacheIter:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!cacheIter",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "Utility"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface CacheIterOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "ProgressReportOptions",
+							"canonicalReference": "iterparse!ProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!CacheIterOptions:interface",
+					"canonicalReferenceGroup": "iterparse!CacheIterOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "CacheIterOptions",
+			"canonicalReference": "iterparse!CacheIterOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!CacheIterOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Read CSV file. In memory efficient way.",
+						"example": "import { csvRead } from 'iterparse'\ncsvRead({ filePath: 'path/to/file' })\n.map((q)=> console.log(q))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "{",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"CSVReadOptions}"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"CSV"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function csvRead<T>(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "CSVReadOptions",
+							"canonicalReference": "iterparse!CSVReadOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "AsyncIterable",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<"
+						},
+						{
+							"kind": "Reference",
+							"text": "ParsingResult",
+							"canonicalReference": "iterparse!ParsingResult:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!csvRead:function(1)",
+					"canonicalReferenceGroup": "iterparse!csvRead"
+				}
+			],
+			"kind": "Function",
+			"name": "csvRead",
+			"canonicalReference": "iterparse!csvRead:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!csvRead",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "CSV"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface CSVReadOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "ProgressReportOptions",
+							"canonicalReference": "iterparse!ProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!CSVReadOptions:interface",
+					"canonicalReferenceGroup": "iterparse!CSVReadOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "CSVReadOptions",
+			"canonicalReference": "iterparse!CSVReadOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!CSVReadOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Writes json objects to file in \".csv\" format",
+						"example": "import { csvWrite } from 'iterparse'\nAsyncIterable.from([{...},{...},{...}])\n.pipe(csvWrite({ filePath: \"path/to/file\" }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Any iteratable.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Write options",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@include",
+								"content": [
+									"./CSVOptions.md"
+								]
+							},
+							{
+								"tag": "@signature",
+								"content": [
+									"cswWrite(option)(iteratable)"
+								]
+							},
+							{
+								"tag": "@signature",
+								"content": [
+									"cswWrite(iteratable",
+									"option)"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"CSV"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function csvWrite<T extends "
+						},
+						{
+							"kind": "Content",
+							"text": "{\n    [k: string]: unknown;\n}"
+						},
+						{
+							"kind": "Content",
+							"text": ">(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "CSVWriteOptions",
+							"canonicalReference": "iterparse!CSVWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Content",
+							"text": "(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>) => "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!csvWrite:function(1)",
+					"canonicalReferenceGroup": "iterparse!csvWrite"
+				},
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Writes json objects to file in \".csv\" format",
+						"example": "import { csvWrite } from 'iterparse'\nAsyncIterable.from([{...},{...},{...}])\n.pipe(csvWrite({ filePath: \"path/to/file\" }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Any iteratable.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "Write options",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@include",
+								"content": [
+									"./CSVOptions.md"
+								]
+							},
+							{
+								"tag": "@signature",
+								"content": [
+									"cswWrite(option)(iteratable)"
+								]
+							},
+							{
+								"tag": "@signature",
+								"content": [
+									"cswWrite(iteratable",
+									"option)"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"CSV"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function csvWrite<T extends "
+						},
+						{
+							"kind": "Content",
+							"text": "{\n    [k: string]: unknown;\n}"
+						},
+						{
+							"kind": "Content",
+							"text": ">(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ", out: "
+						},
+						{
+							"kind": "Reference",
+							"text": "CSVWriteOptions",
+							"canonicalReference": "iterparse!CSVWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!csvWrite:function(2)",
+					"canonicalReferenceGroup": "iterparse!csvWrite"
+				}
+			],
+			"kind": "Function",
+			"name": "csvWrite",
+			"canonicalReference": "iterparse!csvWrite:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!csvWrite",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "CSV"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface CSVWriteOptions "
+						}
+					],
+					"canonicalReference": "iterparse!CSVWriteOptions:interface",
+					"canonicalReferenceGroup": "iterparse!CSVWriteOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "CSVWriteOptions",
+			"canonicalReference": "iterparse!CSVWriteOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!CSVWriteOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will download any resource from interned and cache it in local file system.",
+						"example": "import { download } from 'iterparse'\ndownload({ url: \"url/to/resource.csv\", downloadFolder: \"/tmp\"  })\n.flatMap((filePath)=> csvRead({ filePath }))\n.map((q)=> console.log(q))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "URL to file",
+									"name": "url"
+								}
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "{",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"DownloadOptions}"
+								]
+							},
+							{
+								"tag": "@returns",
+								"content": [
+									"Iteratable<path/to/file>"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"Utility"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function download(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "DownloadOptions",
+							"canonicalReference": "iterparse!DownloadOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<string>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!download:function(1)",
+					"canonicalReferenceGroup": "iterparse!download"
+				}
+			],
+			"kind": "Function",
+			"name": "download",
+			"canonicalReference": "iterparse!download:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!download",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "Utility"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface DownloadOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "RequestInit",
+							"canonicalReference": "@types/node-fetch!RequestInit:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!DownloadOptions:interface",
+					"canonicalReferenceGroup": "iterparse!DownloadOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "DownloadOptions",
+			"canonicalReference": "iterparse!DownloadOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!DownloadOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will read big JSON files in memory efficient way.",
+						"example": "import { jsonRead } from 'iterparse'\njsonRead({ filePath: \"path/to/file.json\" })\n.map((q)=> console.log(q))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "More information {",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"JSONReadOptions}"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"JSON"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function jsonRead<T>(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "JSONReadOptions",
+							"canonicalReference": "iterparse!JSONReadOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!jsonRead:function(1)",
+					"canonicalReferenceGroup": "iterparse!jsonRead"
+				}
+			],
+			"kind": "Function",
+			"name": "jsonRead",
+			"canonicalReference": "iterparse!jsonRead:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!jsonRead",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "JSON"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface JSONReadOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "ProgressReportOptions",
+							"canonicalReference": "iterparse!ProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!JSONReadOptions:interface",
+					"canonicalReferenceGroup": "iterparse!JSONReadOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "JSONReadOptions",
+			"canonicalReference": "iterparse!JSONReadOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!JSONReadOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files",
+						"example": "import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "any iteratable.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "{",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"JSONWriteOptions}"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"JSON"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function jsonWrite<T>(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "JSONWriteOptions",
+							"canonicalReference": "iterparse!JSONWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Content",
+							"text": "(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AsyncIterable",
+							"canonicalReference": "!AsyncIterable:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>) => "
+						},
+						{
+							"kind": "Reference",
+							"text": "AsyncIterable",
+							"canonicalReference": "!AsyncIterable:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!jsonWrite:function(1)",
+					"canonicalReferenceGroup": "iterparse!jsonWrite"
+				},
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files",
+						"example": "import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "any iteratable.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "{",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"JSONWriteOptions}"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"JSON"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function jsonWrite<T>(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ", options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "JSONWriteOptions",
+							"canonicalReference": "iterparse!JSONWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!jsonWrite:function(2)",
+					"canonicalReferenceGroup": "iterparse!jsonWrite"
+				}
+			],
+			"kind": "Function",
+			"name": "jsonWrite",
+			"canonicalReference": "iterparse!jsonWrite:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!jsonWrite",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "JSON"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface JSONWriteOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileWriteMode",
+							"canonicalReference": "iterparse!FileWriteMode:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!JSONWriteOptions:interface",
+					"canonicalReferenceGroup": "iterparse!JSONWriteOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "JSONWriteOptions",
+			"canonicalReference": "iterparse!JSONWriteOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!JSONWriteOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Function read xml from file in memory efficient way",
+						"example": "import { xmlRead } from 'iterparse'\nxmlRead({ filePath: \"./path/to/file.xml\" })\n.map((q)=> console.log(q))\n.count()",
+						"parsed": [
+							{
+								"tag": "@includes",
+								"content": [
+									"./xml-read.md"
+								]
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"XML"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function xmlRead<T>(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "XMLReadOptions",
+							"canonicalReference": "iterparse!XMLReadOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!xmlRead:function(1)",
+					"canonicalReferenceGroup": "iterparse!xmlRead"
+				}
+			],
+			"kind": "Function",
+			"name": "xmlRead",
+			"canonicalReference": "iterparse!xmlRead:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!xmlRead",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "XML"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface XMLReadOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "ProgressReportOptions",
+							"canonicalReference": "iterparse!ProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FastXMLParser",
+							"canonicalReference": "iterparse!FastXMLParser:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!XMLReadOptions:interface",
+					"canonicalReferenceGroup": "iterparse!XMLReadOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "XMLReadOptions",
+			"canonicalReference": "iterparse!XMLReadOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!XMLReadOptions",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Writes JSON object iteratable to file in .xml format",
+						"example": "import { AsyncIterable } from 'ix'\nimport { xmlWrite } from 'iterparse'\nAsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])\n.pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "More information in {",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"XMLWriteOptions }"
+								]
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "any iteratable that extends XMLObject type.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"XML"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function xmlWrite<T extends "
+						},
+						{
+							"kind": "Content",
+							"text": "{\n    [k: string]: unknown;\n}"
+						},
+						{
+							"kind": "Content",
+							"text": ">(options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "XMLWriteOptions",
+							"canonicalReference": "iterparse!XMLWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Content",
+							"text": "(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>) => "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!xmlWrite:function(1)",
+					"canonicalReferenceGroup": "iterparse!xmlWrite"
+				},
+				{
+					"kind": "Function",
+					"comment": {
+						"description": "Writes JSON object iteratable to file in .xml format",
+						"example": "import { AsyncIterable } from 'ix'\nimport { xmlWrite } from 'iterparse'\nAsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }])\n.pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' }))\n.count()",
+						"parsed": [
+							{
+								"tag": "@param",
+								"content": {
+									"description": "More information in {",
+									"name": "options"
+								}
+							},
+							{
+								"tag": "@link",
+								"content": [
+									"XMLWriteOptions }"
+								]
+							},
+							{
+								"tag": "@param",
+								"content": {
+									"description": "any iteratable that extends XMLObject type.",
+									"name": "data"
+								}
+							},
+							{
+								"tag": "@category",
+								"content": [
+									"XML"
+								]
+							}
+						]
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare function xmlWrite<T extends "
+						},
+						{
+							"kind": "Content",
+							"text": "{\n    [k: string]: unknown;\n}"
+						},
+						{
+							"kind": "Content",
+							"text": ">(data: "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ", options: "
+						},
+						{
+							"kind": "Reference",
+							"text": "XMLWriteOptions",
+							"canonicalReference": "iterparse!XMLWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "): "
+						},
+						{
+							"kind": "Reference",
+							"text": "IX",
+							"canonicalReference": "ix!AsyncIterableX:class"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!xmlWrite:function(2)",
+					"canonicalReferenceGroup": "iterparse!xmlWrite"
+				}
+			],
+			"kind": "Function",
+			"name": "xmlWrite",
+			"canonicalReference": "iterparse!xmlWrite:function(1)",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!xmlWrite",
+			"tags": [
+				{
+					"tag": "@category",
+					"value": "XML"
+				}
+			]
+		},
+		{
+			"members": [
+				{
+					"kind": "Interface",
+					"comment": {
+						"description": "",
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export interface XMLWriteOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "FastXMLWriteOptions",
+							"canonicalReference": "iterparse!FastXMLWriteOptions:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileWriteMode",
+							"canonicalReference": "iterparse!FileWriteMode:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
+						}
+					],
+					"canonicalReference": "iterparse!XMLWriteOptions:interface",
+					"canonicalReferenceGroup": "iterparse!XMLWriteOptions"
+				}
+			],
+			"kind": "Interface",
+			"name": "XMLWriteOptions",
+			"canonicalReference": "iterparse!XMLWriteOptions:interface",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!XMLWriteOptions",
+			"tags": []
+		}
+	],
+	"articles": {
+		"readme": "# Introduction\n\nData parsing using ES6 Async Iterators\n\n\n[Online documentation](asdasd) \n\n\n### What problem this package solves?\n\nProcessing huge files in `Node.js` can be hard. Especially when you need execute send or retrieve data from external sources.\n\nThis package solves\n\n1. Parse big `CSV | XML | JSON` files in memory efficient way.\n2. Write data to `CSV | JSON | XML` file in memory efficient way.\n\n# Installation\n\nAsync iterators are natively supported in `Node.js` **10.x.** If you're using `Node.js` **8.x** or **9.x**, you need to use `Node.js`' `--harmony_async_iteration` flag.\n\nAsync iterators are **not supported** in `Node.js` **6.x** or **7.x**, so if you're on an older version you need to upgrade `Node.js` to use async iterators.\n\n```bash\n$ npm install iterparse\n```\n\nOr using `yarn`\n\n```bash\n$ yarn add iterparse\n```\n\n# Documentation\n\n## General usage\n\nFor processing iterators I recommend to use [IxJS](https://github.com/ReactiveX/IxJS) library\n\n#### Real world examples\n\nUsage in e-commerce\nBig e-shops can have feeds with 100k or more products. load all this data at once is really in practical.\n\n```typescript\nconst productCount = 100000;\nconst productSizeInKb = 20;\nconst totalMemoryConsumption = productCount * productSizeInKb * 1024; // 2gb of memory just to load data\n```\n\nSo base on this calculation we will use **2gb** of memory just to load data when we start working with data memory footprint will grow 6, 10 times.\n\n\nWe can use node streams to solve this problem, but working with streams is kinda mind bending and really hard especially when you need manipulate data in meaningfully way and send data to external source `api` `machine learning network` `database` ect.\n\nSome examples what we what we can do with `iterparse`\n\n```typescript\nimport { AsyncIterable } from 'ix';\nimport { xmlRead, jsonWrite } from 'iterparse'\n\ninterface Video {\n    id: string,\n    url: string,\n    description: string\n}\nasync function getListOfYouTubeVideos(url: string): Promise<Video[]> {\n    // I will not implement real logic here\n    // Just have in mind that this function will do some http requests\n    // It will take time to do all this logic\n    ...\n\n    return {...} // Big json object\n}\n\n// Extracting all <product></product> nodes from xml file\n// Let's assume that \"./big_product_feed.xml\" have 20 million records and file size is 30gb\n// This script would use around 50mb of RAM\nxmlRead<Video>({ filePath: \"./big_product_feed.xml\", pattern: 'product' })\n    .map(async ({ url })=>{\n       return getListOfYouTubeVideos(url)\n    })\n    // Write all extracted data to JSON file\n    .pipe(jsonWrite({ filePath: \"./small_feed_with_videos.json\" }))\n    .count()\n    // All iterators must be consumed in any way.\n    // I just pick count()\n    // Other alternatives are toArray(), forEach(), reduce() ect.\n```\n\nKeep in mind this is trivial example but it illustrates how to process huge amounts of data.\n\n### Simple csv to json converter.\n\n```typescript\nimport { csvRead, jsonWrite } from \"iterparse\";\n\ncsvRead({ filePath: \"./big_csv_file.csv\" })\n  .pipe(jsonWrite({ filePath: \"big_json_file.json\" }))\n  .count();\n```\n\n\n### Data aggregation\n\n```typescript\nimport { csvRead, jsonWrite } from \"iterparse\";\n\n// CSV file with 100 million sales records\ncsvRead<{ id: string, price: number, qty: number, margin: number }>({ filePath: \"./sales.csv\" })\n  .reduce((acc, item)=> acc + ((item.qty * item.price) * item.margin), 0)\n  .then((profit) => {\n      console.log(`Yearly profit ${profit}$`)\n  });\n```\n\n### Extract breweries from open api \n\n```typescript\n\nimport fetch from 'node-fetch'\nimport { jsonWrite } from './json'\nasync function* extractBreweries() {\n    let page = 0\n    while (true) {\n        const url = `https://api.openbrewerydb.org/breweries?page=${page}`\n        console.log(`Extracting: \"${url}\"`)\n        const response = await fetch(`https://api.openbrewerydb.org/breweries?page=${page}`)\n        if (!response.ok) {\n            throw new Error(`Failed get ${url}`)\n        }\n\n        const body = await response.json()\n        if (Array.isArray(body) && body.length !== 0) {\n            for (const item of body) {\n                yield item\n            }\n            page++\n            continue\n        }\n\n        return\n    }\n}\n\njsonWrite(extractBreweries(), { filePath: 'breweries.json' }).count()\n\n```\n\n"
+	}
+}
