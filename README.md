@@ -3,7 +3,7 @@
 Data parsing using ES6 Async Iterators
 
 
-[Online documentation](asdasd) 
+[Online documentation](https://digimuza.github.io/iterparse/) 
 
 
 ### What problem this package solves?
