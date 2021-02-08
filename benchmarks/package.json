@@ -1,10 +1,18 @@
 {
-  "name": "bechmarks",
+  "name": "benchmarks",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Andrius Mozūraitis",
   "license": "MIT",
+  "scripts": {
+    "run-csv": "yarn && yarn ts-node src/csv/bench.ts"
+  },
   "dependencies": {
-    "iterparse": "^0.0.9"
+    "csv-parser": "^3.0.0",
+    "iterparse": "^0.0.9",
+    "pretty-ms": "^7.0.1"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1"
   }
 }
