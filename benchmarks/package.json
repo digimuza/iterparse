@@ -1,0 +1,10 @@
+{
+  "name": "bechmarks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Andrius Mozūraitis",
+  "license": "MIT",
+  "dependencies": {
+    "iterparse": "^0.0.9"
+  }
+}
