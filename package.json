@@ -11,6 +11,20 @@
     "tsconfig.json",
     "README.md"
   ],
+  "keywords": [
+    "csv",
+    "parser",
+    "json",
+    "fast-csv",
+    "papaparse",
+    "iterators",
+    "node",
+    "big data",
+    "xml",
+    "xml-parser",
+    "csv-parser",
+    "json-parser"
+  ],
   "scripts": {
     "build": "rm -rf ./lib && tsc && yarn ts-docflux",
     "prepare": "yarn build",
@@ -18,7 +32,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andrius Mozūraitis",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^13.13.5",
     "typescript": "^3.9.3"

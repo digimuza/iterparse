@@ -8,8 +8,10 @@
     "run-csv": "yarn && yarn ts-node src/csv/bench.ts"
   },
   "dependencies": {
+    "@types/faker": "^5.1.6",
     "csv-parser": "^3.0.0",
-    "iterparse": "^0.0.9",
+    "faker": "^5.3.1",
+    "iterparse": "^0.0.10",
     "pretty-ms": "^7.0.1"
   },
   "devDependencies": {

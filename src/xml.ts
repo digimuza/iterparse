@@ -156,13 +156,15 @@ function _xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, opt
                 ...options
             })
             const i = IX.from(data)
-            if (mode === 'overwrite') {
-                dest.write("<root>\r\n")
-            }
+            
             for await (const s of i) {
                 if (!loaded) {
                     await ensureFile(options.filePath)
                     dest = createWriteStream(options.filePath, { flags: mode === 'append' ? 'a' : 'w' })
+                    if (mode === 'overwrite') {
+                        dest.write("<root>\r\n")
+                    }
+                    loaded = true
                 }
                 const result = parser.parse({ [options.nodeName]: s })
                 dest.write(`${result}\r\n`)
