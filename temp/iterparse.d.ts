@@ -53,8 +53,7 @@ export declare interface BufferWriteOptions extends FileReference {
 /**
  * Cache iterator output to file.
  * Useful when we need develop complex iterator pipelines.
- * @param options - Check more information in {@link CacheIterOptions}
- * @include ./cache-iter.md
+ * @include ./CacheIterOptions.md
  * @example
  *  import { cacheIter } from 'iterparse'
  *
@@ -77,17 +76,21 @@ export declare function cacheIter<T>(options: CacheIterOptions): (data: AnyItera
 export declare function cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): AsyncIterable_2<T>;
 
 export declare interface CacheIterOptions extends ProgressReportOptions {
+    /**
+     * Where cache data will be stored?
+     */
     cacheFolder: string;
+    /**
+     * Is cache enabled?
+     */
     enabled?: boolean;
+    /**
+     * When reference id changes cache folder will be regenerated.
+     */
     referenceId?: string;
     /**
-     * @defaultValue true
+     * Format cache in human readable `JSON` format.
      */
-    deleteOnChangedReferenceId?: boolean;
-    /**
-     * @defaultValue true
-     */
-    deleteOnChangedIteratableId?: boolean;
     nice?: {
         buffer: number;
     };
@@ -96,6 +99,7 @@ export declare interface CacheIterOptions extends ProgressReportOptions {
 
 /**
  * Read CSV file. In memory efficient way.
+ * @include ./CSVReadOptions.md
  * @example
  *  import { csvRead } from 'iterparse'
  *  csvRead({ filePath: 'path/to/file' })
@@ -107,16 +111,11 @@ export declare interface CacheIterOptions extends ProgressReportOptions {
  *  for await (const item of csvRead({ filePath: 'path/to/file' })) {
  *      console.log(item)
  *  }
- * @param options - {@link CSVReadOptions}
  * @category CSV
  */
 export declare function csvRead<T>(options: CSVReadOptions): AsyncIterable_2<ParsingResult<T>>;
 
 export declare interface CSVReadOptions extends ProgressReportOptions, FileReference {
-    /**
-     *
-     */
-    onError?: (item: ParsingResult<unknown>) => any;
     /**
      * The delimiting character. Leave blank to auto-detect from a list of most common delimiters, or any values passed in through delimitersToGuess.
      * * It can be a string or a function. If string, it must be one of length 1.
@@ -248,9 +247,6 @@ export declare function csvWrite<T extends {
     [k: string]: unknown;
 }>(data: AnyIterable<T>, out: CSVWriteOptions): AsyncIterable_2<T>;
 
-export declare interface CSVWriteOptions {
-}
-
 export declare interface CSVWriteOptions extends FileReference, FileWriteMode {
     /**
      * @defaultValue `false`
@@ -283,7 +279,7 @@ export declare interface CSVWriteOptions extends FileReference, FileWriteMode {
  * Function will download any resource from interned and cache it in local file system.
  *
  * @param url URL to file
- * @param options - {@link DownloadOptions}
+ * @include ./DownloadOptions.md
  * @returns Iteratable<path/to/file>
  * @example
  *      import { download } from 'iterparse'
@@ -473,7 +469,7 @@ declare interface FileWriteMode {
 
 /**
  * Function will read big JSON files in memory efficient way.
- * @param options - More information {@link JSONReadOptions}
+ * @include ./JSONReadOptions.md
  * @example
  *  import { jsonRead } from 'iterparse'
  *  jsonRead({ filePath: "path/to/file.json" })
@@ -502,8 +498,7 @@ export declare interface JSONReadOptions extends ProgressReportOptions, FileRefe
 /**
  * Function will write iteratable in memory efficient way.
  *
- * @param data any iteratable.
- * @param options #{JSONWriteOptions}#
+ * @include ./JSONWriteOptions.md
  * @example
  *  import { AsyncIterable } from 'ix'
  *  import { jsonWrite } from 'iterparse'

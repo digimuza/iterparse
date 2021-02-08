@@ -357,22 +357,9 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "Check more information in {",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
-								"content": [
-									"CacheIterOptions}"
-								]
-							},
-							{
 								"tag": "@include",
 								"content": [
-									"./cache-iter.md"
+									"./CacheIterOptions.md"
 								]
 							},
 							{
@@ -437,22 +424,9 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "Check more information in {",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
-								"content": [
-									"CacheIterOptions}"
-								]
-							},
-							{
 								"tag": "@include",
 								"content": [
-									"./cache-iter.md"
+									"./CacheIterOptions.md"
 								]
 							},
 							{
@@ -567,16 +541,9 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "{",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
+								"tag": "@include",
 								"content": [
-									"CSVReadOptions}"
+									"./CSVReadOptions.md"
 								]
 							},
 							{
@@ -915,7 +882,25 @@
 					"excerptTokens": [
 						{
 							"kind": "Content",
-							"text": "export interface CSVWriteOptions "
+							"text": "export interface CSVWriteOptions extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileReference",
+							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "FileWriteMode",
+							"canonicalReference": "iterparse!FileWriteMode:interface"
+						},
+						{
+							"kind": "Content",
+							"text": " "
 						}
 					],
 					"canonicalReference": "iterparse!CSVWriteOptions:interface",
@@ -947,16 +932,9 @@
 								}
 							},
 							{
-								"tag": "@param",
-								"content": {
-									"description": "{",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
+								"tag": "@include",
 								"content": [
-									"DownloadOptions}"
+									"./DownloadOptions.md"
 								]
 							},
 							{
@@ -1064,16 +1042,9 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "More information {",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
+								"tag": "@include",
 								"content": [
-									"JSONReadOptions}"
+									"./JSONReadOptions.md"
 								]
 							},
 							{
@@ -1184,18 +1155,10 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "any iteratable.",
-									"name": "data"
-								}
-							},
-							{
-								"tag": "@param",
-								"content": {
-									"description": "#{JSONWriteOptions}#",
-									"name": "options"
-								}
+								"tag": "@include",
+								"content": [
+									"./JSONWriteOptions.md"
+								]
 							},
 							{
 								"tag": "@category",
@@ -1259,18 +1222,10 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "any iteratable.",
-									"name": "data"
-								}
-							},
-							{
-								"tag": "@param",
-								"content": {
-									"description": "#{JSONWriteOptions}#",
-									"name": "options"
-								}
+								"tag": "@include",
+								"content": [
+									"./JSONWriteOptions.md"
+								]
 							},
 							{
 								"tag": "@category",
