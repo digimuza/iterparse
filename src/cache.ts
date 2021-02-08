@@ -21,17 +21,21 @@ export function onLastItem<T>(fn: () => any) {
 }
 
 export interface CacheIterOptions extends ProgressReportOptions {
+    /**
+     * Where cache data will be stored?
+     */
     cacheFolder: string,
+    /**
+     * Is cache enabled?
+     */
     enabled?: boolean,
+    /**
+     * When reference id changes cache folder will be regenerated.
+     */
     referenceId?: string,
     /**
-     * @defaultValue true
+     * Format cache in human readable `JSON` format.
      */
-    deleteOnChangedReferenceId?: boolean
-    /**
-     * @defaultValue true
-     */
-    deleteOnChangedIteratableId?: boolean
     nice?: { buffer: number },
     logger?: Pick<Console, 'info'>
 }
@@ -134,8 +138,7 @@ export function _cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): 
 /**
  * Cache iterator output to file.
  * Useful when we need develop complex iterator pipelines.
- * @param options - Check more information in {@link CacheIterOptions}
- * @include ./cache-iter.md
+ * @include ./CacheIterOptions.md
  * @example
  *  import { cacheIter } from 'iterparse'
  * 

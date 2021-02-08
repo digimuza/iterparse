@@ -14,10 +14,6 @@ export interface ParsingResult<T> {
 }
 export interface CSVReadOptions extends ProgressReportOptions, FileReference {
     /**
-     * 
-     */
-    onError?: (item: ParsingResult<unknown>) => any,
-    /**
      * The delimiting character. Leave blank to auto-detect from a list of most common delimiters, or any values passed in through delimitersToGuess. 
      * * It can be a string or a function. If string, it must be one of length 1. 
      * * If a function, it must accept the input as first parameter and it must return a string which will be used as delimiter. 
@@ -123,6 +119,7 @@ export interface CSVReadOptions extends ProgressReportOptions, FileReference {
 
 /**
  * Read CSV file. In memory efficient way.
+ * @include ./CSVReadOptions.md
  * @example
  *  import { csvRead } from 'iterparse'
  *  csvRead({ filePath: 'path/to/file' })
@@ -134,7 +131,6 @@ export interface CSVReadOptions extends ProgressReportOptions, FileReference {
  *  for await (const item of csvRead({ filePath: 'path/to/file' })) {
  *      console.log(item)
  *  }
- * @param options - {@link CSVReadOptions} 
  * @category CSV
  */
 export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult<T>> {
@@ -193,7 +189,6 @@ export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult
 
 
 
-export interface CSVWriteOptions { }
 
 async function* _csvIterWriter<T extends { [k: string]: unknown }>(data: AnyIterable<T>, out: () => Promise<NodeJS.WritableStream>, options?: CSVWriteOptions) {
     let items: T[] = []

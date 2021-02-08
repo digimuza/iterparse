@@ -96,7 +96,7 @@ export interface JSONReadOptions extends ProgressReportOptions, FileReference {
 
 /**
  * Function will read big JSON files in memory efficient way.
- * @param options - More information {@link JSONReadOptions}
+ * @include ./JSONReadOptions.md
  * @example 
  *  import { jsonRead } from 'iterparse'
  *  jsonRead({ filePath: "path/to/file.json" })
@@ -114,9 +114,9 @@ export function jsonRead<T>(options: JSONReadOptions): IX<T> {
 }
 
 /**
- * Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files 
- * @param data - any iteratable.
- * @param options - {@link JSONWriteOptions}
+ * Function will write iteratable in memory efficient way.
+ * 
+ * @include ./JSONWriteOptions.md
  * @example
  *  import { AsyncIterable } from 'ix'
  *  import { jsonWrite } from 'iterparse'
@@ -134,4 +134,3 @@ export function jsonWrite<T>(data: AnyIterable<T>, options: JSONWriteOptions): I
 export function jsonWrite() {
     return purry(_jsonWrite, arguments)
 }
-

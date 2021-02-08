@@ -69,8 +69,9 @@ const defaultResourceIDHookFunction: ResourceIDHookFunction = (_url, headers) =>
 
 /**
  * Function will download any resource from interned and cache it in local file system.
+ * 
  * @param url URL to file
- * @param options - {@link DownloadOptions}
+ * @include ./DownloadOptions.md
  * @returns Iteratable<path/to/file>
  * @example
  *      import { download } from 'iterparse'

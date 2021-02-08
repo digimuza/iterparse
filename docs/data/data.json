@@ -1177,7 +1177,7 @@
 				{
 					"kind": "Function",
 					"comment": {
-						"description": "Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files",
+						"description": "Function will write iteratable in memory efficient way.",
 						"examples": [
 							"import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
 							"import { jsonWrite } from 'iterparse'\njsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: \"/path/to/file\" })\n.count()"
@@ -1193,15 +1193,9 @@
 							{
 								"tag": "@param",
 								"content": {
-									"description": "{",
+									"description": "#{JSONWriteOptions}#",
 									"name": "options"
 								}
-							},
-							{
-								"tag": "@link",
-								"content": [
-									"JSONWriteOptions}"
-								]
 							},
 							{
 								"tag": "@category",
@@ -1258,7 +1252,7 @@
 				{
 					"kind": "Function",
 					"comment": {
-						"description": "Function will write iteratable in memory efficient way. Tested iteratable that produce 10gb json files",
+						"description": "Function will write iteratable in memory efficient way.",
 						"examples": [
 							"import { AsyncIterable } from 'ix'\nimport { jsonWrite } from 'iterparse'\nAsyncIterable.from([1, 2, 3, 4, 5])\n.pipe(jsonWrite({ filePath: \"path/to/file.json\" }))\n.count()",
 							"import { jsonWrite } from 'iterparse'\njsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: \"/path/to/file\" })\n.count()"
@@ -1274,15 +1268,9 @@
 							{
 								"tag": "@param",
 								"content": {
-									"description": "{",
+									"description": "#{JSONWriteOptions}#",
 									"name": "options"
 								}
-							},
-							{
-								"tag": "@link",
-								"content": [
-									"JSONWriteOptions}"
-								]
 							},
 							{
 								"tag": "@category",

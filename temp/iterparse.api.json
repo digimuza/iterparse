@@ -1,0 +1,2516 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.12.0",
+    "schemaVersion": 1003,
+    "oldestForwardsCompatibleVersion": 1001
+  },
+  "kind": "Package",
+  "canonicalReference": "iterparse!",
+  "docComment": "",
+  "name": "iterparse",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "iterparse!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!bufferRead:function(1)",
+          "docComment": "/**\n * Function will read big files in memory efficient way.\n *\n * @param  - options.filePath - Path to file\n *\n * @example\n *\n * import { bufferRead } from 'iterparse'\n *\n * bufferRead({ filePath: \"path/to/file\" }) .map((buffer)=> console.log(buffer.byteLength)) .count()\n *\n * @example\n *\n * import { bufferRead } from 'iterparse'\n *\n * for await (const buffer of bufferRead({ filePath: \"path/to/file\" })) { console.log(q.byteLength) }  @category Buffer\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function bufferRead(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "BufferReadOptions",
+              "canonicalReference": "iterparse!BufferReadOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer",
+              "canonicalReference": "!Buffer:class"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "bufferRead"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!BufferReadOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface BufferReadOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProgressReportOptions",
+              "canonicalReference": "iterparse!ProgressReportOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "BufferReadOptions",
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!bufferWrite:function(1)",
+          "docComment": "/**\n * Function will write buffer to file\n *\n * @param data - Any iteratable that extends `AnyIteratable<string | Buffer>` type.\n *\n * @example\n *\n * import { AsyncIterable } from 'ix' import { bufferWrite } from 'iterparse' AsyncIterable.from([\"one\", \"two\", \"three\"]).pipe(bufferWrite({ filePath: \"path/to/file\" }))\n *\n * @example\n *\n * import { AsyncIterable } from 'ix' import { bufferWrite } from 'iterparse' bufferWrite(getBufferIter() ,{ filePath: \"path/to/file\" }).count()  @category Buffer\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function bufferWrite(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "BufferWriteOptions",
+              "canonicalReference": "iterparse!BufferWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer",
+              "canonicalReference": "!Buffer:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | string>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer",
+              "canonicalReference": "!Buffer:class"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 12
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "bufferWrite"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!bufferWrite:function(2)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function bufferWrite(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer",
+              "canonicalReference": "!Buffer:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | string>"
+            },
+            {
+              "kind": "Content",
+              "text": ", options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "BufferWriteOptions",
+              "canonicalReference": "iterparse!BufferWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer",
+              "canonicalReference": "!Buffer:class"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 12
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 2,
+          "parameters": [
+            {
+              "parameterName": "data",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            }
+          ],
+          "name": "bufferWrite"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!BufferWriteOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface BufferWriteOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "BufferWriteOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!BufferWriteOptions#mode:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "mode?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "'overwrite' | 'append'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "mode",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!cacheIter:function(1)",
+          "docComment": "/**\n * Cache iterator output to file. Useful when we need develop complex iterator pipelines.\n *\n * @param options - Check more information in {@link CacheIterOptions}  @include ./cache-iter.md\n *\n * @example\n *\n * import { cacheIter } from 'iterparse'\n *\n * getFeed() // If cache exists get feed function will not be called .pipe(cacheIter({ cacheFolder: \"./_cache\" })) .count()\n *\n * @example\n *\n * import { cacheIter } from 'iterparse'\n *\n * const cachedIter = cacheIter(getFeed(), { cacheFolder: \"./_cache\" })\n *\n * for await (const item of cachedIter) { console.log(item) }  @category Utility\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function cacheIter<T>(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CacheIterOptions",
+              "canonicalReference": "iterparse!CacheIterOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "cacheIter"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!cacheIter:function(2)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function cacheIter<T>(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CacheIterOptions",
+              "canonicalReference": "iterparse!CacheIterOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 2,
+          "parameters": [
+            {
+              "parameterName": "data",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "cacheIter"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!CacheIterOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CacheIterOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProgressReportOptions",
+              "canonicalReference": "iterparse!ProgressReportOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CacheIterOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#cacheFolder:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cacheFolder: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "cacheFolder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#deleteOnChangedIteratableId:member",
+              "docComment": "/**\n * @defaultValue\n *\n * true\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "deleteOnChangedIteratableId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "deleteOnChangedIteratableId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#deleteOnChangedReferenceId:member",
+              "docComment": "/**\n * @defaultValue\n *\n * true\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "deleteOnChangedReferenceId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "deleteOnChangedReferenceId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#enabled:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "enabled?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "enabled",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#logger:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "logger?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Pick",
+                  "canonicalReference": "!Pick:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Console",
+                  "canonicalReference": "!Console:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", 'info'>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "logger",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#nice:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "nice?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        buffer: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "nice",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CacheIterOptions#referenceId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "referenceId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "referenceId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!csvRead:function(1)",
+          "docComment": "/**\n * Read CSV file. In memory efficient way.\n *\n * @param options - {@link CSVReadOptions}  @category CSV\n *\n * @example\n *\n * import { csvRead } from 'iterparse' csvRead({ filePath: 'path/to/file' }) .map((q)=> console.log(q)) .count()\n *\n * @example\n *\n * import { csvRead } from 'iterparse' for await (const item of csvRead({ filePath: 'path/to/file' })) { console.log(item) }\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function csvRead<T>(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CSVReadOptions",
+              "canonicalReference": "iterparse!CSVReadOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "AsyncIterable",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ParsingResult",
+              "canonicalReference": "iterparse!ParsingResult:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "csvRead"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!CSVReadOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CSVReadOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProgressReportOptions",
+              "canonicalReference": "iterparse!ProgressReportOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CSVReadOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#comments:member",
+              "docComment": "/**\n * A string that indicates a comment (for example, \"#\" or \"//\"). When Papa encounters a line starting with this string, it will skip the line. More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "comments?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "comments",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#delimiter:member",
+              "docComment": "/**\n * The delimiting character. Leave blank to auto-detect from a list of most common delimiters, or any values passed in through delimitersToGuess. * It can be a string or a function. If string, it must be one of length 1. * If a function, it must accept the input as first parameter and it must return a string which will be used as delimiter. * In both cases it cannot be found in Papa.BAD_DELIMITERS.\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delimiter?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "delimiter",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#delimitersToGuess:member",
+              "docComment": "/**\n * An array of delimiters to guess from if the delimiter option is not set. More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `[',', '\\t', '|', ';']`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delimitersToGuess?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GuessableDelimiters",
+                  "canonicalReference": "@types/papaparse!GuessableDelimiters:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "delimitersToGuess",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#dynamicTyping:member",
+              "docComment": "/**\n * If true, numeric and boolean data will be converted to their type instead of remaining strings. Numeric data must conform to the definition of a decimal literal. Numerical values greater than 2^53 or less than -2^53 will not be converted to numbers to preserve precision. European-formatted numbers must have commas and dots swapped. If also accepts an object or a function. If object it's values should be a boolean to indicate if dynamic typing should be applied for each column number (or header name if using headers). If it's a function, it should return a boolean value for each field number (or name if using headers) which will be passed as first argument.\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @warning This option will reduce parsing performance\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "dynamicTyping?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | {\n        [headerName: string]: boolean;\n        [columnNumber: number]: boolean;\n    } | ((field: string | number) => boolean)"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "dynamicTyping",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#encoding:member",
+              "docComment": "/**\n * The encoding to use when opening local files. If specified, it must be a value supported by the FileReader API. More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `utf8`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "encoding?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "encoding",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#escapeChar:member",
+              "docComment": "/**\n * The character used to escape the quote character within a field. If not set, this option will default to the value of quoteChar, meaning that the default escaping of quote character within a quoted field is using the quote character two times. (e.g. \"column with \"\"quotes\"\" in text\")\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `\"`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "escapeChar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "escapeChar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#fastMode:member",
+              "docComment": "/**\n * Fast mode speeds up parsing significantly for large inputs. However, it only works when the input has no quoted fields. Fast mode will automatically be enabled if no \" characters appear in the input. You can force fast mode either way by setting it to true or false. More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `undefined`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fastMode?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fastMode",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#header:member",
+              "docComment": "/**\n * If true, the first row of parsed data will be interpreted as field names. An array of field names will be returned in meta, and each row of data will be an object of values keyed by field name instead of a simple array. Rows with a different number of fields from the header row will produce an error.\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @warning Duplicate field names will overwrite values in previous fields having the same name.\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "header?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "header",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#newline:member",
+              "docComment": "/**\n * The newline sequence. Leave blank to auto-detect. Must be one of \\r, \\n, or \\r\\n.\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `\"\\r\\n\"`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "newline?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "newline",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#onError:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onError?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParsingResult",
+                  "canonicalReference": "iterparse!ParsingResult:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>) => any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "onError",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#quoteChar:member",
+              "docComment": "/**\n * The character used to quote fields. The quoting of all fields is not mandatory. Any field which is not quoted will correctly read.\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `\"`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "quoteChar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "quoteChar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#skipEmptyLines:member",
+              "docComment": "/**\n * If true, lines that are completely empty (those which evaluate to an empty string) will be skipped. If set to 'greedy', lines that don't have any content (those which have only whitespace after parsing) will also be skipped. More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "skipEmptyLines?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | 'greedy'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "skipEmptyLines",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVReadOptions#trimHeaders:member",
+              "docComment": "/**\n * Trims white space from header values. Requires that `options.header === true`\n *\n * More information [papaparse.com](https://www.papaparse.com/docs#config)\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "trimHeaders?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "trimHeaders",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!csvWrite:function(1)",
+          "docComment": "/**\n * Writes json objects to file in \".csv\" format\n *\n * @param data - Any iteratable.\n *\n * @param options - Write options  @include ./CSVOptions.md  @signature cswWrite(option)(iteratable)  @signature cswWrite(iteratable,option)\n *\n * @example\n *\n * import { csvWrite } from 'iterparse' AsyncIterable.from([{...},{...},{...}]) .pipe(csvWrite({ filePath: \"path/to/file\" })) .count()\n *\n * @example\n *\n * import { csvWrite } from 'iterparse' csvWrite([{ a: 1, b: 2 },{ a: 1, b: 2 }], { filePath: \"/path/to/file\" }) .count()  @category CSV\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function csvWrite<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    [k: string]: unknown;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ">(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CSVWriteOptions",
+              "canonicalReference": "iterparse!CSVWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 10
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "csvWrite"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!csvWrite:function(2)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function csvWrite<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    [k: string]: unknown;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ">(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", out: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CSVWriteOptions",
+              "canonicalReference": "iterparse!CSVWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 10
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 2,
+          "parameters": [
+            {
+              "parameterName": "data",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              }
+            },
+            {
+              "parameterName": "out",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "csvWrite"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!CSVWriteOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CSVWriteOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CSVWriteOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#columns:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "columns?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "columns",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#delimiter:member",
+              "docComment": "/**\n * @defaultValue\n *\n * `,`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delimiter?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "delimiter",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#escapeChar:member",
+              "docComment": "/**\n * @defaultValue\n *\n * `\"`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "escapeChar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "escapeChar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#newline:member",
+              "docComment": "/**\n * @defaultValue\n *\n * `\\r\\n`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "newline?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "newline",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#quoteChar:member",
+              "docComment": "/**\n * @defaultValue\n *\n * `\"`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "quoteChar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "quoteChar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#quotes:member",
+              "docComment": "/**\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "quotes?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | boolean[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "quotes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!CSVWriteOptions#skipEmptyLines:member",
+              "docComment": "/**\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "skipEmptyLines?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | 'greedy'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "skipEmptyLines",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!download:function(1)",
+          "docComment": "/**\n * Function will download any resource from interned and cache it in local file system.\n *\n * @param url - URL to file\n *\n * @param options - {@link DownloadOptions}\n *\n * @returns Iteratable<path/to/file>\n *\n * @example\n *\n * import { download } from 'iterparse' download({ url: \"url/to/resource.csv\", downloadFolder: \"/tmp\" }) .flatMap((filePath)=> csvRead({ filePath })) .map((q)=> console.log(q)) .count()  @category Utility\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function download(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "DownloadOptions",
+              "canonicalReference": "iterparse!DownloadOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<string>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "download"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!DownloadOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface DownloadOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "RequestInit",
+              "canonicalReference": "@types/node-fetch!RequestInit:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DownloadOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!DownloadOptions#downloadFolder:member",
+              "docComment": "/**\n * Folder where file will be downloaded\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "downloadFolder: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "downloadFolder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!DownloadOptions#progress:member",
+              "docComment": "/**\n * Hook for tracking download progress\n *\n * @example\n *\n * (progress) => console.log(progress.toString())\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "progress?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(progress: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DownloadProgress",
+                  "canonicalReference": "iterparse!DownloadProgress:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "progress",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!DownloadOptions#progressFrequency:member",
+              "docComment": "/**\n * How often notify about progress?\n *\n * @defaultValue\n *\n * `3000ms`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "progressFrequency?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "progressFrequency",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!DownloadOptions#resourceId:member",
+              "docComment": "/**\n * Resource ID generation logic. Basically we can take some data from response and convert to resource ID Examples * etag - from response headers * last-modified - from response headers\n *\n * If file with same generated resource ID is found file will not be downloaded.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resourceId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceIDHookFunction",
+                  "canonicalReference": "iterparse!ResourceIDHookFunction:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "resourceId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!DownloadOptions#url:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "url: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "url",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!jsonRead:function(1)",
+          "docComment": "/**\n * Function will read big JSON files in memory efficient way.\n *\n * @param options - More information {@link JSONReadOptions}\n *\n * @example\n *\n * import { jsonRead } from 'iterparse' jsonRead({ filePath: \"path/to/file.json\" }) .map((q)=> console.log(q)) .count()\n *\n * @example\n *\n * import { jsonRead } from 'iterparse' for await (const item of jsonRead({ filePath: \"path/to/file.json\" })) { console.log(item) }  @category JSON\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function jsonRead<T>(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "JSONReadOptions",
+              "canonicalReference": "iterparse!JSONReadOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "jsonRead"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!JSONReadOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface JSONReadOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProgressReportOptions",
+              "canonicalReference": "iterparse!ProgressReportOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "JSONReadOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!JSONReadOptions#pattern:member",
+              "docComment": "/**\n * JSON parsing pattern\n *\n * @example\n *\n * [{...}, {...}] => * { a: [{...}, {...}] } => a.* { a: { b: [{...}, {...}] } } => a.b.*\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "pattern: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "pattern",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!jsonWrite:function(1)",
+          "docComment": "/**\n * Function will write iteratable in memory efficient way.\n *\n * @param data - any iteratable.\n *\n * @param options - #{JSONWriteOptions}#\n *\n * @example\n *\n * import { AsyncIterable } from 'ix' import { jsonWrite } from 'iterparse' AsyncIterable.from([1, 2, 3, 4, 5]) .pipe(jsonWrite({ filePath: \"path/to/file.json\" })) .count()\n *\n * @example\n *\n * import { jsonWrite } from 'iterparse' jsonWrite([{ a: 1, b: 2 }, { a: 1, b: 2 }], { filePath: \"/path/to/file\" }) .count()  @category JSON\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function jsonWrite<T>(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "JSONWriteOptions",
+              "canonicalReference": "iterparse!JSONWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AsyncIterable",
+              "canonicalReference": "!AsyncIterable:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "AsyncIterable",
+              "canonicalReference": "!AsyncIterable:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "jsonWrite"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!jsonWrite:function(2)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function jsonWrite<T>(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "JSONWriteOptions",
+              "canonicalReference": "iterparse!JSONWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 2,
+          "parameters": [
+            {
+              "parameterName": "data",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "jsonWrite"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!JSONWriteOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface JSONWriteOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileWriteMode",
+              "canonicalReference": "iterparse!FileWriteMode:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "JSONWriteOptions",
+          "members": [],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!xmlRead:function(1)",
+          "docComment": "/**\n * Function read xml from file in memory efficient way  @includes ./xml-read.md\n *\n * @example\n *\n * import { xmlRead } from 'iterparse' xmlRead({ filePath: \"./path/to/file.xml\" }) .map((q)=> console.log(q)) .count()\n *\n * @example\n *\n * import { xmlRead } from 'iterparse' for await (const item of xmlRead({ filePath: \"./path/to/file.xml\" })) { console.log(item) }  @category XML\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function xmlRead<T>(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "XMLReadOptions",
+              "canonicalReference": "iterparse!XMLReadOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "xmlRead"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!XMLReadOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface XMLReadOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ProgressReportOptions",
+              "canonicalReference": "iterparse!ProgressReportOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FastXMLParser",
+              "canonicalReference": "iterparse!FastXMLParser:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "XMLReadOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!XMLReadOptions#nodeName:member",
+              "docComment": "/**\n * Object node name\n *\n * @example\n *\n * nodeName === \"Person\" <Person>...</Person>\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "nodeName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "nodeName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            },
+            {
+              "startIndex": 5,
+              "endIndex": 7
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!xmlWrite:function(1)",
+          "docComment": "/**\n * Writes JSON object iteratable to file in .xml format\n *\n * @param options - More information in {  @link XMLWriteOptions }\n *\n * @param data - any iteratable that extends XMLObject type.\n *\n * @example\n *\n * import { AsyncIterable } from 'ix' import { xmlWrite } from 'iterparse'\n *\n * AsyncIterable.from([{ a: 1, b: 2 }, { a: 1, b: 2 }]) .pipe(xmlWrite({ filePath: \"path/to/file\", nodeName: 'Person' })) .count()\n *\n * @example\n *\n * import { xmlWrite } from 'iterparse'\n *\n * xmlWrite([{...}, {...}], { filePath: 'filePath', nodeName: \"Person\" }) .count()  @category XML\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function xmlWrite<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    [k: string]: unknown;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ">(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "XMLWriteOptions",
+              "canonicalReference": "iterparse!XMLWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 10
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "xmlWrite"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "iterparse!xmlWrite:function(2)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function xmlWrite<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    [k: string]: unknown;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ">(data: "
+            },
+            {
+              "kind": "Reference",
+              "text": "AnyIterable",
+              "canonicalReference": "iterparse!AnyIterable:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "XMLWriteOptions",
+              "canonicalReference": "iterparse!XMLWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IX",
+              "canonicalReference": "ix!AsyncIterableX:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 10
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 2,
+          "parameters": [
+            {
+              "parameterName": "data",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              }
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "xmlWrite"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "iterparse!XMLWriteOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface XMLWriteOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FastXMLWriteOptions",
+              "canonicalReference": "iterparse!FastXMLWriteOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileReference",
+              "canonicalReference": "iterparse!FileReference:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "FileWriteMode",
+              "canonicalReference": "iterparse!FileWriteMode:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "XMLWriteOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "iterparse!XMLWriteOptions#nodeName:member",
+              "docComment": "/**\n * Object node name\n *\n * @example\n *\n * nodeName === \"Person\" <Person>...</Person>\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "nodeName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "nodeName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            },
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            },
+            {
+              "startIndex": 5,
+              "endIndex": 7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
