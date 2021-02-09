@@ -142,7 +142,7 @@ export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult
             options?.progress?.(progress)
         }
         const logTh = P.throttle(log, progressFrequency)
-        let obj: Papa.ParseResult[] = []
+        let obj: Papa.ParseResult<unknown>[] = []
         let done = false
         const source = createReadStream(options.filePath)
         source.on('data', (q) => {
