@@ -2,3 +2,7 @@ node_modules
 lib
 examples
 **/_downloads
+
+yarn-error.log
+
+temp

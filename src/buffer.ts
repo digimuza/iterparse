@@ -1,11 +1,11 @@
-import { createReadStream, createWriteStream, ensureFile, statSync } from "fs-extra"
-import { Progress, ProgressReportOptions } from "./helpers"
+import { appendFile, createReadStream, createWriteStream, ensureFile, existsSync, open, statSync, unlinkSync } from "fs-extra"
+import { Progress, ProgressReportOptions, WriteProgress, WriteProgressReportOptions } from "./helpers"
 import * as P from 'ts-prime'
 import { AnyIterable, FileReference, IX } from "./types"
 import { purry } from "ts-prime"
 
 
-export interface BufferReadOptions extends FileReference, ProgressReportOptions {}
+export interface BufferReadOptions extends FileReference, ProgressReportOptions { }
 
 async function* _bufferIterParser(options: BufferReadOptions): AsyncGenerator<Buffer, void, unknown> {
     const { progressFrequency = 3000 } = options || {}
@@ -28,27 +28,37 @@ async function* _bufferIterParser(options: BufferReadOptions): AsyncGenerator<Bu
 
 function _bufferWrite(data: AnyIterable<Buffer | string>, options: BufferWriteOptions) {
     async function* iter() {
-        let dest: NodeJS.WritableStream | null = null
+        let dest: number = 0
         const mode = options.mode || 'overwrite'
-        let loaded = false
-        for await (const item of data) {
-            if (!loaded) {
-                await ensureFile(options.filePath)
-                dest = createWriteStream(options.filePath, { flags: mode === 'append' ? 'a' : "w" })
-                loaded = true
+        if (mode === 'overwrite') {
+            if (existsSync(options.filePath)) {
+                unlinkSync(options.filePath)
             }
-            dest?.write(item)
+        }
+
+        const progress = new WriteProgress(options.filePath, Date.now())
+        const log = () => {
+            options.progress?.(progress)
+        }
+        const inter = setInterval(log, options.progressFrequency || 3000)
+        for await (const item of data) {
+            if (dest === 0) {
+                await ensureFile(options.filePath)
+                dest = await open(options.filePath, "a")
+            }
+            await appendFile(dest, item)
             yield Buffer.from(item)
         }
-        dest?.end()
+        clearInterval(inter)
+        log()
     }
 
     return IX.from(iter())
 }
 
 /**
- * Function will read big files in memory efficient way. 
- * @param options.filePath - Path to file
+ * Function will read big files in memory efficient way.
+ * @include ./BufferReadOptions.md
  * @example
  *  import { bufferRead } from 'iterparse'
  * 
@@ -68,7 +78,7 @@ export function bufferRead(options: BufferReadOptions): IX<Buffer> {
 }
 
 
-export interface BufferWriteOptions extends FileReference {
+export interface BufferWriteOptions extends FileReference, WriteProgressReportOptions {
     mode?: 'overwrite' | 'append'
 }
 

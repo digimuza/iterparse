@@ -1,16 +1,12 @@
-import { createReadStream } from "fs-extra"
+import { createReadStream, existsSync } from "fs-extra"
 import { AsyncIterable } from "ix"
 import * as FastCSV from 'fast-csv';
 import { csvRead } from "iterparse"
 import prettyMs from 'pretty-ms'
 import { resolve } from "path";
+import { csvTestData } from "./generate";
 const CSVParser = require('csv-parser')
-/**
- * http://eforexcel.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/
- */
-
-export const sampleFile = resolve(__dirname, "./_downloads/5m Sales Records.csv")
-
+import * as P from 'ts-prime'
 const monitorRAM = () => {
     let tick = 0
     let sum = 0
@@ -86,11 +82,19 @@ const benchmarks = [
 
 
 async function run() {
+    const generatedFile = resolve(__dirname, "./_downloads/generated.csv")
+    if (!existsSync(generatedFile)) {
+        console.log("Generating test data")
+        await csvTestData()
+    }
+  
+    
+    
     const result = await AsyncIterable.from(benchmarks).map(async (q) => {
-        const result = await q.test(sampleFile)
+        const result = await q.test(generatedFile)
         return {
             ...q,
-            file: sampleFile,
+            file: generatedFile,
             ...result,
             ramNice: formatBytes(result.ram)
         }

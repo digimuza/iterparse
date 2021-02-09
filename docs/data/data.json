@@ -12,11 +12,10 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": ".filePath - Path to file",
-									"name": "options"
-								}
+								"tag": "@include",
+								"content": [
+									"./BufferReadOptions.md"
+								]
 							},
 							{
 								"tag": "@category",
@@ -328,6 +327,15 @@
 							"kind": "Reference",
 							"text": "FileReference",
 							"canonicalReference": "iterparse!FileReference:interface"
+						},
+						{
+							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "WriteProgressReportOptions",
+							"canonicalReference": "iterparse!WriteProgressReportOptions:interface"
 						},
 						{
 							"kind": "Content",
@@ -900,6 +908,15 @@
 						},
 						{
 							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "WriteProgressReportOptions",
+							"canonicalReference": "iterparse!WriteProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
 							"text": " "
 						}
 					],
@@ -921,7 +938,7 @@
 					"comment": {
 						"description": "Function will download any resource from interned and cache it in local file system.",
 						"examples": [
-							"import { download } from 'iterparse'\ndownload({ url: \"url/to/resource.csv\", downloadFolder: \"/tmp\"  })\n.flatMap((filePath)=> csvRead({ filePath }))\n.map((q)=> console.log(q))\n.count()"
+							"import { download } from 'iterparse'\ndownload({ url: \"url/to/resource.csv\", downloadFolder: \"/tmp\", progress: (q) => console.log(q.toString())   })\n.flatMap((filePath)=> csvRead({ filePath }))\n.map((q)=> console.log(q))\n.count()"
 						],
 						"parsed": [
 							{
@@ -935,12 +952,6 @@
 								"tag": "@include",
 								"content": [
 									"./DownloadOptions.md"
-								]
-							},
-							{
-								"tag": "@returns",
-								"content": [
-									"Iteratable<path/to/file>"
 								]
 							},
 							{
@@ -1322,6 +1333,15 @@
 						},
 						{
 							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "WriteProgressReportOptions",
+							"canonicalReference": "iterparse!WriteProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
 							"text": " "
 						}
 					],
@@ -1341,7 +1361,7 @@
 				{
 					"kind": "Function",
 					"comment": {
-						"description": "Function read xml from file in memory efficient way",
+						"description": "Function read xml from file in memory efficient way\r\n  This parser are able to handled `unlimited` size xml files in memory efficient manner.",
 						"examples": [
 							"import { xmlRead } from 'iterparse'\nxmlRead({ filePath: \"./path/to/file.xml\" })\n.map((q)=> console.log(q))\n.count()",
 							"import { xmlRead } from 'iterparse'\nfor await (const item of xmlRead({ filePath: \"./path/to/file.xml\" })) {\nconsole.log(item)\n}"
@@ -1470,24 +1490,10 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "More information in {",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
+								"tag": "@include",
 								"content": [
-									"XMLWriteOptions }"
+									"./XMLWriteOptions.md"
 								]
-							},
-							{
-								"tag": "@param",
-								"content": {
-									"description": "any iteratable that extends XMLObject type.",
-									"name": "data"
-								}
 							},
 							{
 								"tag": "@category",
@@ -1559,24 +1565,10 @@
 						],
 						"parsed": [
 							{
-								"tag": "@param",
-								"content": {
-									"description": "More information in {",
-									"name": "options"
-								}
-							},
-							{
-								"tag": "@link",
+								"tag": "@include",
 								"content": [
-									"XMLWriteOptions }"
+									"./XMLWriteOptions.md"
 								]
-							},
-							{
-								"tag": "@param",
-								"content": {
-									"description": "any iteratable that extends XMLObject type.",
-									"name": "data"
-								}
 							},
 							{
 								"tag": "@category",
@@ -1690,6 +1682,15 @@
 						},
 						{
 							"kind": "Content",
+							"text": ", "
+						},
+						{
+							"kind": "Reference",
+							"text": "WriteProgressReportOptions",
+							"canonicalReference": "iterparse!WriteProgressReportOptions:interface"
+						},
+						{
+							"kind": "Content",
 							"text": " "
 						}
 					],
@@ -1706,6 +1707,6 @@
 		}
 	],
 	"articles": {
-		"readme": "# Introduction\n\nData parsing using ES6 Async Iterators\n\n\n[Online documentation](https://digimuza.github.io/iterparse/) \n\n\n### What problem this package solves?\n\nProcessing huge files in `Node.js` can be hard. Especially when you need execute send or retrieve data from external sources.\n\nThis package solves\n\n1. Parse big `CSV | XML | JSON` files in memory efficient way.\n2. Write data to `CSV | JSON | XML` file in memory efficient way.\n\n# Installation\n\nAsync iterators are natively supported in `Node.js` **10.x.** If you're using `Node.js` **8.x** or **9.x**, you need to use `Node.js`' `--harmony_async_iteration` flag.\n\nAsync iterators are **not supported** in `Node.js` **6.x** or **7.x**, so if you're on an older version you need to upgrade `Node.js` to use async iterators.\n\n```bash\n$ npm install iterparse\n```\n\nOr using `yarn`\n\n```bash\n$ yarn add iterparse\n```\n\n# Benchmarks\n\n\n## CSV\n\nParing 5 million records of sales data. \n[Sample.csv (111.96MB) ](http://eforexcel.com/wp/wp-content/uploads/2020/09/5m-Sales-Records.7z)\n\nTest was executed on `AMD 2600x` processor\n\nYou can check benchmark source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/csv/bench.ts).\n\n<div style=\"background: transparent;\">\n    <div style=\"width: 20%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px\"><h3 style=\"color: white\">csv-parser - 24.1 s<h3></div>\n    <div style=\"width: 20.9%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px\"><h3 style=\"color: white\">iterparse - 23.9 s<h3></div>\n    <div style=\"width: 100%; background: rgb(250, 140, 22); padding: 5px;\"><h3 style=\"color: white\">fast-csv - 119.8 s<h3></div>\n</div>\n\n\n## XML\n\nParsing 1 million records of random generated data. \nData was generated using `yarn generate-xml` command. Source code [here]()\n\nTest was executed on `AMD 2600x` processor\n\nYou can check benchmark source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/xml/bench.ts).\n\n<div style=\"background: transparent;\">\n    <div style=\"width: 100%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px\"><h3 style=\"color: white\">xml-stream - 3m 23s<h3></div>\n    <div style=\"width: 13%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px\"><h3 style=\"color: white\">iterparse - 27 s<h3></div>\n</div>\n\n\n## JSON\n\nParsing 1 million records of random generated data. \nData was generated using `yarn generate-json` command. Source code [here]()\n\nTest was executed on `AMD 2600x` processor\n\nYou can check benchmark source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/json/bench.ts).\n\nCurrently iterparse is only contender. Because it already uses JSONStream package i can't put it here\n\n<div style=\"background: transparent;\">\n    <div style=\"width: 100%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px\"><h3 style=\"color: white\">iterparse - 23 s<h3></div>\n</div>\n\n# Documentation\n\n## General usage\n\nFor processing iterators I recommend to use [IxJS](https://github.com/ReactiveX/IxJS) library\n\n#### Real world examples\n\nUsage in e-commerce\nBig e-shops can have feeds with 100k or more products. load all this data at once is really in practical.\n\n```typescript\nconst productCount = 100000;\nconst productSizeInKb = 20;\nconst totalMemoryConsumption = productCount * productSizeInKb * 1024; // 2gb of memory just to load data\n```\n\nSo base on this calculation we will use **2gb** of memory just to load data when we start working with data memory footprint will grow 6, 10 times.\n\n\nWe can use node streams to solve this problem, but working with streams is kinda mind bending and really hard especially when you need manipulate data in meaningfully way and send data to external source `api` `machine learning network` `database` ect.\n\nSome examples what we what we can do with `iterparse`\n\n```typescript\nimport { AsyncIterable } from 'ix';\nimport { xmlRead, jsonWrite } from 'iterparse'\n\ninterface Video {\n    id: string,\n    url: string,\n    description: string\n}\nasync function getListOfYouTubeVideos(url: string): Promise<Video[]> {\n    // I will not implement real logic here\n    // Just have in mind that this function will do some http requests\n    // It will take time to do all this logic\n    ...\n\n    return {...} // Big json object\n}\n\n// Extracting all <product></product> nodes from xml file\n// Let's assume that \"./big_product_feed.xml\" have 20 million records and file size is 30gb\n// This script would use around 50mb of RAM\nxmlRead<Video>({ filePath: \"./big_product_feed.xml\", pattern: 'product' })\n    .map(async ({ url })=>{\n       return getListOfYouTubeVideos(url)\n    })\n    // Write all extracted data to JSON file\n    .pipe(jsonWrite({ filePath: \"./small_feed_with_videos.json\" }))\n    .count()\n    // All iterators must be consumed in any way.\n    // I just pick count()\n    // Other alternatives are toArray(), forEach(), reduce() ect.\n```\n\nKeep in mind this is trivial example but it illustrates how to process huge amounts of data.\n\n### Simple csv to json converter.\n\n```typescript\nimport { csvRead, jsonWrite } from \"iterparse\";\n\ncsvRead({ filePath: \"./big_csv_file.csv\" })\n  .pipe(jsonWrite({ filePath: \"big_json_file.json\" }))\n  .count();\n```\n\n\n### Data aggregation\n\n```typescript\nimport { csvRead, jsonWrite } from \"iterparse\";\n\n// CSV file with 100 million sales records\ncsvRead<{ id: string, price: number, qty: number, margin: number }>({ filePath: \"./sales.csv\" })\n  .reduce((acc, item)=> acc + ((item.qty * item.price) * item.margin), 0)\n  .then((profit) => {\n      console.log(`Yearly profit ${profit}$`)\n  });\n```\n\n### Extract breweries from open api \n\n```typescript\n\nimport fetch from 'node-fetch'\nimport { jsonWrite } from './json'\nasync function* extractBreweries() {\n    let page = 0\n    while (true) {\n        const url = `https://api.openbrewerydb.org/breweries?page=${page}`\n        console.log(`Extracting: \"${url}\"`)\n        const response = await fetch(`https://api.openbrewerydb.org/breweries?page=${page}`)\n        if (!response.ok) {\n            throw new Error(`Failed get ${url}`)\n        }\n\n        const body = await response.json()\n        if (Array.isArray(body) && body.length !== 0) {\n            for (const item of body) {\n                yield item\n            }\n            page++\n            continue\n        }\n\n        return\n    }\n}\n\njsonWrite(extractBreweries(), { filePath: 'breweries.json' }).count()\n\n```\n\n"
+		"readme": "# Introduction\n\nData parsing using ES6 Async Iterators\n\n\n[Online documentation](https://digimuza.github.io/iterparse/) \n\n\n### What problem this package solves?\n\nProcessing huge files in `Node.js` can be hard. Especially when you need execute send or retrieve data from external sources.\n\nThis package solves\n\n1. Parse big `CSV | XML | JSON` files in memory efficient way.\n2. Write data to `CSV | JSON | XML` file in memory efficient way.\n\n# Installation\n\nAsync iterators are natively supported in `Node.js` **10.x.** If you're using `Node.js` **8.x** or **9.x**, you need to use `Node.js`' `--harmony_async_iteration` flag.\n\nAsync iterators are **not supported** in `Node.js` **6.x** or **7.x**, so if you're on an older version you need to upgrade `Node.js` to use async iterators.\n\n```bash\n$ npm install iterparse\n```\n\nOr using `yarn`\n\n```bash\n$ yarn add iterparse\n```\n\n# Benchmarks\n\nRun all benchmarks\n\n```\n    git clone https://github.com/digimuza/iterparse.git &&\n    cd ./iterparse/benchmarks &&\n    yarn && \n    yarn run\n```\n\n\nAll benchmarks are executed with on `AMD 2600x` processor.\n\nBenchmarks source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks)\n\n## CSV Parsing\n\nParsing 1 million records of random generated data.\n> Data was generated using [this](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/csv/generate.ts). script \n\n<div style=\"background: transparent;\">\n    <div style=\"width: 33%; background: rgb(24, 144, 255); padding: 5px; margin-bottom: 20px\"><h6 style=\"color: white\">csv-parser - 2.8 s<h6></div>\n    <div style=\"width: 40%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px\"><h6 style=\"color: white\">iterparse - 3.4 s<h6></div>\n    <div style=\"width: 100%; background: rgb(250, 140, 22); padding: 5px;\"><h6 style=\"color: white\">fast-csv - 8.3 s<h6></div>\n</div>\n\n\n## XML\n\nParsing 1 million records of random generated data. \n> Data was generated using [this](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/xml/generate.ts). script \n\n<div style=\"background: transparent;\">\n    <div style=\"width: 13%; background: rgb(24, 144, 255); padding: 5px; margin-bottom: 20px\"><h6 style=\"color: white\">iterparse - 11 s<h6></div>\n</div>\n\n\n## JSON\n\nParsing 1 million records of random generated data. \n> Data was generated using [this](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/json/generate.ts). script \n\n<div style=\"background: transparent;\">\n    <div style=\"width: 100%; background: rgb(24, 144, 255); padding: 5px; margin-bottom: 20px\"><h6 style=\"color: white\">iterparse - 3.5 s<h6></div>\n</div>\n\n# Documentation\n\n## General usage\n\nFor processing iterators I recommend to use [IxJS](https://github.com/ReactiveX/IxJS) library\n\n#### Real world examples\n\nUsage in e-commerce\nBig e-shops can have feeds with 100k or more products. load all this data at once is really in practical.\n\n```typescript\nconst productCount = 100000;\nconst productSizeInKb = 20;\nconst totalMemoryConsumption = productCount * productSizeInKb * 1024; // 2gb of memory just to load data\n```\n\nSo base on this calculation we will use **2gb** of memory just to load data when we start working with data memory footprint will grow 6, 10 times.\n\n\nWe can use node streams to solve this problem, but working with streams is kinda mind bending and really hard especially when you need manipulate data in meaningfully way and send data to external source `api` `machine learning network` `database` ect.\n\nSome examples what we what we can do with `iterparse`\n\n```typescript\nimport { AsyncIterable } from 'ix';\nimport { xmlRead, jsonWrite } from 'iterparse'\n\ninterface Video {\n    id: string,\n    url: string,\n    description: string\n}\nasync function getListOfYouTubeVideos(url: string): Promise<Video[]> {\n    // I will not implement real logic here\n    // Just have in mind that this function will do some http requests\n    // It will take time to do all this logic\n    ...\n\n    return {...} // Big json object\n}\n\n// Extracting all <product></product> nodes from xml file\n// Let's assume that \"./big_product_feed.xml\" have 20 million records and file size is 30gb\n// This script would use around 50mb of RAM\nxmlRead<Video>({ filePath: \"./big_product_feed.xml\", pattern: 'product' })\n    .map(async ({ url })=>{\n       return getListOfYouTubeVideos(url)\n    })\n    // Write all extracted data to JSON file\n    .pipe(jsonWrite({ filePath: \"./small_feed_with_videos.json\" }))\n    .count()\n    // All iterators must be consumed in any way.\n    // I just pick count()\n    // Other alternatives are toArray(), forEach(), reduce() ect.\n```\n\nKeep in mind this is trivial example but it illustrates how to process huge amounts of data.\n\n### Simple csv to json converter.\n\n```typescript\nimport { csvRead, jsonWrite } from \"iterparse\";\n\ncsvRead({ filePath: \"./big_csv_file.csv\" })\n  .pipe(jsonWrite({ filePath: \"big_json_file.json\" }))\n  .count();\n```\n\n\n### Data aggregation\n\n```typescript\nimport { csvRead, jsonWrite } from \"iterparse\";\n\n// CSV file with 100 million sales records\ncsvRead<{ id: string, price: number, qty: number, margin: number }>({ filePath: \"./sales.csv\" })\n  .reduce((acc, item)=> acc + ((item.qty * item.price) * item.margin), 0)\n  .then((profit) => {\n      console.log(`Yearly profit ${profit}$`)\n  });\n```\n\n### Extract breweries from open api \n\n```typescript\n\nimport fetch from 'node-fetch'\nimport { jsonWrite } from './json'\nasync function* extractBreweries() {\n    let page = 0\n    while (true) {\n        const url = `https://api.openbrewerydb.org/breweries?page=${page}`\n        console.log(`Extracting: \"${url}\"`)\n        const response = await fetch(`https://api.openbrewerydb.org/breweries?page=${page}`)\n        if (!response.ok) {\n            throw new Error(`Failed get ${url}`)\n        }\n\n        const body = await response.json()\n        if (Array.isArray(body) && body.length !== 0) {\n            for (const item of body) {\n                yield item\n            }\n            page++\n            continue\n        }\n\n        return\n    }\n}\n\njsonWrite(extractBreweries(), { filePath: 'breweries.json' }).count()\n\n```\n\n"
 	}
 }

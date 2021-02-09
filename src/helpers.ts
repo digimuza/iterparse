@@ -124,3 +124,54 @@ export class Progress {
         }
     }
 }
+
+
+
+export interface WriteProgressReportOptions {
+    /**
+     * Hook for tracking download progress
+     */
+    progress?: (data: WriteProgress) => void
+    /**
+    * How often notify about progress?
+    * @defaultValue `3000ms`
+    */
+    progressFrequency?: number
+}
+
+export class WriteProgress  {
+    writedBytes: number = 0
+    items = 0
+    constructor(private filePath: string, private startTime: number) { }
+    add(chunk: number) {
+        this.writedBytes += chunk
+    }
+    set(data: { currentSize?: number, items?: number }) {
+        if (data.currentSize) {
+            this.writedBytes = data.currentSize
+        }
+        if (data.items) {
+            this.items = data.items
+        }
+    }
+    addItem(count: number = 1) {
+        this.items += count
+    }
+    toString() {
+        const json = this.toJSON()
+        return `Writing. File: "${relative(process.cwd(), this.filePath)}", Items: ${this.items.toLocaleString()}, Speed: ${json.speed}, Memory: ${formatBytes(process.memoryUsage().heapUsed)}`
+    }
+
+    toJSON() {
+        const diff = Math.floor(Date.now() - this.startTime)
+        const bytesPerMs = Math.floor(this.writedBytes / diff) || 0
+        return {
+            filePath: this.filePath,
+            items: this.items,
+            bytesPerSec: bytesPerMs * 1000,
+            speed: `${formatBytes(bytesPerMs * 1000)}/s`,
+            startTime: this.startTime,
+            writedBytes: this.writedBytes,
+        }
+    }
+}

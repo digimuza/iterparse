@@ -1,11 +1,11 @@
 import { createWriteStream } from 'fs'
-import { ProgressReportOptions } from "./helpers";
+import { ProgressReportOptions, WriteProgress, WriteProgressReportOptions } from "./helpers";
 import { AsyncIterable } from "ix";
 import { bufferRead } from "./buffer";
 import * as Parser from 'fast-xml-parser'
 import { isString, purry } from "ts-prime";
 import * as he from 'he'
-import { ensureFile } from 'fs-extra'
+import { appendFile, ensureFile, open } from 'fs-extra'
 import { AnyIterable, FileReference, FileWriteMode, IX } from "./types";
 
 export interface FastXMLParser {
@@ -116,7 +116,7 @@ export interface FastXMLWriteOptions {
     attrValueProcessor?: (attrValue: string) => string;
 }
 
-export interface XMLWriteOptions extends FastXMLWriteOptions, FileReference, FileWriteMode {
+export interface XMLWriteOptions extends FastXMLWriteOptions, FileReference, FileWriteMode, WriteProgressReportOptions {
     /**
      * Object node name
      * @example
@@ -129,9 +129,9 @@ export interface XMLWriteOptions extends FastXMLWriteOptions, FileReference, Fil
 function _xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, options: XMLWriteOptions): AsyncIterable<T> {
     return IX.defer(async () => {
         const mode = options.mode || 'overwrite'
-        let loaded = false
-        let dest: NodeJS.WritableStream = undefined as unknown as NodeJS.WritableStream
+        let dest: number = 0
         async function* iter() {
+            const progress = new WriteProgress(options.filePath, Date.now())
             const defaultOptions: FastXMLWriteOptions = {
                 attributeNamePrefix: "",
                 attrNodeName: "_", //default is false
@@ -155,36 +155,46 @@ function _xmlWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, opt
                 ...defaultOptions,
                 ...options
             })
-            const i = IX.from(data)
-            
-            for await (const s of i) {
-                if (!loaded) {
-                    await ensureFile(options.filePath)
-                    dest = createWriteStream(options.filePath, { flags: mode === 'append' ? 'a' : 'w' })
-                    if (mode === 'overwrite') {
-                        dest.write("<root>\r\n")
-                    }
-                    loaded = true
-                }
-                const result = parser.parse({ [options.nodeName]: s })
-                dest.write(`${result}\r\n`)
-                yield s
+            const items = IX.from(data)
+            const log = () => {
+                options.progress?.(progress)
             }
+            const inter = setInterval(log, options.progressFrequency || 3000)
+            for await (const buff of items) {
+                if (dest === 0) {
+                    await ensureFile(options.filePath)
+
+                    dest = await open(options.filePath, "a")
+                    if (mode === 'overwrite') {
+                        await appendFile(dest, "<root>\r\n")
+                    }
+                }
+                const result = parser.parse({ [options.nodeName]: buff })
+
+                const buffer = Buffer.from(`${result}\r\n`)
+                progress.add(buffer.byteLength)
+                await appendFile(dest, buffer)
+                progress.addItem()
+                yield buff
+            }
+
+            if (mode === 'overwrite') {
+                await appendFile(dest, "</root>")
+            }
+
+            clearInterval(inter)
+            log()
         }
 
-        return IX.from(iter()).finally(() => {
-            if (mode === 'overwrite') {
-                dest.write("</root>")
-            }
-        })
+        return IX.from(iter())
     })
 }
 
 
 /**
  * Writes JSON object iteratable to file in .xml format
- * @param options - More information in { @link XMLWriteOptions }
- * @param data - any iteratable that extends XMLObject type.
+ * 
+ * @include ./XMLWriteOptions.md
  * @example
  *  import { AsyncIterable } from 'ix'
  *  import { xmlWrite } from 'iterparse'
@@ -207,6 +217,8 @@ export function xmlWrite() {
 
 /**
  * Function read xml from file in memory efficient way
+ * This parser are able to handled `unlimited` size xml files in memory efficient manner.
+ * 
  * @includes ./xml-read.md
  * @example
  *  import { xmlRead } from 'iterparse'    

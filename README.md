@@ -33,51 +33,49 @@ $ yarn add iterparse
 
 # Benchmarks
 
+Run all benchmarks
 
-## CSV
+```
+    git clone https://github.com/digimuza/iterparse.git &&
+    cd ./iterparse/benchmarks &&
+    yarn && 
+    yarn run
+```
 
-Paring 5 million records of sales data. 
-[Sample.csv (111.96MB) ](http://eforexcel.com/wp/wp-content/uploads/2020/09/5m-Sales-Records.7z)
 
-Test was executed on `AMD 2600x` processor
+All benchmarks are executed with on `AMD 2600x` processor.
 
-You can check benchmark source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/csv/bench.ts).
+Benchmarks source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks)
+
+## CSV Parsing
+
+Parsing 1 million records of random generated data.
+> Data was generated using [this](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/csv/generate.ts). script 
 
 <div style="background: transparent;">
-    <div style="width: 20%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px"><h3 style="color: white">csv-parser - 24.1 s<h3></div>
-    <div style="width: 20.9%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px"><h3 style="color: white">iterparse - 23.9 s<h3></div>
-    <div style="width: 100%; background: rgb(250, 140, 22); padding: 5px;"><h3 style="color: white">fast-csv - 119.8 s<h3></div>
+    <div style="width: 33%; background: rgb(24, 144, 255); padding: 5px; margin-bottom: 20px"><h6 style="color: white">csv-parser - 2.8 s<h6></div>
+    <div style="width: 40%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px"><h6 style="color: white">iterparse - 3.4 s<h6></div>
+    <div style="width: 100%; background: rgb(250, 140, 22); padding: 5px;"><h6 style="color: white">fast-csv - 8.3 s<h6></div>
 </div>
 
 
 ## XML
 
 Parsing 1 million records of random generated data. 
-Data was generated using `yarn generate-xml` command. Source code [here]()
-
-Test was executed on `AMD 2600x` processor
-
-You can check benchmark source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/xml/bench.ts).
+> Data was generated using [this](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/xml/generate.ts). script 
 
 <div style="background: transparent;">
-    <div style="width: 100%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px"><h3 style="color: white">xml-stream - 3m 23s<h3></div>
-    <div style="width: 13%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px"><h3 style="color: white">iterparse - 27 s<h3></div>
+    <div style="width: 13%; background: rgb(24, 144, 255); padding: 5px; margin-bottom: 20px"><h6 style="color: white">iterparse - 11 s<h6></div>
 </div>
 
 
 ## JSON
 
 Parsing 1 million records of random generated data. 
-Data was generated using `yarn generate-json` command. Source code [here]()
-
-Test was executed on `AMD 2600x` processor
-
-You can check benchmark source code [here](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/json/bench.ts).
-
-Currently iterparse is only contender. Because it already uses JSONStream package i can't put it here
+> Data was generated using [this](https://github.com/digimuza/iterparse/blob/master/benchmarks/src/json/generate.ts). script 
 
 <div style="background: transparent;">
-    <div style="width: 100%; background: rgb(250, 140, 22); padding: 5px; margin-bottom: 20px"><h3 style="color: white">iterparse - 23 s<h3></div>
+    <div style="width: 100%; background: rgb(24, 144, 255); padding: 5px; margin-bottom: 20px"><h6 style="color: white">iterparse - 3.5 s<h6></div>
 </div>
 
 # Documentation

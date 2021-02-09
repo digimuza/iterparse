@@ -1,5 +1,5 @@
-import { createReadStream, createWriteStream, ensureFile, statSync } from 'fs-extra';
-import { Progress, ProgressReportOptions } from './helpers';
+import { appendFile, createReadStream, createWriteStream, ensureFile, existsSync, open, statSync, unlinkSync } from 'fs-extra';
+import { Progress, ProgressReportOptions, WriteProgress, WriteProgressReportOptions } from './helpers';
 import * as P from 'ts-prime';
 import { purry } from 'ts-prime';
 import { AnyIterable, FileReference, FileWriteMode, IX } from './types';
@@ -57,30 +57,55 @@ async function* _jsonIterParser(options: JSONReadOptions) {
 }
 
 
-export interface JSONWriteOptions extends FileReference, FileWriteMode { }
+export interface JSONWriteOptions extends FileReference, FileWriteMode, WriteProgressReportOptions { }
 
 function _jsonWrite<T>(data: AnyIterable<T>, args: JSONWriteOptions): AsyncIterable<T> {
-    let dest: NodeJS.WritableStream | null = null
+
     async function* iter() {
+        const buffered = IX.from(data).buffer(1000)
+     
+        let dest: number = 0
         const { mode = 'overwrite' } = args
-        let x = 0
-        let loaded = false
-        for await (const item of data) {
-            if (!loaded) {
-                loaded = true
-                await ensureFile(args.filePath)
-                dest = createWriteStream(args.filePath, { flags: mode === 'append' ? 'a' : 'w' })
-                dest?.write(`[\r\n`)
+
+        if (mode === 'overwrite') {
+            if (existsSync(args.filePath)) {
+                unlinkSync(args.filePath)
             }
-            dest?.write(`${JSON.stringify(item)},\r\n`)
-            yield item
+        }
+        const progress = new WriteProgress(args.filePath, Date.now())
+        const log = () => {
+            args.progress?.(progress)
+        }
+        const interval = setInterval(() => {
+            log()
+        }, args.progressFrequency || 3000)
+        for await (const item of buffered) {
+            if (dest === 0) {
+                await ensureFile(args.filePath)
+                dest = await open(args.filePath, 'a')
+                if (mode === 'overwrite') {
+                    await appendFile(dest, `[\r\n`)
+                }
+            }
+
+            const buffer = Buffer.from(item.map((e) => `\t${JSON.stringify(e)},`).join("\r\n"))
+            progress.add(buffer.byteLength)
+            await appendFile(dest, buffer)
+
+            for (const iV of item) {
+                yield iV
+            }
+            progress.addItem(item.length)
         }
 
+        if (mode === 'overwrite') {
+            await appendFile(dest, `]`)
+        }
+
+        log()
+        clearInterval(interval)
     }
-    return IX.from(iter()).finally(() => {
-        dest?.write("\r\n]")
-        dest?.end()
-    })
+    return IX.from(iter())
 }
 
 export interface JSONReadOptions extends ProgressReportOptions, FileReference {

@@ -6,6 +6,7 @@ import { basename, extname, resolve } from 'path'
 import { URL } from 'url'
 import { DownloadProgress, getFileType } from './helpers'
 import { IX } from './types'
+import { canFail } from 'ts-prime'
 
 /**
  * Writes source stream to file
@@ -72,13 +73,13 @@ const defaultResourceIDHookFunction: ResourceIDHookFunction = (_url, headers) =>
  * 
  * @param url URL to file
  * @include ./DownloadOptions.md
- * @returns Iteratable<path/to/file>
  * @example
  *      import { download } from 'iterparse'
- *      download({ url: "url/to/resource.csv", downloadFolder: "/tmp"  })
+ *      download({ url: "url/to/resource.csv", downloadFolder: "/tmp", progress: (q) => console.log(q.toString())   })
  *          .flatMap((filePath)=> csvRead({ filePath }))
  *          .map((q)=> console.log(q))
  *          .count()
+ * 
  * @category Utility
  */
 export function download(options: DownloadOptions): IX<string> {
@@ -87,7 +88,13 @@ export function download(options: DownloadOptions): IX<string> {
         const response = await fetch(url, options)
         response.body.pause()
         if (!response.ok) {
-            throw new Error("asd")
+            response.body.resume()
+            const payload = await IX.from(response.body).toArray()
+            const json = P.canFail(()=> JSON.parse(payload.map((q) => q.toString()).join("")))
+            if (!P.isError(json)) {
+                throw new Error(`Code: ${response.status}, Body: ${JSON.stringify(json)}`)
+            }
+            throw new Error(`Code: ${response.status}, Status Text: ${response.statusText}`)
         }
         const { resourceId = defaultResourceIDHookFunction } = options
         const resource = P.isString(resourceId) ? resourceId : resourceId(url, response.headers)
@@ -114,20 +121,20 @@ export function download(options: DownloadOptions): IX<string> {
         const log = () => {
             options.progress?.(downloadProgress)
         }
-        const logTh = P.throttle(log, options.progressFrequency || 1000)
+        const logTh = P.throttle(log, options.progressFrequency || 3000)
         response.body.resume()
-
-        const output = await write(response.body, filePath).then(async (q) => {
-            log()
-            unlinkSync(lockFilePath)
-            return q
-        })
         response.body.on('data', (chunk) => {
             if (chunk instanceof Buffer) {
                 downloadProgress.add(chunk.byteLength)
             }
             logTh()
         })
+        const output = await write(response.body, filePath).then(async (q) => {
+            log()
+            unlinkSync(lockFilePath)
+            return q
+        })
+       
         return IX.of(output)
     })
 }

@@ -25,3 +25,4 @@ Download option are extended have same options as `RequestInit`
 * `progressFrequency` - How often report about processing status?
     
     @defaultValue - 3000ms
+    

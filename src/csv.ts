@@ -1,7 +1,7 @@
 import * as Papa from 'papaparse'
-import { statSync, createReadStream } from 'fs-extra'
+import { statSync, createReadStream, createWriteStream, open, appendFile, existsSync, unlinkSync, ensureFile } from 'fs-extra'
 import * as P from 'ts-prime'
-import { Progress, ProgressReportOptions } from './helpers'
+import { Progress, ProgressReportOptions, WriteProgress, WriteProgressReportOptions } from './helpers'
 import { AsyncIterable } from 'ix'
 import { delay, isArray, isObject, mapRecord, purry } from 'ts-prime'
 import { GuessableDelimiters } from 'papaparse'
@@ -190,21 +190,26 @@ export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult
 
 
 
-async function* _csvIterWriter<T extends { [k: string]: unknown }>(data: AnyIterable<T>, out: () => Promise<NodeJS.WritableStream>, options?: CSVWriteOptions) {
-    let items: T[] = []
+async function* _csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, options: CSVWriteOptions) {
     let chunk = 0
-    let dest: NodeJS.WritableStream | null = null
-    let loaded = false
-    for await (const d of data) {
-        if (!loaded) {
-            loaded = true
+    let dest: number = 0
+
+    if (options.mode === 'overwrite' && existsSync(options.filePath)) {
+        unlinkSync(options.filePath)
+    }
+
+    const progress = new WriteProgress(options.filePath, Date.now())
+    const log = () => {
+        options.progress?.(progress)
+    }
+    const inter = setInterval(log, options.progressFrequency || 3000)
+
+    for await (const items of IX.from(data).buffer(1000)) {
+        if (dest === 0) {
+            await ensureFile(options.filePath)
             // Accessing stream only when receiving first item.
             // This is convenient because. If stream have 0 items I will not create any file
-            dest = await out()
-        }
-        yield d
-        if (items.length < 10) {
-            items.push(d)
+            dest = await open(options.filePath, 'a')
         }
         const normalized = items.map((q) => {
             return mapRecord(q as Record<string, string>, ([k, v]) => {
@@ -220,32 +225,20 @@ async function* _csvIterWriter<T extends { [k: string]: unknown }>(data: AnyIter
             header: chunk === 0,
             ...options
         })
-        items = []
+        const buffer = Buffer.from(`${csv}\r\n`)
+        await appendFile(dest, buffer)
+        progress.add(buffer.byteLength)
+        for (const iv of items) {
+            yield iv
+        }
+        progress.addItem(items.length)
         chunk++
-        dest?.write(`${csv}\r\n`)
     }
-    if (items.length !== 0) {
-        const normalized = items.map((q) => {
-            return mapRecord(q as Record<string, string>, ([k, v]) => {
-                if (isArray(v) || isObject(v)) {
-                    return [k, JSON.stringify(v) as any]
-                }
-
-                return [k, v as any]
-
-            }) as Record<string, string | number | boolean | undefined | null>
-        })
-        const csv = Papa.unparse(normalized, {
-            header: chunk === 0,
-            ...options
-        })
-        dest?.write(csv)
-    }
-
-    dest?.end()
+    clearInterval(inter)
+    log()
 }
 
-export interface CSVWriteOptions extends FileReference, FileWriteMode {
+export interface CSVWriteOptions extends FileReference, FileWriteMode, WriteProgressReportOptions {
     /**
      * @defaultValue `false`
      */
@@ -296,5 +289,5 @@ export interface CSVWriteOptions extends FileReference, FileWriteMode {
 export function csvWrite<T extends { [k: string]: unknown }>(options: CSVWriteOptions): (data: AnyIterable<T>) => IX<T>
 export function csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, out: CSVWriteOptions): IX<T>
 export function csvWrite() {
-    return purry(_csvIterWriter, arguments)
+    return purry(_csvWrite, arguments)
 }

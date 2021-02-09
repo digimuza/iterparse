@@ -5,14 +5,18 @@
   "author": "Andrius Mozūraitis",
   "license": "MIT",
   "scripts": {
-    "run-csv": "yarn && yarn ts-node src/csv/bench.ts"
+    "run-csv": "yarn ts-node src/csv/bench.ts",
+    "run-json": "yarn ts-node src/json/bench.ts",
+    "run-xml": "yarn ts-node src/xml/bench.ts",
+    "run": "yarn run-csv && yarn run-json && yarn run-xml"
   },
   "dependencies": {
     "@types/faker": "^5.1.6",
     "csv-parser": "^3.0.0",
     "faker": "^5.3.1",
     "iterparse": "^0.0.10",
-    "pretty-ms": "^7.0.1"
+    "pretty-ms": "^7.0.1",
+    "xml-stream": "^0.4.5"
   },
   "devDependencies": {
     "ts-node": "^9.1.1"

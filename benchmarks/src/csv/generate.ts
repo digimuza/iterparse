@@ -1,13 +1,10 @@
 import faker from 'faker'
-import { xmlWrite } from 'iterparse'
+import { csvWrite } from 'iterparse'
 import { AsyncIterable } from 'ix'
 import { range } from 'ix/asynciterable'
 import { resolve } from 'path'
-
-
-
-export async function xmlTestData() {
-    const generatedFile = resolve(__dirname, "./_downloads/generated.xml")
+export async function csvTestData() {
+    const generatedFile = resolve(__dirname, "./_downloads/generated.csv")
     await AsyncIterable.from(range(0, (1000 * 1000))).map((q) => {
         return {
             name: faker.name.firstName(),
@@ -16,9 +13,8 @@ export async function xmlTestData() {
             address: faker.address.city()
         }
     })
-        .pipe(xmlWrite({
+        .pipe(csvWrite({
             filePath: generatedFile,
-            nodeName: "Person"
         }))
         .count()
     return generatedFile
