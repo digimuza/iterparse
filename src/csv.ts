@@ -156,8 +156,14 @@ export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult
         Papa.parse(
             source,
             {
-                ...options,
                 header: true,
+                skipEmptyLines: true,
+                dynamicTyping: true,
+                transformHeader: (parsed)=> parsed.trim().replace(/^"/, "").replace(/"$/, ""),
+                transform: (value) => {
+                    return value.trim().replace(/^"/, "").replace(/"$/, "")
+                },
+                ...options,
                 step: function (row) {
                     obj.push(row)
                     if (obj.length === 100) {

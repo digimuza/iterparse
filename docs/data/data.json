@@ -14,7 +14,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./BufferReadOptions.md"
+									"## BufferReadOptions\n\n* `filePath` - path to file\n\n* `progress` - Reports about json parsing progress\n\n    ```typescript\n    bufferRead({\n        filePath: \"path/to/file.json\",\n        progress: (q) => console.log(q.toString())\n    })\n    .count()\n    ```\n    Logs:\n    ```\n    File: \"../to/file.csv\", Progress: 10.42%, Items: 4,855, Speed: 10.71MB/s, ETA: 25.8s, Memory: 91.75MB\n    ```\n\n    JSON\n\n    ```typescript\n    bufferRead({\n        filePath: \"path/to/file.csv\",\n        progress: (q) => console.log(q.toJSON())\n    })\n    .count()\n    ```\n\n    Logs:\n    ```javascript\n    {\n        eta: 25861.831312410843,\n        filePath: \"path/to/file.csv\",\n        items: 4855,\n        progress: 0.10422863704581108,\n        etaMs: '25.8s',\n        bytesPerSec: 11216000,\n        speed: '10.7MB/s',\n        startTime: 1612718403380,\n        totalSize: 323817340,\n        parsedBytes: 33751040\n    }\n    ```\n* `progressFrequency` - How often report about processing status?\n    \n    @defaultValue - 3000ms"
 								]
 							},
 							{
@@ -367,7 +367,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./CacheIterOptions.md"
+									"## CacheIterOptions\n\n* `cacheFolder` - where cache data will be stored?\n* `enabled` - is cache enabled?\n\n    Easy way to enable or disable caching logic\n\n    `@defaultValue` - `true`\n\n* `referenceId` - when reference id changes cache folder will be regenerated.\n\n    `@defaultValue` - `hash(new Date().toDateString() + iteratableStructure + JSON.stringify(options.nice))` basically this means regenerate cache every single day\n\n    `iteratableStructure` - Any changes to source iteratable may regenerate cache\n        \n    ```typescript\n    getFeed()\n        .take(1000) // Changes to take count will regenerate cache\n        .pipe(cacheIter({ cacheFolder: \"./folder\" }))\n        .count()\n\n    ``` \n\n    `Note`: If you want to disable cache regeneration logic just hard code `referenceId` as static value\n\n    ```typescript\n    getFeed()\n        .pipe(cacheIter({ cacheFolder: \"./folder\", referenceId: \"v1\" }))\n        .count()\n\n    ``` \n\n    Also keep in mind that `referenceId` can be function. \n\n     ```typescript\n    getFeed()\n        .pipe(cacheIter({ \n            cacheFolder: \"./folder\", \n            referenceId: ({ iteratableStructureId, nice }) => new Date().toDateString() + iteratableStructure + JSON.stringify(nice)\n        }))\n        .count()\n\n    ```  \n* `nice` - format cache in human readable `JSON` format.\n\n    * `nice.buffer` - how big is single file? \n        \n        Recommended value is `3000` objects\n\n    Keep in mind that this option can create a lot of files\n\n* `logger` - helpful for debugging purposes"
 								]
 							},
 							{
@@ -434,7 +434,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./CacheIterOptions.md"
+									"## CacheIterOptions\n\n* `cacheFolder` - where cache data will be stored?\n* `enabled` - is cache enabled?\n\n    Easy way to enable or disable caching logic\n\n    `@defaultValue` - `true`\n\n* `referenceId` - when reference id changes cache folder will be regenerated.\n\n    `@defaultValue` - `hash(new Date().toDateString() + iteratableStructure + JSON.stringify(options.nice))` basically this means regenerate cache every single day\n\n    `iteratableStructure` - Any changes to source iteratable may regenerate cache\n        \n    ```typescript\n    getFeed()\n        .take(1000) // Changes to take count will regenerate cache\n        .pipe(cacheIter({ cacheFolder: \"./folder\" }))\n        .count()\n\n    ``` \n\n    `Note`: If you want to disable cache regeneration logic just hard code `referenceId` as static value\n\n    ```typescript\n    getFeed()\n        .pipe(cacheIter({ cacheFolder: \"./folder\", referenceId: \"v1\" }))\n        .count()\n\n    ``` \n\n    Also keep in mind that `referenceId` can be function. \n\n     ```typescript\n    getFeed()\n        .pipe(cacheIter({ \n            cacheFolder: \"./folder\", \n            referenceId: ({ iteratableStructureId, nice }) => new Date().toDateString() + iteratableStructure + JSON.stringify(nice)\n        }))\n        .count()\n\n    ```  \n* `nice` - format cache in human readable `JSON` format.\n\n    * `nice.buffer` - how big is single file? \n        \n        Recommended value is `3000` objects\n\n    Keep in mind that this option can create a lot of files\n\n* `logger` - helpful for debugging purposes"
 								]
 							},
 							{
@@ -551,7 +551,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./CSVReadOptions.md"
+									"## CSVReadOptions\n\nCSVReadOptions extends papa parse config object.\n\nYou can read about papa parse config here [papaparse.com](https://www.papaparse.com/docs#config)\n\n* `filePath` - path to file\n\n* `progress` - Reports about json parsing progress\n\n    ```typescript\n    csvRead({\n        filePath: \"path/to/file.json\",\n        progress: (q) => console.log(q.toString())\n    })\n    .count()\n    ```\n    Logs:\n    ```\n    File: \"../to/file.csv\", Progress: 10.42%, Items: 4,855, Speed: 10.71MB/s, ETA: 25.8s, Memory: 91.75MB\n    ```\n\n    JSON\n\n    ```typescript\n    csvRead({\n        filePath: \"path/to/file.csv\",\n        progress: (q) => console.log(q.toJSON())\n    })\n    .count()\n    ```\n\n    Logs:\n    ```javascript\n    {\n        eta: 25861.831312410843,\n        filePath: \"path/to/file.csv\",\n        items: 4855,\n        progress: 0.10422863704581108,\n        etaMs: '25.8s',\n        bytesPerSec: 11216000,\n        speed: '10.7MB/s',\n        startTime: 1612718403380,\n        totalSize: 323817340,\n        parsedBytes: 33751040\n    }\n    ```\n* `progressFrequency` - How often report about processing status?\n    \n    @defaultValue - 3000ms\n"
 								]
 							},
 							{
@@ -686,9 +686,7 @@
 							},
 							{
 								"tag": "@include",
-								"content": [
-									"./CSVOptions.md"
-								]
+								"content": []
 							},
 							{
 								"tag": "@signature",
@@ -788,9 +786,7 @@
 							},
 							{
 								"tag": "@include",
-								"content": [
-									"./CSVOptions.md"
-								]
+								"content": []
 							},
 							{
 								"tag": "@signature",
@@ -951,7 +947,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./DownloadOptions.md"
+									"## DownloadOptions\n\nDownload option are extended have same options as `RequestInit`\n\n[RequestInit](https://www.npmjs.com/package/node-fetch#options) options\n\n* `url` - link to file\n\n* `downloadFolder` - path where downloaded content will be stored\n\n* `resourceId` - How to generate resource id?\n    Download function have special behavior where it tries to prevent multiple downloads if possible. \n    \n    This function achieve this by executing request and checking response headers. Most likely headers will have `etag` or `last-modified` values.\n    If this happen generated `resourceId` will be `hash(etag) | hash(last-modified)` \n\n    If these values are not present. Resource id will be `hash(${date.toDateString()}:${date.getHours()})` this will cache file for maximum 1 hour\n\n    Examples\n    ```typescript\n    // Will download file once.\n    download({\n        url: \"url/to/resource.json\",\n        resourceId: \"example\"\n    })\n    .count()\n    ```\n    ```typescript\n    // Will download file always.\n    download({\n        url: \"url/to/resource.json\",\n        resourceId: false\n    })\n    .count()\n    ```\n\n    ```typescript\n    // Will download file every at least 24 hours.\n    download({\n        url: \"url/to/resource.json\",\n        resourceId: new Date().toDateString()\n    })\n    .count()\n    ```\n\n* `progress` - reports about download progress\n\n    ```typescript\n    download({\n        url: \"url/to/resource.json\",\n        progress: (q) => console.log(q.toString())\n    })\n    .count()\n    ```\n    Logs:\n    ```\n    URL: \"url/to/resource.json\", Progress: 10.42%, Speed: 10.71MB/s, ETA: 25.8s, Memory: 91.75MB\n    ```\n* `progressFrequency` - How often report about processing status?\n    \n    @defaultValue - 3000ms\n    "
 								]
 							},
 							{
@@ -1055,7 +1051,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./JSONReadOptions.md"
+									"## JSONReadOptions\n\n- `filePath` - path to file\n\n- `pattern` - JSON parsing pattern\n\n  ```\n      [{...}, {...}] => *\n      { a: [{...}, {...}] } => a.*\n      { a: { b: [{...}, {...}] } } => a.b.*\n  ```\n\n- `progress` - Reports about json parsing progress\n\n  ```typescript\n  jsonRead({\n    filePath: \"path/to/file.json\",\n    pattern: \"*\",\n    progress: (q) => console.log(q.toString()),\n  }).count();\n  ```\n\n  Logs:\n\n  ```\n  File: \"../to/file.json\", Progress: 10.42%, Items: 4,855, Speed: 10.71MB/s, ETA: 25.8s, Memory: 91.75MB\n  ```\n\n  JSON\n\n  ```typescript\n  jsonRead({\n    filePath: \"path/to/file.json\",\n    pattern: \"*\",\n    progress: (q) => console.log(q.toJSON()),\n  }).count();\n  ```\n\n  Logs:\n\n  ```javascript\n  {\n      eta: 25861.831312410843,\n      filePath: \"path/to/file.json\",\n      items: 4855,\n      progress: 0.10422863704581108,\n      etaMs: '25.8s',\n      bytesPerSec: 11216000,\n      speed: '10.7MB/s',\n      startTime: 1612718403380,\n      totalSize: 323817340,\n      parsedBytes: 33751040\n  }\n  ```\n\n- `progressFrequency` - How often report about processing status?\n  @defaultValue - 3000ms\n"
 								]
 							},
 							{
@@ -1168,7 +1164,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./JSONWriteOptions.md"
+									"## LineWriteOptions\n\n- `filePath` - path to file\n\n- `mode` - write mode\n\n  `@defaultValue` - `overwrite`\n\n  - `append` - Appends each object to file.\n  - `overwrite` - Always overwrite existing content. On successful write construct valid JSON file\n\n- `progress` - Report about write progress\n- `progressFrequency` - How often notify about progress?\n\n  `@defaultValue` - `3000ms`\n"
 								]
 							},
 							{
@@ -1235,7 +1231,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./JSONWriteOptions.md"
+									"## LineWriteOptions\n\n- `filePath` - path to file\n\n- `mode` - write mode\n\n  `@defaultValue` - `overwrite`\n\n  - `append` - Appends each object to file.\n  - `overwrite` - Always overwrite existing content. On successful write construct valid JSON file\n\n- `progress` - Report about write progress\n- `progressFrequency` - How often notify about progress?\n\n  `@defaultValue` - `3000ms`\n"
 								]
 							},
 							{
@@ -1492,7 +1488,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./XMLWriteOptions.md"
+									"## XMLWriteOptions\n\n- `filePath` - path to file\n\n- `mode` - write mode\n\n  `@defaultValue` - `overwrite`\n\n  - `append` - Appends each object to file.\n  - `overwrite` - Always overwrite existing content. On successful write construct valid JSON file\n\n- `progress` - Report about write progress\n- `progressFrequency` - How often notify about progress?\n\n  `@defaultValue` - `3000ms`\n"
 								]
 							},
 							{
@@ -1567,7 +1563,7 @@
 							{
 								"tag": "@include",
 								"content": [
-									"./XMLWriteOptions.md"
+									"## XMLWriteOptions\n\n- `filePath` - path to file\n\n- `mode` - write mode\n\n  `@defaultValue` - `overwrite`\n\n  - `append` - Appends each object to file.\n  - `overwrite` - Always overwrite existing content. On successful write construct valid JSON file\n\n- `progress` - Report about write progress\n- `progressFrequency` - How often notify about progress?\n\n  `@defaultValue` - `3000ms`\n"
 								]
 							},
 							{
