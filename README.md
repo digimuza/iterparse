@@ -1,3 +1,6 @@
+[![npm module](https://badge.fury.io/js/iterparse.svg)](https://www.npmjs.org/package/iterparse)
+[![dependencies](https://david-dm.org/digimuza/iterparse/status.svg)](https://david-dm.org/digimuza/iterparse)
+
 # Introduction
 
 Data parsing using ES6 Async Iterators
