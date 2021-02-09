@@ -1,6 +1,6 @@
 {
   "name": "iterparse",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Delightful data parsing",
   "main": "lib/index.js",
   "files": [
@@ -35,8 +35,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^13.13.5",
-    "typescript": "^3.9.3",
-    "ts-docflux": "^0.0.11"
+    "ts-docflux": "^0.0.11",
+    "typescript": "^3.9.3"
   },
   "tsDocFluxConfig": {
     "mainEntryPointFilePath": "./lib/index.d.ts"
