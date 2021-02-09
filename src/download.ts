@@ -59,7 +59,7 @@ export interface DownloadOptions extends RequestInit {
      * 
      * If file with same generated resource ID is found file will not be downloaded.
      */
-    resourceId?: string | ResourceIDHookFunction
+    resourceId?: string | ResourceIDHookFunction | false
 }
 
 const defaultResourceIDHookFunction: ResourceIDHookFunction = (_url, headers) => {
@@ -90,17 +90,17 @@ export function download(options: DownloadOptions): IX<string> {
         if (!response.ok) {
             response.body.resume()
             const payload = await IX.from(response.body).toArray()
-            const json = P.canFail(()=> JSON.parse(payload.map((q) => q.toString()).join("")))
+            const json = P.canFail(() => JSON.parse(payload.map((q) => q.toString()).join("")))
             if (!P.isError(json)) {
                 throw new Error(`Code: ${response.status}, Body: ${JSON.stringify(json)}`)
             }
             throw new Error(`Code: ${response.status}, Status Text: ${response.statusText}`)
         }
         const { resourceId = defaultResourceIDHookFunction } = options
-        const resource = P.isString(resourceId) ? resourceId : resourceId(url, response.headers)
+        const resource = P.isString(resourceId) || P.isBoolean(resourceId) ? resourceId : resourceId(url, response.headers)
         const baseName = basename(new URL(url).pathname)
         const extension = getFileType(response.headers.get('content-type') || '') || extname(baseName)
-        const fileName = `${baseName.replace(extname(baseName), '')}-${P.hash(`${url}:${resource}`)}${extension}`
+        const fileName = resource === false ? `${baseName.replace(extname(baseName), '')}-${P.hash(`${url}`)}${extension}` : `${baseName.replace(extname(baseName), '')}-${P.hash(`${url}:${resource}`)}${extension}`
         const filePath = resolve(options.downloadFolder, fileName)
         const lockFilePath = resolve(options.downloadFolder, `.${basename(filePath).replace(extension, '')}.lock`)
 
@@ -134,7 +134,7 @@ export function download(options: DownloadOptions): IX<string> {
             unlinkSync(lockFilePath)
             return q
         })
-       
+
         return IX.of(output)
     })
 }
