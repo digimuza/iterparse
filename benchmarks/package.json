@@ -16,7 +16,7 @@
     "@types/faker": "^5.1.6",
     "csv-parser": "^3.0.0",
     "faker": "^5.3.1",
-    "iterparse": "^0.0.10",
+    "iterparse": "^0.0.12",
     "pretty-ms": "^7.0.1",
     "xml-stream": "^0.4.5"
   },
