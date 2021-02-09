@@ -31,11 +31,14 @@
     "watch": "yarn link && tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Andrius Mozūraitis",
+  "author": "digimuza",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^26.0.20",
     "@types/node": "^13.13.5",
+    "jest": "^22.4.3",
     "ts-docflux": "^0.0.11",
+    "ts-jest": "^22.4.5",
     "typescript": "^3.9.3"
   },
   "repository": {

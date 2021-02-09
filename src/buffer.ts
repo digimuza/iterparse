@@ -1,4 +1,4 @@
-import { appendFile, createReadStream, createWriteStream, ensureFile, existsSync, open, statSync, unlinkSync } from "fs-extra"
+import { appendFile, createReadStream, ensureFile, existsSync, open, statSync, unlinkSync } from "fs-extra"
 import { Progress, ProgressReportOptions, WriteProgress, WriteProgressReportOptions } from "./helpers"
 import * as P from 'ts-prime'
 import { AnyIterable, FileReference, IX } from "./types"
