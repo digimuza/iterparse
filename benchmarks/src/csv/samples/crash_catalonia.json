@@ -1,0 +1,30 @@
+[
+	{
+		"Day of Week": "Sunday",
+		"Number of Crashes": 13664
+	},
+	{
+		"Day of Week": "Monday",
+		"Number of Crashes": 17279
+	},
+	{
+		"Day of Week": "Tuesday",
+		"Number of Crashes": 17337
+	},
+	{
+		"Day of Week": "Wednesday",
+		"Number of Crashes": 17394
+	},
+	{
+		"Day of Week": "Thursday",
+		"Number of Crashes": 17954
+	},
+	{
+		"Day of Week": "Friday",
+		"Number of Crashes": 19147
+	},
+	{
+		"Day of Week": "Saturday",
+		"Number of Crashes": 15714
+	}
+]

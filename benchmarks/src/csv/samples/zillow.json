@@ -1,0 +1,182 @@
+[
+	{
+		"Index": 1,
+		"Living Space (sq ft)": 2222,
+		"Beds": 3,
+		"Baths": 3.5,
+		"Zip": 32312,
+		"Year": 1981,
+		"List Price ($)": 250000
+	},
+	{
+		"Index": 2,
+		"Living Space (sq ft)": 1628,
+		"Beds": 3,
+		"Baths": 2,
+		"Zip": 32308,
+		"Year": 2009,
+		"List Price ($)": 185000
+	},
+	{
+		"Index": 3,
+		"Living Space (sq ft)": 3824,
+		"Beds": 5,
+		"Baths": 4,
+		"Zip": 32312,
+		"Year": 1954,
+		"List Price ($)": 399000
+	},
+	{
+		"Index": 4,
+		"Living Space (sq ft)": 1137,
+		"Beds": 3,
+		"Baths": 2,
+		"Zip": 32309,
+		"Year": 1993,
+		"List Price ($)": 150000
+	},
+	{
+		"Index": 5,
+		"Living Space (sq ft)": 3560,
+		"Beds": 6,
+		"Baths": 4,
+		"Zip": 32309,
+		"Year": 1973,
+		"List Price ($)": 315000
+	},
+	{
+		"Index": 6,
+		"Living Space (sq ft)": 2893,
+		"Beds": 4,
+		"Baths": 3,
+		"Zip": 32312,
+		"Year": 1994,
+		"List Price ($)": 699000
+	},
+	{
+		"Index": 7,
+		"Living Space (sq ft)": 3631,
+		"Beds": 4,
+		"Baths": 3,
+		"Zip": 32309,
+		"Year": 1996,
+		"List Price ($)": 649000
+	},
+	{
+		"Index": 8,
+		"Living Space (sq ft)": 2483,
+		"Beds": 4,
+		"Baths": 3,
+		"Zip": 32312,
+		"Year": 2016,
+		"List Price ($)": 399000
+	},
+	{
+		"Index": 9,
+		"Living Space (sq ft)": 2400,
+		"Beds": 4,
+		"Baths": 4,
+		"Zip": 32312,
+		"Year": 2002,
+		"List Price ($)": 613000
+	},
+	{
+		"Index": 10,
+		"Living Space (sq ft)": 1997,
+		"Beds": 3,
+		"Baths": 3,
+		"Zip": 32311,
+		"Year": 2006,
+		"List Price ($)": 295000
+	},
+	{
+		"Index": 11,
+		"Living Space (sq ft)": 2097,
+		"Beds": 4,
+		"Baths": 3,
+		"Zip": 32311,
+		"Year": 2016,
+		"List Price ($)": 290000
+	},
+	{
+		"Index": 12,
+		"Living Space (sq ft)": 3200,
+		"Beds": 5,
+		"Baths": 4,
+		"Zip": 32312,
+		"Year": 1964,
+		"List Price ($)": 465000
+	},
+	{
+		"Index": 13,
+		"Living Space (sq ft)": 4892,
+		"Beds": 5,
+		"Baths": 6,
+		"Zip": 32311,
+		"Year": 2005,
+		"List Price ($)": 799900
+	},
+	{
+		"Index": 14,
+		"Living Space (sq ft)": 1128,
+		"Beds": 2,
+		"Baths": 1,
+		"Zip": 32303,
+		"Year": 1955,
+		"List Price ($)": 89000
+	},
+	{
+		"Index": 15,
+		"Living Space (sq ft)": 1381,
+		"Beds": 3,
+		"Baths": 2,
+		"Zip": 32301,
+		"Year": 2006,
+		"List Price ($)": 143000
+	},
+	{
+		"Index": 16,
+		"Living Space (sq ft)": 4242,
+		"Beds": 4,
+		"Baths": 5,
+		"Zip": 32303,
+		"Year": 2007,
+		"List Price ($)": 569000
+	},
+	{
+		"Index": 17,
+		"Living Space (sq ft)": 2533,
+		"Beds": 3,
+		"Baths": 2,
+		"Zip": 32310,
+		"Year": 1991,
+		"List Price ($)": 365000
+	},
+	{
+		"Index": 18,
+		"Living Space (sq ft)": 1158,
+		"Beds": 3,
+		"Baths": 2,
+		"Zip": 32303,
+		"Year": 1993,
+		"List Price ($)": 155000
+	},
+	{
+		"Index": 19,
+		"Living Space (sq ft)": 2497,
+		"Beds": 4,
+		"Baths": 4,
+		"Zip": 32309,
+		"Year": 1990,
+		"List Price ($)": 289000
+	},
+	{
+		"Index": 20,
+		"Living Space (sq ft)": 4010,
+		"Beds": 5,
+		"Baths": 3,
+		"Zip": 32309,
+		"Year": 2002,
+		"List Price ($)": 549900
+	}
+]

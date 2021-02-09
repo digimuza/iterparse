@@ -8,7 +8,9 @@
     "run-csv": "yarn ts-node src/csv/bench.ts",
     "run-json": "yarn ts-node src/json/bench.ts",
     "run-xml": "yarn ts-node src/xml/bench.ts",
-    "run": "yarn run-csv && yarn run-json && yarn run-xml"
+    "run": "yarn run-csv && yarn run-json && yarn run-xml",
+    "test-csv": "yarn ts-node src/csv/test.ts",
+    "test": "yarn test-csv"
   },
   "dependencies": {
     "@types/faker": "^5.1.6",

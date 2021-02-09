@@ -1,0 +1,1362 @@
+[
+	{
+		"Index": 1,
+		"Eruption length (mins)": 3.6,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 2,
+		"Eruption length (mins)": 1.8,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 3,
+		"Eruption length (mins)": 3.333,
+		"Eruption wait (mins)": 74
+	},
+	{
+		"Index": 4,
+		"Eruption length (mins)": 2.283,
+		"Eruption wait (mins)": 62
+	},
+	{
+		"Index": 5,
+		"Eruption length (mins)": 4.533,
+		"Eruption wait (mins)": 85
+	},
+	{
+		"Index": 6,
+		"Eruption length (mins)": 2.883,
+		"Eruption wait (mins)": 55
+	},
+	{
+		"Index": 7,
+		"Eruption length (mins)": 4.7,
+		"Eruption wait (mins)": 88
+	},
+	{
+		"Index": 8,
+		"Eruption length (mins)": 3.6,
+		"Eruption wait (mins)": 85
+	},
+	{
+		"Index": 9,
+		"Eruption length (mins)": 1.95,
+		"Eruption wait (mins)": 51
+	},
+	{
+		"Index": 10,
+		"Eruption length (mins)": 4.35,
+		"Eruption wait (mins)": 85
+	},
+	{
+		"Index": 11,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 12,
+		"Eruption length (mins)": 3.917,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 13,
+		"Eruption length (mins)": 4.2,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 14,
+		"Eruption length (mins)": 1.75,
+		"Eruption wait (mins)": 47
+	},
+	{
+		"Index": 15,
+		"Eruption length (mins)": 4.7,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 16,
+		"Eruption length (mins)": 2.167,
+		"Eruption wait (mins)": 52
+	},
+	{
+		"Index": 17,
+		"Eruption length (mins)": 1.75,
+		"Eruption wait (mins)": 62
+	},
+	{
+		"Index": 18,
+		"Eruption length (mins)": 4.8,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 19,
+		"Eruption length (mins)": 1.6,
+		"Eruption wait (mins)": 52
+	},
+	{
+		"Index": 20,
+		"Eruption length (mins)": 4.25,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 21,
+		"Eruption length (mins)": 1.8,
+		"Eruption wait (mins)": 51
+	},
+	{
+		"Index": 22,
+		"Eruption length (mins)": 1.75,
+		"Eruption wait (mins)": 47
+	},
+	{
+		"Index": 23,
+		"Eruption length (mins)": 3.45,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 24,
+		"Eruption length (mins)": 3.067,
+		"Eruption wait (mins)": 69
+	},
+	{
+		"Index": 25,
+		"Eruption length (mins)": 4.533,
+		"Eruption wait (mins)": 74
+	},
+	{
+		"Index": 26,
+		"Eruption length (mins)": 3.6,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 27,
+		"Eruption length (mins)": 1.967,
+		"Eruption wait (mins)": 55
+	},
+	{
+		"Index": 28,
+		"Eruption length (mins)": 4.083,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 29,
+		"Eruption length (mins)": 3.85,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 30,
+		"Eruption length (mins)": 4.433,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 31,
+		"Eruption length (mins)": 4.3,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 32,
+		"Eruption length (mins)": 4.467,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 33,
+		"Eruption length (mins)": 3.367,
+		"Eruption wait (mins)": 66
+	},
+	{
+		"Index": 34,
+		"Eruption length (mins)": 4.033,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 35,
+		"Eruption length (mins)": 3.833,
+		"Eruption wait (mins)": 74
+	},
+	{
+		"Index": 36,
+		"Eruption length (mins)": 2.017,
+		"Eruption wait (mins)": 52
+	},
+	{
+		"Index": 37,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 48
+	},
+	{
+		"Index": 38,
+		"Eruption length (mins)": 4.833,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 39,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 40,
+		"Eruption length (mins)": 4.783,
+		"Eruption wait (mins)": 90
+	},
+	{
+		"Index": 41,
+		"Eruption length (mins)": 4.35,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 42,
+		"Eruption length (mins)": 1.883,
+		"Eruption wait (mins)": 58
+	},
+	{
+		"Index": 43,
+		"Eruption length (mins)": 4.567,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 44,
+		"Eruption length (mins)": 1.75,
+		"Eruption wait (mins)": 58
+	},
+	{
+		"Index": 45,
+		"Eruption length (mins)": 4.533,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 46,
+		"Eruption length (mins)": 3.317,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 47,
+		"Eruption length (mins)": 3.833,
+		"Eruption wait (mins)": 64
+	},
+	{
+		"Index": 48,
+		"Eruption length (mins)": 2.1,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 49,
+		"Eruption length (mins)": 4.633,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 50,
+		"Eruption length (mins)": 2,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 51,
+		"Eruption length (mins)": 4.8,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 52,
+		"Eruption length (mins)": 4.716,
+		"Eruption wait (mins)": 90
+	},
+	{
+		"Index": 53,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 54,
+		"Eruption length (mins)": 4.833,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 55,
+		"Eruption length (mins)": 1.733,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 56,
+		"Eruption length (mins)": 4.883,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 57,
+		"Eruption length (mins)": 3.717,
+		"Eruption wait (mins)": 71
+	},
+	{
+		"Index": 58,
+		"Eruption length (mins)": 1.667,
+		"Eruption wait (mins)": 64
+	},
+	{
+		"Index": 59,
+		"Eruption length (mins)": 4.567,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 60,
+		"Eruption length (mins)": 4.317,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 61,
+		"Eruption length (mins)": 2.233,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 62,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 63,
+		"Eruption length (mins)": 1.75,
+		"Eruption wait (mins)": 48
+	},
+	{
+		"Index": 64,
+		"Eruption length (mins)": 4.8,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 65,
+		"Eruption length (mins)": 1.817,
+		"Eruption wait (mins)": 60
+	},
+	{
+		"Index": 66,
+		"Eruption length (mins)": 4.4,
+		"Eruption wait (mins)": 92
+	},
+	{
+		"Index": 67,
+		"Eruption length (mins)": 4.167,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 68,
+		"Eruption length (mins)": 4.7,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 69,
+		"Eruption length (mins)": 2.067,
+		"Eruption wait (mins)": 65
+	},
+	{
+		"Index": 70,
+		"Eruption length (mins)": 4.7,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 71,
+		"Eruption length (mins)": 4.033,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 72,
+		"Eruption length (mins)": 1.967,
+		"Eruption wait (mins)": 56
+	},
+	{
+		"Index": 73,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 74,
+		"Eruption length (mins)": 4,
+		"Eruption wait (mins)": 71
+	},
+	{
+		"Index": 75,
+		"Eruption length (mins)": 1.983,
+		"Eruption wait (mins)": 62
+	},
+	{
+		"Index": 76,
+		"Eruption length (mins)": 5.067,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 77,
+		"Eruption length (mins)": 2.017,
+		"Eruption wait (mins)": 60
+	},
+	{
+		"Index": 78,
+		"Eruption length (mins)": 4.567,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 79,
+		"Eruption length (mins)": 3.883,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 80,
+		"Eruption length (mins)": 3.6,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 81,
+		"Eruption length (mins)": 4.133,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 82,
+		"Eruption length (mins)": 4.333,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 83,
+		"Eruption length (mins)": 4.1,
+		"Eruption wait (mins)": 70
+	},
+	{
+		"Index": 84,
+		"Eruption length (mins)": 2.633,
+		"Eruption wait (mins)": 65
+	},
+	{
+		"Index": 85,
+		"Eruption length (mins)": 4.067,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 86,
+		"Eruption length (mins)": 4.933,
+		"Eruption wait (mins)": 88
+	},
+	{
+		"Index": 87,
+		"Eruption length (mins)": 3.95,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 88,
+		"Eruption length (mins)": 4.517,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 89,
+		"Eruption length (mins)": 2.167,
+		"Eruption wait (mins)": 48
+	},
+	{
+		"Index": 90,
+		"Eruption length (mins)": 4,
+		"Eruption wait (mins)": 86
+	},
+	{
+		"Index": 91,
+		"Eruption length (mins)": 2.2,
+		"Eruption wait (mins)": 60
+	},
+	{
+		"Index": 92,
+		"Eruption length (mins)": 4.333,
+		"Eruption wait (mins)": 90
+	},
+	{
+		"Index": 93,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 50
+	},
+	{
+		"Index": 94,
+		"Eruption length (mins)": 4.817,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 95,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 63
+	},
+	{
+		"Index": 96,
+		"Eruption length (mins)": 4.3,
+		"Eruption wait (mins)": 72
+	},
+	{
+		"Index": 97,
+		"Eruption length (mins)": 4.667,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 98,
+		"Eruption length (mins)": 3.75,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 99,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 51
+	},
+	{
+		"Index": 100,
+		"Eruption length (mins)": 4.9,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 101,
+		"Eruption length (mins)": 2.483,
+		"Eruption wait (mins)": 62
+	},
+	{
+		"Index": 102,
+		"Eruption length (mins)": 4.367,
+		"Eruption wait (mins)": 88
+	},
+	{
+		"Index": 103,
+		"Eruption length (mins)": 2.1,
+		"Eruption wait (mins)": 49
+	},
+	{
+		"Index": 104,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 105,
+		"Eruption length (mins)": 4.05,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 106,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 47
+	},
+	{
+		"Index": 107,
+		"Eruption length (mins)": 4.7,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 108,
+		"Eruption length (mins)": 1.783,
+		"Eruption wait (mins)": 52
+	},
+	{
+		"Index": 109,
+		"Eruption length (mins)": 4.85,
+		"Eruption wait (mins)": 86
+	},
+	{
+		"Index": 110,
+		"Eruption length (mins)": 3.683,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 111,
+		"Eruption length (mins)": 4.733,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 112,
+		"Eruption length (mins)": 2.3,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 113,
+		"Eruption length (mins)": 4.9,
+		"Eruption wait (mins)": 89
+	},
+	{
+		"Index": 114,
+		"Eruption length (mins)": 4.417,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 115,
+		"Eruption length (mins)": 1.7,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 116,
+		"Eruption length (mins)": 4.633,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 117,
+		"Eruption length (mins)": 2.317,
+		"Eruption wait (mins)": 50
+	},
+	{
+		"Index": 118,
+		"Eruption length (mins)": 4.6,
+		"Eruption wait (mins)": 85
+	},
+	{
+		"Index": 119,
+		"Eruption length (mins)": 1.817,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 120,
+		"Eruption length (mins)": 4.417,
+		"Eruption wait (mins)": 87
+	},
+	{
+		"Index": 121,
+		"Eruption length (mins)": 2.617,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 122,
+		"Eruption length (mins)": 4.067,
+		"Eruption wait (mins)": 69
+	},
+	{
+		"Index": 123,
+		"Eruption length (mins)": 4.25,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 124,
+		"Eruption length (mins)": 1.967,
+		"Eruption wait (mins)": 56
+	},
+	{
+		"Index": 125,
+		"Eruption length (mins)": 4.6,
+		"Eruption wait (mins)": 88
+	},
+	{
+		"Index": 126,
+		"Eruption length (mins)": 3.767,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 127,
+		"Eruption length (mins)": 1.917,
+		"Eruption wait (mins)": 45
+	},
+	{
+		"Index": 128,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 129,
+		"Eruption length (mins)": 2.267,
+		"Eruption wait (mins)": 55
+	},
+	{
+		"Index": 130,
+		"Eruption length (mins)": 4.65,
+		"Eruption wait (mins)": 90
+	},
+	{
+		"Index": 131,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 45
+	},
+	{
+		"Index": 132,
+		"Eruption length (mins)": 4.167,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 133,
+		"Eruption length (mins)": 2.8,
+		"Eruption wait (mins)": 56
+	},
+	{
+		"Index": 134,
+		"Eruption length (mins)": 4.333,
+		"Eruption wait (mins)": 89
+	},
+	{
+		"Index": 135,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 46
+	},
+	{
+		"Index": 136,
+		"Eruption length (mins)": 4.383,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 137,
+		"Eruption length (mins)": 1.883,
+		"Eruption wait (mins)": 51
+	},
+	{
+		"Index": 138,
+		"Eruption length (mins)": 4.933,
+		"Eruption wait (mins)": 86
+	},
+	{
+		"Index": 139,
+		"Eruption length (mins)": 2.033,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 140,
+		"Eruption length (mins)": 3.733,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 141,
+		"Eruption length (mins)": 4.233,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 142,
+		"Eruption length (mins)": 2.233,
+		"Eruption wait (mins)": 60
+	},
+	{
+		"Index": 143,
+		"Eruption length (mins)": 4.533,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 144,
+		"Eruption length (mins)": 4.817,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 145,
+		"Eruption length (mins)": 4.333,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 146,
+		"Eruption length (mins)": 1.983,
+		"Eruption wait (mins)": 59
+	},
+	{
+		"Index": 147,
+		"Eruption length (mins)": 4.633,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 148,
+		"Eruption length (mins)": 2.017,
+		"Eruption wait (mins)": 49
+	},
+	{
+		"Index": 149,
+		"Eruption length (mins)": 5.1,
+		"Eruption wait (mins)": 96
+	},
+	{
+		"Index": 150,
+		"Eruption length (mins)": 1.8,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 151,
+		"Eruption length (mins)": 5.033,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 152,
+		"Eruption length (mins)": 4,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 153,
+		"Eruption length (mins)": 2.4,
+		"Eruption wait (mins)": 65
+	},
+	{
+		"Index": 154,
+		"Eruption length (mins)": 4.6,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 155,
+		"Eruption length (mins)": 3.567,
+		"Eruption wait (mins)": 71
+	},
+	{
+		"Index": 156,
+		"Eruption length (mins)": 4,
+		"Eruption wait (mins)": 70
+	},
+	{
+		"Index": 157,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 158,
+		"Eruption length (mins)": 4.083,
+		"Eruption wait (mins)": 93
+	},
+	{
+		"Index": 159,
+		"Eruption length (mins)": 1.8,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 160,
+		"Eruption length (mins)": 3.967,
+		"Eruption wait (mins)": 89
+	},
+	{
+		"Index": 161,
+		"Eruption length (mins)": 2.2,
+		"Eruption wait (mins)": 45
+	},
+	{
+		"Index": 162,
+		"Eruption length (mins)": 4.15,
+		"Eruption wait (mins)": 86
+	},
+	{
+		"Index": 163,
+		"Eruption length (mins)": 2,
+		"Eruption wait (mins)": 58
+	},
+	{
+		"Index": 164,
+		"Eruption length (mins)": 3.833,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 165,
+		"Eruption length (mins)": 3.5,
+		"Eruption wait (mins)": 66
+	},
+	{
+		"Index": 166,
+		"Eruption length (mins)": 4.583,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 167,
+		"Eruption length (mins)": 2.367,
+		"Eruption wait (mins)": 63
+	},
+	{
+		"Index": 168,
+		"Eruption length (mins)": 5,
+		"Eruption wait (mins)": 88
+	},
+	{
+		"Index": 169,
+		"Eruption length (mins)": 1.933,
+		"Eruption wait (mins)": 52
+	},
+	{
+		"Index": 170,
+		"Eruption length (mins)": 4.617,
+		"Eruption wait (mins)": 93
+	},
+	{
+		"Index": 171,
+		"Eruption length (mins)": 1.917,
+		"Eruption wait (mins)": 49
+	},
+	{
+		"Index": 172,
+		"Eruption length (mins)": 2.083,
+		"Eruption wait (mins)": 57
+	},
+	{
+		"Index": 173,
+		"Eruption length (mins)": 4.583,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 174,
+		"Eruption length (mins)": 3.333,
+		"Eruption wait (mins)": 68
+	},
+	{
+		"Index": 175,
+		"Eruption length (mins)": 4.167,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 176,
+		"Eruption length (mins)": 4.333,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 177,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 178,
+		"Eruption length (mins)": 2.417,
+		"Eruption wait (mins)": 50
+	},
+	{
+		"Index": 179,
+		"Eruption length (mins)": 4,
+		"Eruption wait (mins)": 85
+	},
+	{
+		"Index": 180,
+		"Eruption length (mins)": 4.167,
+		"Eruption wait (mins)": 74
+	},
+	{
+		"Index": 181,
+		"Eruption length (mins)": 1.883,
+		"Eruption wait (mins)": 55
+	},
+	{
+		"Index": 182,
+		"Eruption length (mins)": 4.583,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 183,
+		"Eruption length (mins)": 4.25,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 184,
+		"Eruption length (mins)": 3.767,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 185,
+		"Eruption length (mins)": 2.033,
+		"Eruption wait (mins)": 51
+	},
+	{
+		"Index": 186,
+		"Eruption length (mins)": 4.433,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 187,
+		"Eruption length (mins)": 4.083,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 188,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 46
+	},
+	{
+		"Index": 189,
+		"Eruption length (mins)": 4.417,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 190,
+		"Eruption length (mins)": 2.183,
+		"Eruption wait (mins)": 55
+	},
+	{
+		"Index": 191,
+		"Eruption length (mins)": 4.8,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 192,
+		"Eruption length (mins)": 1.833,
+		"Eruption wait (mins)": 57
+	},
+	{
+		"Index": 193,
+		"Eruption length (mins)": 4.8,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 194,
+		"Eruption length (mins)": 4.1,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 195,
+		"Eruption length (mins)": 3.966,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 196,
+		"Eruption length (mins)": 4.233,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 197,
+		"Eruption length (mins)": 3.5,
+		"Eruption wait (mins)": 87
+	},
+	{
+		"Index": 198,
+		"Eruption length (mins)": 4.366,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 199,
+		"Eruption length (mins)": 2.25,
+		"Eruption wait (mins)": 51
+	},
+	{
+		"Index": 200,
+		"Eruption length (mins)": 4.667,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 201,
+		"Eruption length (mins)": 2.1,
+		"Eruption wait (mins)": 60
+	},
+	{
+		"Index": 202,
+		"Eruption length (mins)": 4.35,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 203,
+		"Eruption length (mins)": 4.133,
+		"Eruption wait (mins)": 91
+	},
+	{
+		"Index": 204,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 205,
+		"Eruption length (mins)": 4.6,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 206,
+		"Eruption length (mins)": 1.783,
+		"Eruption wait (mins)": 46
+	},
+	{
+		"Index": 207,
+		"Eruption length (mins)": 4.367,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 208,
+		"Eruption length (mins)": 3.85,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 209,
+		"Eruption length (mins)": 1.933,
+		"Eruption wait (mins)": 49
+	},
+	{
+		"Index": 210,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 211,
+		"Eruption length (mins)": 2.383,
+		"Eruption wait (mins)": 71
+	},
+	{
+		"Index": 212,
+		"Eruption length (mins)": 4.7,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 213,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 49
+	},
+	{
+		"Index": 214,
+		"Eruption length (mins)": 3.833,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 215,
+		"Eruption length (mins)": 3.417,
+		"Eruption wait (mins)": 64
+	},
+	{
+		"Index": 216,
+		"Eruption length (mins)": 4.233,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 217,
+		"Eruption length (mins)": 2.4,
+		"Eruption wait (mins)": 53
+	},
+	{
+		"Index": 218,
+		"Eruption length (mins)": 4.8,
+		"Eruption wait (mins)": 94
+	},
+	{
+		"Index": 219,
+		"Eruption length (mins)": 2,
+		"Eruption wait (mins)": 55
+	},
+	{
+		"Index": 220,
+		"Eruption length (mins)": 4.15,
+		"Eruption wait (mins)": 76
+	},
+	{
+		"Index": 221,
+		"Eruption length (mins)": 1.867,
+		"Eruption wait (mins)": 50
+	},
+	{
+		"Index": 222,
+		"Eruption length (mins)": 4.267,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 223,
+		"Eruption length (mins)": 1.75,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 224,
+		"Eruption length (mins)": 4.483,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 225,
+		"Eruption length (mins)": 4,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 226,
+		"Eruption length (mins)": 4.117,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 227,
+		"Eruption length (mins)": 4.083,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 228,
+		"Eruption length (mins)": 4.267,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 229,
+		"Eruption length (mins)": 3.917,
+		"Eruption wait (mins)": 70
+	},
+	{
+		"Index": 230,
+		"Eruption length (mins)": 4.55,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 231,
+		"Eruption length (mins)": 4.083,
+		"Eruption wait (mins)": 70
+	},
+	{
+		"Index": 232,
+		"Eruption length (mins)": 2.417,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 233,
+		"Eruption length (mins)": 4.183,
+		"Eruption wait (mins)": 86
+	},
+	{
+		"Index": 234,
+		"Eruption length (mins)": 2.217,
+		"Eruption wait (mins)": 50
+	},
+	{
+		"Index": 235,
+		"Eruption length (mins)": 4.45,
+		"Eruption wait (mins)": 90
+	},
+	{
+		"Index": 236,
+		"Eruption length (mins)": 1.883,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 237,
+		"Eruption length (mins)": 1.85,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 238,
+		"Eruption length (mins)": 4.283,
+		"Eruption wait (mins)": 77
+	},
+	{
+		"Index": 239,
+		"Eruption length (mins)": 3.95,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 240,
+		"Eruption length (mins)": 2.333,
+		"Eruption wait (mins)": 64
+	},
+	{
+		"Index": 241,
+		"Eruption length (mins)": 4.15,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 242,
+		"Eruption length (mins)": 2.35,
+		"Eruption wait (mins)": 47
+	},
+	{
+		"Index": 243,
+		"Eruption length (mins)": 4.933,
+		"Eruption wait (mins)": 86
+	},
+	{
+		"Index": 244,
+		"Eruption length (mins)": 2.9,
+		"Eruption wait (mins)": 63
+	},
+	{
+		"Index": 245,
+		"Eruption length (mins)": 4.583,
+		"Eruption wait (mins)": 85
+	},
+	{
+		"Index": 246,
+		"Eruption length (mins)": 3.833,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 247,
+		"Eruption length (mins)": 2.083,
+		"Eruption wait (mins)": 57
+	},
+	{
+		"Index": 248,
+		"Eruption length (mins)": 4.367,
+		"Eruption wait (mins)": 82
+	},
+	{
+		"Index": 249,
+		"Eruption length (mins)": 2.133,
+		"Eruption wait (mins)": 67
+	},
+	{
+		"Index": 250,
+		"Eruption length (mins)": 4.35,
+		"Eruption wait (mins)": 74
+	},
+	{
+		"Index": 251,
+		"Eruption length (mins)": 2.2,
+		"Eruption wait (mins)": 54
+	},
+	{
+		"Index": 252,
+		"Eruption length (mins)": 4.45,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 253,
+		"Eruption length (mins)": 3.567,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 254,
+		"Eruption length (mins)": 4.5,
+		"Eruption wait (mins)": 73
+	},
+	{
+		"Index": 255,
+		"Eruption length (mins)": 4.15,
+		"Eruption wait (mins)": 88
+	},
+	{
+		"Index": 256,
+		"Eruption length (mins)": 3.817,
+		"Eruption wait (mins)": 80
+	},
+	{
+		"Index": 257,
+		"Eruption length (mins)": 3.917,
+		"Eruption wait (mins)": 71
+	},
+	{
+		"Index": 258,
+		"Eruption length (mins)": 4.45,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 259,
+		"Eruption length (mins)": 2,
+		"Eruption wait (mins)": 56
+	},
+	{
+		"Index": 260,
+		"Eruption length (mins)": 4.283,
+		"Eruption wait (mins)": 79
+	},
+	{
+		"Index": 261,
+		"Eruption length (mins)": 4.767,
+		"Eruption wait (mins)": 78
+	},
+	{
+		"Index": 262,
+		"Eruption length (mins)": 4.533,
+		"Eruption wait (mins)": 84
+	},
+	{
+		"Index": 263,
+		"Eruption length (mins)": 1.85,
+		"Eruption wait (mins)": 58
+	},
+	{
+		"Index": 264,
+		"Eruption length (mins)": 4.25,
+		"Eruption wait (mins)": 83
+	},
+	{
+		"Index": 265,
+		"Eruption length (mins)": 1.983,
+		"Eruption wait (mins)": 43
+	},
+	{
+		"Index": 266,
+		"Eruption length (mins)": 2.25,
+		"Eruption wait (mins)": 60
+	},
+	{
+		"Index": 267,
+		"Eruption length (mins)": 4.75,
+		"Eruption wait (mins)": 75
+	},
+	{
+		"Index": 268,
+		"Eruption length (mins)": 4.117,
+		"Eruption wait (mins)": 81
+	},
+	{
+		"Index": 269,
+		"Eruption length (mins)": 2.15,
+		"Eruption wait (mins)": 46
+	},
+	{
+		"Index": 270,
+		"Eruption length (mins)": 4.417,
+		"Eruption wait (mins)": 90
+	},
+	{
+		"Index": 271,
+		"Eruption length (mins)": 1.817,
+		"Eruption wait (mins)": 46
+	},
+	{
+		"Index": 272,
+		"Eruption length (mins)": 4.467,
+		"Eruption wait (mins)": 74
+	}
+]

@@ -1,0 +1,177 @@
+[
+	{
+		"Last name": "Alfalfa",
+		"First name": "Aloysius",
+		"SSN": "123-45-6789",
+		"Test1": 40,
+		"Test2": 90,
+		"Test3": 100,
+		"Test4": 83,
+		"Final": 49,
+		"Grade": "D-"
+	},
+	{
+		"Last name": "Alfred",
+		"First name": "University",
+		"SSN": "123-12-1234",
+		"Test1": 41,
+		"Test2": 97,
+		"Test3": 96,
+		"Test4": 97,
+		"Final": 48,
+		"Grade": "D+"
+	},
+	{
+		"Last name": "Gerty",
+		"First name": "Gramma",
+		"SSN": "567-89-0123",
+		"Test1": 41,
+		"Test2": 80,
+		"Test3": 60,
+		"Test4": 40,
+		"Final": 44,
+		"Grade": "C"
+	},
+	{
+		"Last name": "Android",
+		"First name": "Electric",
+		"SSN": "087-65-4321",
+		"Test1": 42,
+		"Test2": 23,
+		"Test3": 36,
+		"Test4": 45,
+		"Final": 47,
+		"Grade": "B-"
+	},
+	{
+		"Last name": "Bumpkin",
+		"First name": "Fred",
+		"SSN": "456-78-9012",
+		"Test1": 43,
+		"Test2": 78,
+		"Test3": 88,
+		"Test4": 77,
+		"Final": 45,
+		"Grade": "A-"
+	},
+	{
+		"Last name": "Rubble",
+		"First name": "Betty",
+		"SSN": "234-56-7890",
+		"Test1": 44,
+		"Test2": 90,
+		"Test3": 80,
+		"Test4": 90,
+		"Final": 46,
+		"Grade": "C-"
+	},
+	{
+		"Last name": "Noshow",
+		"First name": "Cecil",
+		"SSN": "345-67-8901",
+		"Test1": 45,
+		"Test2": 11,
+		"Test3": -1,
+		"Test4": 4,
+		"Final": 43,
+		"Grade": "F"
+	},
+	{
+		"Last name": "Buff",
+		"First name": "Bif",
+		"SSN": "632-79-9939",
+		"Test1": 46,
+		"Test2": 20,
+		"Test3": 30,
+		"Test4": 40,
+		"Final": 50,
+		"Grade": "B+"
+	},
+	{
+		"Last name": "Airpump",
+		"First name": "Andrew",
+		"SSN": "223-45-6789",
+		"Test1": "49.0      1.0",
+		"Test2": 90,
+		"Test3": 100,
+		"Test4": 83,
+		"Final": "A"
+	},
+	{
+		"Last name": "Backus",
+		"First name": "Jim",
+		"SSN": "143-12-1234",
+		"Test1": 48,
+		"Test2": 1,
+		"Test3": 97,
+		"Test4": 96,
+		"Final": 97,
+		"Grade": "A+"
+	},
+	{
+		"Last name": "Carnivore",
+		"First name": "Art",
+		"SSN": "565-89-0123",
+		"Test1": 44,
+		"Test2": 1,
+		"Test3": 80,
+		"Test4": 60,
+		"Final": 40,
+		"Grade": "D+"
+	},
+	{
+		"Last name": "Dandy",
+		"First name": "Jim",
+		"SSN": "087-75-4321",
+		"Test1": 47,
+		"Test2": 1,
+		"Test3": 23,
+		"Test4": 36,
+		"Final": 45,
+		"Grade": "C+"
+	},
+	{
+		"Last name": "Elephant",
+		"First name": "Ima",
+		"SSN": "456-71-9012",
+		"Test1": 45,
+		"Test2": 1,
+		"Test3": 78,
+		"Test4": 88,
+		"Final": 77,
+		"Grade": "B-"
+	},
+	{
+		"Last name": "Franklin",
+		"First name": "Benny",
+		"SSN": "234-56-2890",
+		"Test1": 50,
+		"Test2": 1,
+		"Test3": 90,
+		"Test4": 80,
+		"Final": 90,
+		"Grade": "B-"
+	},
+	{
+		"Last name": "George",
+		"First name": "Boy",
+		"SSN": "345-67-3901",
+		"Test1": 40,
+		"Test2": 1,
+		"Test3": 11,
+		"Test4": -1,
+		"Final": 4,
+		"Grade": "B"
+	},
+	{
+		"Last name": "Heffalump",
+		"First name": "Harvey",
+		"SSN": "632-79-9439",
+		"Test1": 30,
+		"Test2": 1,
+		"Test3": 20,
+		"Test4": 30,
+		"Final": 40,
+		"Grade": "C"
+	}
+]
