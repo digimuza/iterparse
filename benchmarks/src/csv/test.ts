@@ -14,7 +14,8 @@ async function compareOut() {
 
                 if (!P.equals(parsed, valid)) {
                     await writeFile(resolve(sampleFolder, `${file}.__invalid__.json`.replace(extname(file), ".json")), JSON.stringify(parsed, undefined, '\t'))
-                    throw new Error(`Failed to compare files: ${file}: ${validFile}`)
+                    console.log(`Failed to compare files: ${file}: ${validFile}`)
+                    process.exit(1)
                 }
 
                 console.log("Success", file)

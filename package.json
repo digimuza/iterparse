@@ -27,7 +27,6 @@
   ],
   "scripts": {
     "build": "rm -rf ./lib && tsc && yarn ts-docflux",
-    "prepare": "yarn test && yarn build",
     "watch": "yarn link && tsc --watch",
     "test": "cd ./benchmarks && yarn && yarn test"
   },
