@@ -494,10 +494,10 @@ timsort@~0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-ts-docflux@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/ts-docflux/-/ts-docflux-0.0.11.tgz#2799860983c722831599254a872577b335065318"
-  integrity sha512-OlgiE0CoCSGMjU4Wpc5Fmia4WF8cBVIVQ3/XE7NZCju9Y1nRUpNn2fN6hZTa+Ct66LmoyciWSpFFHPCIMTUMEw==
+ts-docflux@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/ts-docflux/-/ts-docflux-0.0.13.tgz#1be5c4593b948bfc111ccdc267838f7d4b5e8c57"
+  integrity sha512-BKujwHfoZu8h7s5YXm9NMZBxX7xtXEH5DXW40BoBnP1U7nj8tCghxr9W4j6+vuSUB0wL2M5zmfff30AZnD3dqg==
   dependencies:
     "@microsoft/api-extractor" "^7.12.0"
     "@types/fs-extra" "^8.1.0"
