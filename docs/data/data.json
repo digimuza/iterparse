@@ -3,6 +3,97 @@
 		{
 			"members": [
 				{
+					"kind": "TypeAlias",
+					"comment": {
+						"description": "",
+						"examples": [],
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare type AnyIterable<T> = "
+						},
+						{
+							"kind": "Reference",
+							"text": "Iterable",
+							"canonicalReference": "!Iterable:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "<T> | "
+						},
+						{
+							"kind": "Reference",
+							"text": "AsyncIterable",
+							"canonicalReference": "!AsyncIterable:interface"
+						},
+						{
+							"kind": "Content",
+							"text": "<T>"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!AnyIterable:type",
+					"canonicalReferenceGroup": "iterparse!AnyIterable"
+				}
+			],
+			"kind": "TypeAlias",
+			"name": "AnyIterable",
+			"canonicalReference": "iterparse!AnyIterable:type",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!AnyIterable",
+			"tags": []
+		},
+		{
+			"members": [
+				{
+					"kind": "TypeAlias",
+					"comment": {
+						"description": "",
+						"examples": [],
+						"parsed": []
+					},
+					"excerptTokens": [
+						{
+							"kind": "Content",
+							"text": "export declare type AnyIterableValueOf<O> = "
+						},
+						{
+							"kind": "Content",
+							"text": "O extends "
+						},
+						{
+							"kind": "Reference",
+							"text": "AnyIterable",
+							"canonicalReference": "iterparse!AnyIterable:type"
+						},
+						{
+							"kind": "Content",
+							"text": "<infer T> ? T : never"
+						},
+						{
+							"kind": "Content",
+							"text": ";"
+						}
+					],
+					"canonicalReference": "iterparse!AnyIterableValueOf:type",
+					"canonicalReferenceGroup": "iterparse!AnyIterableValueOf"
+				}
+			],
+			"kind": "TypeAlias",
+			"name": "AnyIterableValueOf",
+			"canonicalReference": "iterparse!AnyIterableValueOf:type",
+			"package": "iterparse",
+			"canonicalReferenceGroup": "iterparse!AnyIterableValueOf",
+			"tags": []
+		},
+		{
+			"members": [
+				{
 					"kind": "Function",
 					"comment": {
 						"description": "Function will read big files in memory efficient way.",

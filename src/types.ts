@@ -17,4 +17,4 @@ export interface FileWriteMode {
 
 export { AsyncIterable as IX } from 'ix'
 export type AnyIterable<T> = Iterable<T> | AsyncIterable<T>
-
+export type AnyIterableValueOf<O> = O extends AnyIterable<infer T> ? T : never

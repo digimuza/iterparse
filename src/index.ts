@@ -4,3 +4,5 @@ export { jsonRead, jsonWrite, JSONReadOptions, JSONWriteOptions, } from './json'
 export { xmlRead, xmlWrite, XMLReadOptions, XMLWriteOptions } from './xml'
 export { download, DownloadOptions } from './download'
 export { cacheIter, CacheIterOptions } from './cache'
+
+export { AnyIterable, AnyIterableValueOf } from './types'
