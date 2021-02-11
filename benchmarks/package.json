@@ -10,8 +10,8 @@
     "run-xml": "yarn ts-node src/xml/bench.ts",
     "bench": "yarn run-csv && yarn run-json && yarn run-xml",
     "test-csv": "yarn ts-node src/csv/test.ts",
-    "test-xml": "yarn ts-node src/csv/xml.ts",
-    "test": "yarn test-csv && yarn add test-xml"
+    "test-xml": "yarn ts-node src/xml/test.ts",
+    "test": "yarn test-csv && yarn test-xml"
   },
   "dependencies": {
     "@types/faker": "^5.1.6",

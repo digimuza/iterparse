@@ -208,10 +208,10 @@ isarray@0.0.1:
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
   integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
 
-iterparse@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/iterparse/-/iterparse-0.0.12.tgz#e28e8b138997290c992a71416b6258bc7982fb3c"
-  integrity sha512-MDw1HoQi5Nxl6MaVMPXCgTx7aSs8McumIrQEF2JItLPweNY2DR6leEdIzN6xQzq+PidWLi8he1z+cNc4H8SbRg==
+iterparse@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/iterparse/-/iterparse-0.0.13.tgz#b81acc8c5bc5ec6449e880a32e3034e05d61a838"
+  integrity sha512-gwKyYXunOgVnpb+Nq6NAO8eDEHBLWZTGkakMVBt6Zrexx2XpSnSoNV3P1csiSgQgm4MJFgbmUCJ+IvV6gV9kxA==
   dependencies:
     "@types/fs-extra" "^8.1.0"
     "@types/he" "^1.1.1"
