@@ -267,15 +267,43 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
                 if (!qwe.includes(`<${options.nodeName}`)) {
                     continue
                 }
-                yield Parser.parse(qwe, {
+                const parsedResult = Parser.parse(qwe, {
                     ...defaultOptions,
                     ...options
 
                 })[options.nodeName]
+                if (parsedResult == null) continue 
+                yield parsedResult
                 count++
             }
+
+        }
+
+
+        const last_chunk = last.replace(new RegExp(`<${options.nodeName}`, 'gm'), `!@###@!<${options.nodeName}`).split(`!@###@!`)
+        const lastOfLast = last_chunk.pop() || ''
+        for (const qwe of last_chunk) {
+            if (!qwe.includes(`<${options.nodeName}`)) {
+                continue
+            }
+            yield Parser.parse(qwe, {
+                ...defaultOptions,
+                ...options
+
+            })[options.nodeName]
+            count++
+        }
+        const lastItem = lastOfLast.replace(`</${options.nodeName}>`, `</${options.nodeName}>!@###@!`).split(`!@###@!`)?.[0] || ''
+        if (lastItem.includes(`<${options.nodeName}`)) {
+            yield Parser.parse(lastItem, {
+                ...defaultOptions,
+                ...options
+
+            })[options.nodeName]
         }
     }
+
+
 
     return AsyncIterable.from(iter())
 }
