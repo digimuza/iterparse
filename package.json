@@ -1,6 +1,6 @@
 {
   "name": "iterparse",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Delightful data parsing",
   "main": "lib/index.js",
   "files": [
