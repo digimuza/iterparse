@@ -19,9 +19,9 @@ class GroupingProgressDisplay {
             return `Grouping idle...`
         }
         if (this.progress.state === 'GROUPING') {
-            return `Grouping, Items: ${this.progress.groupedItems.toLocaleString()}, Total Groups: ${json.groupedGroups}, Speed: ${json.groupingSpeed}, Grouped Size: ${formatBytes(json.groupedBytes)}, Memory: ${formatBytes(json.memory)}`
+            return `Grouping, Items: ${this.progress.groupedItems.toLocaleString()}, Total Groups: ${json.groupedGroups}, Grouped Size: ${formatBytes(json.groupedBytes)}, Memory: ${formatBytes(json.memory)}`
         }
-        return `Reading, Progress: ${((json.readedItems/json.groupedItems) * 100).toFixed(2)}%, Items: ${this.progress.readedItems.toLocaleString()}/${json.groupedItems.toLocaleString()}, Groups: ${json.readedGroups}/${json.groupedGroups}, Speed: ${json.readingSpeed}, Read: ${formatBytes(json.readedBytes)}, Memory: ${formatBytes(json.memory)}` 
+        return `Reading, Progress: ${((json.readedItems/json.groupedItems) * 100).toFixed(2)}%, Groups: ${json.readedGroups}/${json.groupedGroups}, Memory: ${formatBytes(json.memory)}` 
     }
 
     toJSON() {
@@ -31,14 +31,12 @@ class GroupingProgressDisplay {
 
         const readingDiff = Math.floor(Date.now() - this.progress.parsingStartTime)
         const readingBytesPerMs = Math.floor(this.progress.groupedBytes / readingDiff) || 0
-        const readingBytesPerSecond = Math.floor(groupingBytesPerMs * 1000)
+        const readingBytesPerSecond = Math.floor(readingBytesPerMs * 1000)
 
         return {
             state: this.progress.state,
             groupingBytesPerSecond,
             readingBytesPerSecond,
-            groupingSpeed: `${formatBytes(groupingBytesPerSecond)}/s`,
-            readingSpeed: `${formatBytes(readingBytesPerSecond)}/s`,
             memory: process.memoryUsage().heapUsed,
             groupingStartTime: this.progress.parsingStartTime,
             groupingStopTime: this.progress.parsingStopTime,
@@ -143,11 +141,7 @@ export interface FileGroupByOptions<T> {
 export function fileGroupBy<T>(args: FileGroupByOptions<T>): AsyncIterable<GroupedItems<T>> {
     const progress: GroupingProgress =  new GroupingProgress()
 
-    const interval = setInterval(() => {
-        args.progress?.(new GroupingProgressDisplay(progress))
-    }, args.progressFrequency || 1000)
-
-
+    let interval: NodeJS.Timeout | undefined
     async function* groupProcess() {
         const tmpFile = tmpNameSync()
         const encoding = 'utf8'
@@ -161,9 +155,13 @@ export function fileGroupBy<T>(args: FileGroupByOptions<T>): AsyncIterable<Group
             groups: new Map(),
             lastPosition: 0,
         }
-
+        interval = setInterval(() => {
+            if (progress.state === 'IDLE') return
+            args.progress?.(new GroupingProgressDisplay(progress))
+        }, args.progressFrequency || 1000)
 
         for await (const value of args.source) {
+            
             if (progress.groupedGroups === 0) {
                 progress.start('GROUPING')
             }
@@ -172,19 +170,22 @@ export function fileGroupBy<T>(args: FileGroupByOptions<T>): AsyncIterable<Group
             const groupId = args.groupingFn(value).toString()
             await appendFile(fd, parsedValue, { encoding })
 
-            const group = groupFileMap.groups.get(groupId) || []
-            
             
             progress.addItem(1)
             progress.addChunk(size)
+            const group = groupFileMap.groups.get(groupId)
+            if (group == null) {
+                progress.addGroup(1)  
+            } 
 
-            group.push([groupFileMap.lastPosition, size])
-            groupFileMap.groups.set(groupId, group)
+            const newGroup = group || []
+            newGroup.push([groupFileMap.lastPosition, size])
+            groupFileMap.groups.set(groupId, newGroup)
             groupFileMap.lastPosition = groupFileMap.lastPosition + size
             continue
         }
 
-        
+        args.progress?.(new GroupingProgressDisplay(progress))
         progress.start('READING')
         
         for (const [groupId, mapData] of groupFileMap.groups) {
@@ -193,14 +194,14 @@ export function fileGroupBy<T>(args: FileGroupByOptions<T>): AsyncIterable<Group
                 key: groupId,
                 items: await Promise.all(
                     mapData.map(async ([location ,size])=> {
-                        progress.readItem()
+                        progress.readItem(1)
                         progress.readChunk(size)
                         const buffer = Buffer.alloc(size)
                         await read(fd, buffer, 0, size, location)
                         const item = P.canFail(() => {
                             return JSON.parse(buffer.toString(encoding))
                         })
-                        if (P.canFail(item)) {
+                        if (P.isError(item)) {
                             throw new Error(`Critical error: something went wrong in grouping process`)
                         }
                         return item as T
@@ -213,6 +214,7 @@ export function fileGroupBy<T>(args: FileGroupByOptions<T>): AsyncIterable<Group
     }
 
     return AsyncIterable.from(groupProcess()).finally(()=>{
+        if (interval == null) return 
         clearInterval(interval)
     })
 }
