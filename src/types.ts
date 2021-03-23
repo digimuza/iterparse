@@ -1,3 +1,5 @@
+import { download } from './download';
+import { xmlRead } from './xml';
 
 export interface FileReference {
     /**

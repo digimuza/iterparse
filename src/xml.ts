@@ -250,6 +250,7 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
         arrayMode: false, //"strict"
     }
     let count = 0
+    const elMatch = new RegExp(`<${options.nodeName}( .*)?>`, 'gm')
     async function* iter() {
         for await (const buffer of bufferRead({
             ...options,
@@ -261,7 +262,7 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
             }
         })) {
             const full = `${last}${buffer.toString()}`
-            const beef = full.replace(new RegExp(`<${options.nodeName}`, 'gm'), `!@###@!<${options.nodeName}`).split(`!@###@!`)
+            const beef = full.replace(elMatch, `!@###@!<${options.nodeName}>`).split(`!@###@!`)
             last = beef.pop() || ''
             for (const qwe of beef) {
                 if (!qwe.includes(`<${options.nodeName}`)) {
@@ -280,7 +281,7 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
         }
 
 
-        const last_chunk = last.replace(new RegExp(`<${options.nodeName}`, 'gm'), `!@###@!<${options.nodeName}`).split(`!@###@!`)
+        const last_chunk = last.replace(elMatch, `!@###@!<${options.nodeName}`).split(`!@###@!`)
         const lastOfLast = last_chunk.pop() || ''
         for (const qwe of last_chunk) {
             if (!qwe.includes(`<${options.nodeName}`)) {
