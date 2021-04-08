@@ -600,7 +600,12 @@ ts-docflux@^0.0.13:
     xml-flow "^1.0.4"
     zod "^1.11.11"
 
-ts-prime@^0.3.11, ts-prime@^0.3.7:
+ts-prime@0.3.15:
+  version "0.3.15"
+  resolved "https://registry.yarnpkg.com/ts-prime/-/ts-prime-0.3.15.tgz#75fc8777b6618ae3136a3d599d339f52617ad2ec"
+  integrity sha512-ADiQE/4hGlzy/AkVCE+Vt5ETe8QOUSCbbrL9Vo9lGps/fUKIYykje9hLj/6Mbbcq684u872G3Ul7D84vM0+/xw==
+
+ts-prime@^0.3.7:
   version "0.3.12"
   resolved "https://registry.yarnpkg.com/ts-prime/-/ts-prime-0.3.12.tgz#0b755d8dc366ecb49d4b337864b289d2e5c2161a"
   integrity sha512-HsaCT3zW5+HaSMXYVC7nC8fI7R2MqGOg6yvjmhY3OiMG5lETVDq1shmuL1/+t5jmHDI2XHDlR8UyH4aXFEKz8g==

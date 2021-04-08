@@ -1,6 +1,7 @@
 import { AsyncIterable } from "ix"
 import * as P from 'ts-prime'
 import { GroupedItems } from "./fileGroupBy"
+import { formatBytes } from "./helpers"
 import { AnyIterable } from "./types"
 
 
@@ -154,7 +155,7 @@ class Progress {
     constructor(private progress: ProgressTrack) { }
     toString() {
         const speed = this.progress.items > 1 ? ` Speed: ${(1 / (this.progress.average / 1000)).toFixed(2)} items/s,` : ""
-        return `Items: ${this.progress.items.toLocaleString()},${speed} Memory: ${P.formatBytes(process.memoryUsage().heapUsed)}`
+        return `Items: ${this.progress.items.toLocaleString()},${speed} Memory: ${formatBytes(process.memoryUsage().heapUsed)}`
     }
     toJSON() {
         return {
