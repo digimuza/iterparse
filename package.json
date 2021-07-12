@@ -26,7 +26,7 @@
     "json-parser"
   ],
   "scripts": {
-    "build": "rm -rf ./lib && tsc && yarn ts-docflux",
+    "build": "rm -rf ./lib && tsc",
     "watch": "yarn link && tsc --watch",
     "test": "cd ./benchmarks && yarn && yarn test"
   },
@@ -61,6 +61,6 @@
     "papaparse": "^5.2.0",
     "pretty-ms": "^7.0.1",
     "tmp": "^0.2.1",
-    "ts-prime": "0.3.15"
+    "ts-prime": "^1.0.0"
   }
 }
