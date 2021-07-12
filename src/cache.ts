@@ -65,28 +65,28 @@ export function _cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): 
         const lockFile = resolve(options.cacheFolder, ".lock")
         if (existsSync(lockFile)) {
             options.logger?.info('Lock file exist. This usually means that iterator was not cached fully. Cache folder will be deleted and recreated with new iterator')
-            rmdirSync(options.cacheFolder, { recursive: true })
+            rmdirSync(options.cacheFolder)
         }
         if (!existsSync(metaFile)) {
             options.logger?.info('Meta file does not exists. Deleting cache folder...')
-            rmdirSync(options.cacheFolder, { recursive: true })
+            removeIfExists(options);
         }
 
         if (existsSync(metaFile)) {
             const meta: { referenceId: string, createdAt: string, iteratableId: string, format: CacheIterOptions['nice'] } = await readJSON(metaFile)
             if (meta.referenceId !== referenceId) {
                 options.logger?.info('Reference id changed. Deleting cache folder...')
-                rmdirSync(options.cacheFolder, { recursive: true })
+                removeIfExists(options);
             }
 
             if (!P.equals(meta.format, options.nice)) {
                 options.logger?.info('Cache format changed. Deleting cache folder...')
-                rmdirSync(options.cacheFolder, { recursive: true })
+                removeIfExists(options);
             }
 
             if (!P.equals(meta.iteratableId, iteratableId)) {
                 options.logger?.info('Source iterator structure changed. Deleting cache folder...')
-                rmdirSync(options.cacheFolder, { recursive: true })
+                removeIfExists(options);
             }
         }
 
@@ -106,7 +106,7 @@ export function _cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): 
         const cache = getCache()
         if (cache) return cache
         if (existsSync(options.cacheFolder)) {
-            rmdirSync(options.cacheFolder, { recursive: true })
+            removeIfExists(options)
         }
         await ensureFile(lockFile)
 
@@ -133,6 +133,12 @@ export function _cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): 
             .pipe(jsonWrite({ filePath: resolve(options.cacheFolder, `cache.json`) }))
             .pipe(onLastItem(onCacheComplete))
     })
+}
+
+function removeIfExists(options: CacheIterOptions) {
+    if (existsSync(options.cacheFolder)) {
+        rmdirSync(options.cacheFolder);
+    }
 }
 
 /**

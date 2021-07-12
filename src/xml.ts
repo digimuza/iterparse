@@ -86,6 +86,7 @@ export interface XMLReadOptions extends ProgressReportOptions, FastXMLParser, Fi
      * <Person>...</Person>
      */
     nodeName: string
+    encoding?: "utf8" | "utf16le" | "ascii" | "base64" | "binary"
 }
 export interface FastXMLWriteOptions {
     /**
@@ -250,7 +251,7 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
         arrayMode: false, //"strict"
     }
     let count = 0
-    const elMatch = new RegExp(`<${options.nodeName}( .*)?>`, 'gm')
+    const elMatch = new RegExp(`<${options.nodeName}( ?.*)?>`, 'gm')
     async function* iter() {
         for await (const buffer of bufferRead({
             ...options,
@@ -261,7 +262,10 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
                 options.progress?.(q)
             }
         })) {
-            const full = `${last}${buffer.toString()}`
+            const full = `${last}${buffer.toString(options.encoding)}`
+            if (!full.match(elMatch)) {
+                throw new Error(`Failed to find node: ${options.nodeName}`)
+            }
             const beef = full.replace(elMatch, `!@###@!<${options.nodeName}>`).split(`!@###@!`)
             last = beef.pop() || ''
             for (const qwe of beef) {
@@ -273,7 +277,7 @@ export function xmlRead<T>(options: XMLReadOptions): IX<T> {
                     ...options
 
                 })[options.nodeName]
-                if (parsedResult == null) continue 
+                if (parsedResult == null) continue
                 yield parsedResult
                 count++
             }
