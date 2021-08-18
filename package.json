@@ -50,6 +50,7 @@
     "@types/he": "^1.1.1",
     "@types/node-fetch": "^2.5.8",
     "@types/papaparse": "^5.0.3",
+    "@types/rimraf": "^3.0.2",
     "@types/tmp": "^0.2.0",
     "JSONStream": "^1.3.5",
     "fast-csv": "^4.3.6",
@@ -60,6 +61,7 @@
     "node-fetch": "^2.6.1",
     "papaparse": "^5.2.0",
     "pretty-ms": "^7.0.1",
+    "rimraf": "^3.0.2",
     "tmp": "^0.2.1",
     "ts-prime": "^1.0.0"
   }

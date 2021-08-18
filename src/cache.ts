@@ -6,7 +6,6 @@ import { jsonRead, jsonWrite } from "./json";
 import { AnyIterable, IX } from "./types";
 import * as P from 'ts-prime'
 import { ProgressReportOptions } from "./helpers";
-
 export function onLastItem<T>(fn: () => any) {
     return (q: AnyIterable<T>) => {
         async function* iter() {
@@ -137,7 +136,9 @@ export function _cacheIter<T>(data: AnyIterable<T>, options: CacheIterOptions): 
 
 function removeIfExists(options: CacheIterOptions) {
     if (existsSync(options.cacheFolder)) {
-        rmdirSync(options.cacheFolder);
+        rmdirSync(options.cacheFolder, {
+            recursive: true
+        });
     }
 }
 
