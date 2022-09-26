@@ -210,7 +210,7 @@ async function* _csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<
     }
     const inter = setInterval(log, options.progressFrequency || 3000)
 
-    for await (const items of IX.from(data).buffer(1000)) {
+    for await (const items of IX.from(data).buffer(options.writeBuffer || 1000)) {
         if (dest === 0) {
             await ensureFile(options.filePath)
             // Accessing stream only when receiving first item.
@@ -245,6 +245,13 @@ async function* _csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<
 }
 
 export interface CSVWriteOptions extends FileReference, FileWriteMode, WriteProgressReportOptions {
+    /**
+    * How many records store in memmory before writing to file. Higher the number bigger memory usage, but faster performance.
+    * Lower number smaller memory usage but, slower performance.
+    * Optimal buffer count is 1000
+    * @defaultValue 1000
+    */
+    writeBuffer?: number
     /**
      * @defaultValue `false`
      */
