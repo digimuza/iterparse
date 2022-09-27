@@ -199,6 +199,7 @@ export function csvRead<T>(options: CSVReadOptions): AsyncIterable<ParsingResult
 async function* _csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<T>, options: CSVWriteOptions) {
     let chunk = 0
     let dest: number = 0
+    let haveFile: boolean | null = null
 
     if (options.mode === 'overwrite' && existsSync(options.filePath)) {
         unlinkSync(options.filePath)
@@ -209,6 +210,9 @@ async function* _csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<
         options.progress?.(progress)
     }
     const inter = setInterval(log, options.progressFrequency || 3000)
+    if (existsSync(options.filePath)) {
+        haveFile = true
+    }
 
     for await (const items of IX.from(data).buffer(options.writeBuffer || 1000)) {
         if (dest === 0) {
@@ -228,7 +232,7 @@ async function* _csvWrite<T extends { [k: string]: unknown }>(data: AnyIterable<
             }) as Record<string, string | number | boolean | undefined | null>
         })
         const csv = Papa.unparse(normalized, {
-            header: chunk === 0,
+            header: chunk === 0 && !haveFile,
             ...options
         })
         const buffer = Buffer.from(`${csv}\r\n`)
